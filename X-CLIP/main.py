@@ -15,7 +15,7 @@ from utils.logger import create_logger
 import time
 import numpy as np
 import random
-from apex import amp
+# from apex import amp
 from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
@@ -56,6 +56,7 @@ def main(config):
                          logger=logger,
                         )
     model = model.cuda()
+    scaler = torch.cuda.amp.GradScaler(enabled=True)
 
     mixup_fn = None
     if config.AUG.MIXUP > 0:
@@ -72,8 +73,9 @@ def main(config):
     
     optimizer = build_optimizer(config, model)
     lr_scheduler = build_scheduler(config, optimizer, len(train_loader))
-    if config.TRAIN.OPT_LEVEL != 'O0':
-        model, optimizer = amp.initialize(models=model, optimizers=optimizer, opt_level=config.TRAIN.OPT_LEVEL)
+    # if config.TRAIN.OPT_LEVEL != 'O0':
+    #     model, optimizer = amp.initialize(models=model, optimizers=optimizer, opt_level=config.TRAIN.OPT_LEVEL)
+
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
 
     start_epoch, max_accuracy = 0, 0.0
@@ -101,7 +103,7 @@ def main(config):
 
     for epoch in range(start_epoch, config.TRAIN.EPOCHS):
         train_loader.sampler.set_epoch(epoch)
-        train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn)
+        train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler)
 
         acc1 = validate(val_loader, text_labels, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
@@ -120,7 +122,7 @@ def main(config):
     logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
 
 
-def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn):
+def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler):
     model.train()
     optimizer.zero_grad()
     
@@ -145,26 +147,32 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
         if texts.shape[0] == 1:
             texts = texts.view(1, -1)
-        
-        output = model(images, texts)
+        with torch.cuda.amp.autocast(enabled=True):
+            output = model(images, texts)
 
-        total_loss = criterion(output, label_id)
-        total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
+            total_loss = criterion(output, label_id)
+            total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
+        scaler.scale(total_loss).backward()
+        
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
             optimizer.zero_grad()
-        if config.TRAIN.OPT_LEVEL != 'O0':
-            with amp.scale_loss(total_loss, optimizer) as scaled_loss:
-                scaled_loss.backward()
-        else:
-            total_loss.backward()
+        # if config.TRAIN.OPT_LEVEL != 'O0':
+            # with amp.scale_loss(total_loss, optimizer) as scaled_loss:
+            #     scaled_loss.backward()
+        # else:
+        #     total_loss.backward()
         if config.TRAIN.ACCUMULATION_STEPS > 1:
             if (idx + 1) % config.TRAIN.ACCUMULATION_STEPS == 0:
-                optimizer.step()
+                # optimizer.step()
+                scaler.step(optimizer)
+                scaler.update()
                 optimizer.zero_grad()
                 lr_scheduler.step_update(epoch * num_steps + idx)
         else:
-            optimizer.step()
+            # optimizer.step()
+            scaler.step(optimizer)
+            scaler.update()
             lr_scheduler.step_update(epoch * num_steps + idx)
 
         torch.cuda.synchronize()
