@@ -276,7 +276,7 @@ def build_dataloader(logger, config):
     train_loader = DataLoader(
         train_data, sampler=sampler_train,
         batch_size=config.TRAIN.BATCH_SIZE,
-        num_workers=16,
+        num_workers=1,
         pin_memory=True,
         drop_last=True,
         collate_fn=partial(mmcv_collate, samples_per_gpu=config.TRAIN.BATCH_SIZE),
@@ -300,12 +300,12 @@ def build_dataloader(logger, config):
         val_pipeline[1] = dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, multiview=config.TEST.NUM_CLIP)
     
     val_data = VideoDataset(ann_file=config.DATA.VAL_FILE, data_prefix=config.DATA.ROOT, labels_file=config.DATA.LABEL_LIST, pipeline=val_pipeline)
-    indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size())
+    indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size()) # assume having 4 processes -> process #0 handles indices 0, 4, 8, 12,... process #2 handles indices 1, 5, 9, 13,...
     sampler_val = SubsetRandomSampler(indices)
     val_loader = DataLoader(
         val_data, sampler=sampler_val,
-        batch_size=2,
-        num_workers=16,
+        batch_size=config.TRAIN.BATCH_SIZE,
+        num_workers=1,
         pin_memory=True,
         drop_last=True,
         collate_fn=partial(mmcv_collate, samples_per_gpu=2),
