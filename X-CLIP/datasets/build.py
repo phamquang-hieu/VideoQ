@@ -248,7 +248,7 @@ def build_dataloader(logger, config):
         dict(type='DecordInit'),
         dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
-        dict(type='Resize', scale=(-1, scale_resize)),
+        dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
         dict(
             type='MultiScaleCrop',
             input_size=config.DATA.INPUT_SIZE,
@@ -297,6 +297,7 @@ def build_dataloader(logger, config):
         val_pipeline[3] = dict(type='Resize', scale=(-1, config.DATA.INPUT_SIZE))
         val_pipeline[4] = dict(type='ThreeCrop', crop_size=config.DATA.INPUT_SIZE)
     if config.TEST.NUM_CLIP > 1:
+        # config.TEST.NUM_CLIP -> number of clips sampled out of a video
         val_pipeline[1] = dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, multiview=config.TEST.NUM_CLIP)
     
     val_data = VideoDataset(ann_file=config.DATA.VAL_FILE, data_prefix=config.DATA.ROOT, labels_file=config.DATA.LABEL_LIST, pipeline=val_pipeline)

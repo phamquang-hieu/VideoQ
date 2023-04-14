@@ -209,12 +209,12 @@ def validate(val_loader, text_labels, model, config):
             label_id = label_id.reshape(-1)
 
             b, tn, c, h, w = _image.size()
-            t = config.DATA.NUM_FRAMES
-            n = tn // t
+            t = config.DATA.NUM_FRAMES # number of frames in a video
+            n = tn // t # number of views
             _image = _image.view(b, n, t, c, h, w)
            
             tot_similarity = torch.zeros((b, config.DATA.NUM_CLASSES)).cuda()
-            for i in range(n):
+            for i in range(n): # for view in views
                 image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
                 label_id = label_id.cuda(non_blocking=True)
                 image_input = image.cuda(non_blocking=True)
@@ -225,7 +225,7 @@ def validate(val_loader, text_labels, model, config):
                     output = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
-                tot_similarity += similarity
+                tot_similarity += similarity # accumulating simmilarity from views
 
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)

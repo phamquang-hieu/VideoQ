@@ -1981,7 +1981,7 @@ class SampleFrames:
         else:
             if self.multiview == 1:
                 clip_offsets = self._get_train_clips(num_frames)
-            else:
+            else: # multiview -> sample multiple clips (each of 32 frame) from the original video
                 clip_offsets = np.concatenate([self._get_train_clips(num_frames)  for _ in range(self.multiview)])
 
         return clip_offsets
