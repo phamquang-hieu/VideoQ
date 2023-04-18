@@ -11,3 +11,5 @@ thumb.sdb
 wandb/
 trained_models/
 test.*
+*.zip
+ucfcrime_v2
