@@ -70,6 +70,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
         self.pipeline = Compose(pipeline)
         self.video_infos = self.load_annotations()
+        # video_infos: a dict of keys as video id and values under the form of dictionary containing info about individual video 
+        # or a list of dict containing info about individual videos
         if self.sample_by_class:
             self.video_infos_by_class = self.parse_by_class()
 
@@ -105,6 +107,19 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                 assert len(video_infos[i]['label']) == 1
                 video_infos[i]['label'] = video_infos[i]['label'][0]
         return video_infos
+    
+    def load_json_annotations_2(self):
+        """load json annotations from extended ucf crime"""
+        video_infos = mmcv.load(self.ann_file)
+        # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
+        num_videos = len(video_infos)
+        results = {}
+        i = 0
+        for k, v in video_infos():
+            results[i][k] = v # v['annotation']
+            # results[i]['label'] # v['label'] 
+            i+=1
+
 
     def parse_by_class(self):
         video_infos_by_class = defaultdict(list)

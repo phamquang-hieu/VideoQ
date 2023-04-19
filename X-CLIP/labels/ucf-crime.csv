@@ -1,0 +1,15 @@
+id,name
+1,Abuse
+2,Arrest
+3,Arson
+4,Assault
+5,RoadAccident
+6,Burglary
+7,Explosion
+8,Fighting
+9,Robbery
+10,Shooting
+11,Stealing
+12,Shoplifting
+13,Vandalism
+14,Normal_Videos_for_Event_Recognition
