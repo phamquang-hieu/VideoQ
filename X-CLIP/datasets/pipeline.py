@@ -2113,6 +2113,9 @@ class SampleAnnotatedFrames(SampleFrames):
             if end > total_frames:
                 end = total_frames - 1
             total_frames = end - start + 1
+        
+        if total_frames == start:
+            print("total_frames == start", total_frames, start)
 
         if self.frame_uniform:  # sthv2 sampling strategy
             assert results['start_index'] == 0
