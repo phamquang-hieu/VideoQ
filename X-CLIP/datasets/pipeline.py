@@ -2101,7 +2101,7 @@ class SampleAnnotatedFrames(SampleFrames):
             n_annotations = len(results["annotations"])
             chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "2"
             total_frames = (chosen_annotation["start"] - chosen_annotation["end"]) * results["fps"]
-            start = chosen_annotation["start"] * results["fps"]
+            start = np.int(chosen_annotation["start"] * results["fps"])
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
@@ -2126,7 +2126,7 @@ class SampleAnnotatedFrames(SampleFrames):
                     self.frame_interval, size=len(frame_inds))
                 frame_inds += perframe_offsets
             
-            frame_inds = frame_inds.astype(np.int)
+            # frame_inds = frame_inds.astype(np.int)
             frame_inds += start #@PQH shift to the start position
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
