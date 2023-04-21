@@ -2110,8 +2110,13 @@ class SampleAnnotatedFrames(SampleFrames):
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
             total_frames = results["total_frames"]
-            start = np.random.randint(0, total_frames-1)
-            end = start + 20 * self.num_clips * self.clip_len
+            start_max = total_frames - 10 * np.int(results['fps']) 
+            if start_max < 0:
+                start = 0 
+            else:
+                start = np.random.randint(0, start_max)
+                
+            end = start + 10 * self.num_clips * self.clip_len
             if end > total_frames:
                 end = total_frames - 1
             total_frames = end - start + 1
