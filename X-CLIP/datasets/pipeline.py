@@ -2126,7 +2126,8 @@ class SampleAnnotatedFrames(SampleFrames):
                     self.frame_interval, size=len(frame_inds))
                 frame_inds += perframe_offsets
             
-            frame_inds += np.float64(start) #@PQH shift to the start position
+            frame_inds = frame_inds.astype(np.int)
+            frame_inds += start #@PQH shift to the start position
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
