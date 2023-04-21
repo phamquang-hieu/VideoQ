@@ -115,7 +115,10 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
         # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
         idx = 0
-        results = defaultdict(dict)
+        # results = defaultdict(dict)
+        results = {}
+        for k in range(len(video_infos)):
+            results[k] = {}
         for vid, values in video_infos.items():
             results[idx]['filename'] = os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid
             results[idx]['label'] = values['label']
