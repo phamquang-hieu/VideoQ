@@ -1804,8 +1804,9 @@ class DecordInit:
             iob = iob.read()
             file_obj = io.BytesIO(iob)
         container = decord.VideoReader(file_obj, num_threads=self.num_threads)
-        results['video_reader'] = container
-        results['total_frames'] = len(container)
+        results["video_reader"] = container
+        results["total_frames"] = len(container)
+        results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
         return results
 
     def __repr__(self):
@@ -1981,7 +1982,7 @@ class SampleFrames:
         else:
             if self.multiview == 1:
                 clip_offsets = self._get_train_clips(num_frames)
-            else: # multiview -> sample multiple clips (each of 32 frame) from the original video
+            else: #@PQH: multiview -> sample multiple clips (each of e.g 32 frame) from the original video
                 clip_offsets = np.concatenate([self._get_train_clips(num_frames)  for _ in range(self.multiview)])
 
         return clip_offsets
@@ -2060,6 +2061,90 @@ class SampleFrames:
                     f'out_of_bound_opt={self.out_of_bound_opt}, '
                     f'test_mode={self.test_mode})')
         return repr_str
+
+class SampleAnnotatedFrames(SampleFrames):
+    """@PQH: Sample annotated frames only from a video, 
+        e.g. only the abnormal part from the video in case of UCF-Crime
+        parameters:
+            from_annotated: probability of sampling frame coming from the annotated (abnormal) part    
+    """
+    def __init__(self, 
+                 clip_len, 
+                 frame_interval=1, 
+                 num_clips=1, 
+                 temporal_jitter=False, 
+                 twice_sample=False, 
+                 out_of_bound_opt='loop', 
+                 test_mode=False, 
+                 start_index=None, 
+                 frame_uniform=False, 
+                 multiview=1,
+                 from_annotated=1.0):
+        super().__init__(clip_len, frame_interval, num_clips, temporal_jitter, twice_sample, 
+                         out_of_bound_opt, test_mode, start_index, frame_uniform, multiview)
+        self.from_annotated = from_annotated
+    
+    def __call__(self, results):
+        """Perform the SampleFrames loading.
+
+        Args:
+            results (dict): The resulting dict to be modified and passed
+                to the next transform in pipeline.
+        """
+        assert 'annotations' in results, "video info does not contain any annotations"
+
+        # total_frames = results['total_frames']
+        n_annotations = len(results["annotations"])
+        if n_annotations > 0:
+            #@TODO: integrating the parameter self.from_annotated in future update
+            n_annotations = len(results["annotations"])
+            chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "2"
+            total_frames = (chosen_annotation["start"] - chosen_annotation["end"]) * chosen_annotation["fps"]
+            start = chosen_annotation["start"] * results["fps"]
+        else:
+            # this is the case if the video is of a normal action
+            # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
+            total_frames = results["total_frames"]
+            start = np.random.randint(0, total_frames)
+            end = start + 10 * results["num_clips"] * results["clip_len"] if end < total_frames else total_frames
+            total_frames = end - start
+
+        if self.frame_uniform:  # sthv2 sampling strategy
+            assert results['start_index'] == 0
+            frame_inds = self.get_seq_frames(total_frames)
+        else:
+            clip_offsets = self._sample_clips(total_frames)
+            frame_inds = clip_offsets[:, None] + np.arange(
+                self.clip_len)[None, :] * self.frame_interval
+            frame_inds = np.concatenate(frame_inds)
+
+            if self.temporal_jitter:
+                perframe_offsets = np.random.randint(
+                    self.frame_interval, size=len(frame_inds))
+                frame_inds += perframe_offsets
+            
+            frame_inds += start #@PQH shift to the start position
+            
+            frame_inds = frame_inds.reshape((-1, self.clip_len))
+            if self.out_of_bound_opt == 'loop':
+                frame_inds = np.mod(frame_inds, total_frames)
+            elif self.out_of_bound_opt == 'repeat_last':
+                safe_inds = frame_inds < total_frames
+                unsafe_inds = 1 - safe_inds
+                last_ind = np.max(safe_inds * frame_inds, axis=1)
+                new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
+                frame_inds = new_inds
+            else:
+                raise ValueError('Illegal out_of_bound option.')
+
+            start_index = results['start_index']
+            frame_inds = np.concatenate(frame_inds) + start_index
+
+        results['frame_inds'] = frame_inds.astype(np.int)
+        results['clip_len'] = self.clip_len
+        results['frame_interval'] = self.frame_interval
+        results['num_clips'] = self.num_clips
+        return results
 
 
 @PIPELINES.register_module()

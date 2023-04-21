@@ -1,15 +1,15 @@
 id,name
-1,Abuse
-2,Arrest
-3,Arson
-4,Assault
-5,RoadAccident
-6,Burglary
-7,Explosion
-8,Fighting
-9,Robbery
-10,Shooting
-11,Stealing
-12,Shoplifting
-13,Vandalism
-14,Normal_Videos_for_Event_Recognition
+0,abuse
+1,arrest
+2,arson
+3,assault
+4,road accidents
+5,burglary
+6,explosion
+7,fighting
+8,robbery
+9,shooting
+10,stealing
+11,shoplifting
+12,vandalism
+13,normal video

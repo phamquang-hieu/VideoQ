@@ -111,14 +111,18 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
     def load_json_annotations_2(self):
         """load json annotations from extended ucf crime"""
         video_infos = mmcv.load(self.ann_file)
+
         # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
-        num_videos = len(video_infos)
-        results = {}
-        i = 0
-        for k, v in video_infos():
-            results[i][k] = v # v['annotation']
-            # results[i]['label'] # v['label'] 
-            i+=1
+        idx = 0
+        results = defaultdict(dict)
+        for vid, values in video_infos.items():
+            results[idx]['filename'] = vid
+            results[idx]['label'] = values['label']
+            results[idx]['annotations'] = values["annotations"]
+            results[idx]['tar'] = self.use_tar_format
+            idx += 1
+
+        return results
 
 
     def parse_by_class(self):
@@ -201,7 +205,7 @@ class VideoDataset(BaseDataset):
     def load_annotations(self):
         """Load annotation file to get video information."""
         if self.ann_file.endswith('.json'):
-            return self.load_json_annotations()
+            return self.load_json_annotations_2()
 
         video_infos = []
         with open(self.ann_file, 'r') as fin:
@@ -324,7 +328,7 @@ def build_dataloader(logger, config):
         num_workers=1,
         pin_memory=True,
         drop_last=True,
-        collate_fn=partial(mmcv_collate, samples_per_gpu=2),
+        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE),
     )
 
     return train_data, val_data, train_loader, val_loader
