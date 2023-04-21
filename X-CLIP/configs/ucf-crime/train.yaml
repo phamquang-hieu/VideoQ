@@ -1,0 +1,15 @@
+DATA:
+    ROOT: 'ucfcrime_v2/public_ucfcrimev2/videos'
+    TRAIN_FILE: 'annotations/train_formated.json'
+    VAL_FILE: 'annotations/test_formated.json'
+    DATASET: ucf101
+    NUM_FRAMES: 32
+    NUM_CLASSES: 51
+    LABEL_LIST: 'labels/ucf_101_labels.csv'
+MODEL:
+    ARCH: ViT-B/16
+TRAIN:
+    BATCH_SIZE: 4
+    ACCUMULATION_STEPS: 2
+    EPOCHS: 50
+    LR: 2.e-6
