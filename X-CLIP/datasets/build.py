@@ -116,7 +116,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         idx = 0
         results = defaultdict(dict)
         for vid, values in video_infos.items():
-            results[idx]['filename'] = vid
+            results[idx]['filename'] = osp.join(self.data_prefix, vid) if self.data_prefix is not None else vid
             results[idx]['label'] = values['label']
             results[idx]['annotations'] = values["annotations"]
             results[idx]['tar'] = self.use_tar_format
