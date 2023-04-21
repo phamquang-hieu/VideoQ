@@ -2107,7 +2107,7 @@ class SampleAnnotatedFrames(SampleFrames):
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
             total_frames = results["total_frames"]
             start = np.random.randint(0, total_frames)
-            end = start + 10 * results["num_clips"] * results["clip_len"] 
+            end = start + 10 * self.num_clips * self.clip_len
             if end > total_frames:
                 end = total_frames
             total_frames = end - start
