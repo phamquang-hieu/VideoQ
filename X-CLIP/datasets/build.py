@@ -54,9 +54,9 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         data_prefix = data_prefix.replace(".tar", "")
         self.ann_file = ann_file
         self.repeat = repeat
-        self.data_prefix = osp.realpath(
-            data_prefix) if data_prefix is not None and osp.isdir(
-                data_prefix) else data_prefix
+        # self.data_prefix = osp.realpath(
+        #     data_prefix) if data_prefix is not None and osp.isdir(
+        #         data_prefix) else data_prefix
         self.test_mode = test_mode
         self.multi_class = multi_class
         self.num_classes = num_classes
@@ -116,7 +116,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         idx = 0
         results = defaultdict(dict)
         for vid, values in video_infos.items():
-            results[idx]['filename'] = osp.join(self.data_prefix, vid) if self.data_prefix is not None else vid
+            results[idx]['filename'] = os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid
             results[idx]['label'] = values['label']
             results[idx]['annotations'] = values["annotations"]
             results[idx]['tar'] = self.use_tar_format
