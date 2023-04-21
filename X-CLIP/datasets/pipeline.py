@@ -2112,7 +2112,7 @@ class SampleAnnotatedFrames(SampleFrames):
             end = start + 10 * self.num_clips * self.clip_len
             if end > total_frames:
                 end = total_frames - 1
-            total_frames = end - start
+            total_frames = end - start + 1
 
         if self.frame_uniform:  # sthv2 sampling strategy
             assert results['start_index'] == 0
