@@ -119,14 +119,18 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         # results = {}
         # for k in range(len(video_infos)):
             # results[k] = {}
+        results = []
         for vid, values in video_infos.items():
-            video_infos[idx]['filename'] = os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid
-            video_infos[idx]['label'] = values['label']
-            video_infos[idx]['annotations'] = values["annotations"]
-            video_infos[idx]['tar'] = self.use_tar_format
-            idx += 1
-
-        return video_infos #results
+            # video_infos[idx]['filename'] = os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid
+            # video_infos[idx]['label'] = values['label']
+            # video_infos[idx]['annotations'] = values["annotations"]
+            # video_infos[idx]['tar'] = self.use_tar_format
+            # idx += 1
+            results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
+                                label=values['label'],
+                                annotations=values["annotations"],
+                                tar=self.use_tar_format))
+        return results
 
 
     def parse_by_class(self):
