@@ -2100,14 +2100,16 @@ class SampleAnnotatedFrames(SampleFrames):
             #@TODO: integrating the parameter self.from_annotated in future update
             n_annotations = len(results["annotations"])
             chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "2"
-            total_frames = (chosen_annotation["start"] - chosen_annotation["end"]) * chosen_annotation["fps"]
+            total_frames = (chosen_annotation["start"] - chosen_annotation["end"]) * results["fps"]
             start = chosen_annotation["start"] * results["fps"]
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
             total_frames = results["total_frames"]
             start = np.random.randint(0, total_frames)
-            end = start + 10 * results["num_clips"] * results["clip_len"] if end < total_frames else total_frames
+            end = start + 10 * results["num_clips"] * results["clip_len"] 
+            if end > total_frames:
+                end = total_frames
             total_frames = end - start
 
         if self.frame_uniform:  # sthv2 sampling strategy
