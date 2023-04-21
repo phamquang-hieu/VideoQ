@@ -127,7 +127,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
             # video_infos[idx]['tar'] = self.use_tar_format
             # idx += 1
             results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
-                                label=values['label'],
+                                label=int(values['label']),
                                 annotations=values["annotations"],
                                 tar=self.use_tar_format))
         return results
