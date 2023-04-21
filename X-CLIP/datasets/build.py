@@ -54,6 +54,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         data_prefix = data_prefix.replace(".tar", "")
         self.ann_file = ann_file
         self.repeat = repeat
+        self.data_prefix = data_prefix
         # self.data_prefix = osp.realpath(
         #     data_prefix) if data_prefix is not None and osp.isdir(
         #         data_prefix) else data_prefix
