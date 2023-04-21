@@ -2062,6 +2062,7 @@ class SampleFrames:
                     f'test_mode={self.test_mode})')
         return repr_str
 
+@PIPELINES.register_module()
 class SampleAnnotatedFrames(SampleFrames):
     """@PQH: Sample annotated frames only from a video, 
         e.g. only the abnormal part from the video in case of UCF-Crime

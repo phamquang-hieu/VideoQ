@@ -112,20 +112,10 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
     def load_json_annotations_2(self):
         """load json annotations from extended ucf crime"""
         video_infos = mmcv.load(self.ann_file)
-
         # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
         idx = 0
-        # results = defaultdict(dict)
-        # results = {}
-        # for k in range(len(video_infos)):
-            # results[k] = {}
         results = []
         for vid, values in video_infos.items():
-            # video_infos[idx]['filename'] = os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid
-            # video_infos[idx]['label'] = values['label']
-            # video_infos[idx]['annotations'] = values["annotations"]
-            # video_infos[idx]['tar'] = self.use_tar_format
-            # idx += 1
             results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
                                 label=int(values['label']),
                                 annotations=values["annotations"],
@@ -273,7 +263,7 @@ def build_dataloader(logger, config):
 
     train_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
         dict(
@@ -311,7 +301,7 @@ def build_dataloader(logger, config):
     
     val_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)),
         dict(type='CenterCrop', crop_size=config.DATA.INPUT_SIZE),
