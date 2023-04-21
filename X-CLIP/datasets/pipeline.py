@@ -2103,7 +2103,7 @@ class SampleAnnotatedFrames(SampleFrames):
             total_frames = (chosen_annotation["start"] - chosen_annotation["end"]) * results["fps"]
             start = np.int(chosen_annotation["start"] * results["fps"])
             if total_frames < 0:
-                print("total_frames < 0", total_frames, start, results["start"], results["end"])
+                print("total_frames < 0", total_frames, start, chosen_annotation["start"], chosen_annotation["end"])
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
