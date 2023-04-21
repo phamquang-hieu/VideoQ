@@ -323,6 +323,9 @@ def build_dataloader(logger, config):
     val_data = VideoDataset(ann_file=config.DATA.VAL_FILE, data_prefix=config.DATA.ROOT, labels_file=config.DATA.LABEL_LIST, pipeline=val_pipeline)
     indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size()) # assume having 4 processes -> process #0 handles indices 0, 4, 8, 12,... process #2 handles indices 1, 5, 9, 13,...
     sampler_val = SubsetRandomSampler(indices)
+    import json
+    with open("log.json", "w") as f:
+        json.dump(val_data.video_infos, f, indent="\t")
     val_loader = DataLoader(
         val_data, sampler=sampler_val,
         batch_size=config.TEST.BATCH_SIZE,
