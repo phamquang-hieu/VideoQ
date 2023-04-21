@@ -2136,9 +2136,9 @@ class SampleAnnotatedFrames(SampleFrames):
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
-                frame_inds = np.mod(frame_inds, total_frames)
+                frame_inds = np.mod(frame_inds, results['total_frames'])
             elif self.out_of_bound_opt == 'repeat_last':
-                safe_inds = frame_inds < total_frames
+                safe_inds = frame_inds < results['total_frames']# total_frames
                 unsafe_inds = 1 - safe_inds
                 last_ind = np.max(safe_inds * frame_inds, axis=1)
                 new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
