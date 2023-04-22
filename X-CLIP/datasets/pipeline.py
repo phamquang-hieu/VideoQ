@@ -2149,7 +2149,7 @@ class SampleAnnotatedFrames(SampleFrames):
                 raise ValueError('Illegal out_of_bound option.')
 
             # start_index = results['start_index']
-            frame_inds = np.concatenate(frame_inds) # + start_index #start_index 
+            frame_inds = np.concatenate(frame_inds) #+ start_index #start_index 
 
         results['frame_inds'] = frame_inds.astype(np.int)
         results['clip_len'] = self.clip_len
