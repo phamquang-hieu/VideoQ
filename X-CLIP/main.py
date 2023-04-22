@@ -192,7 +192,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 f'time {batch_time.val:.4f} ({batch_time.avg:.4f})\t'
                 f'tot_loss {tot_loss_meter.val:.4f} ({tot_loss_meter.avg:.4f})\t'
                 f'mem {memory_used:.0f}MB')
-        del label_id, images, total_loss, output, end, memory_used, etas
+        del label_id, images, total_loss, output, memory_used, etas
         gc.collect()
     epoch_time = time.time() - start
     logger.info(f"EPOCH {epoch} training takes {datetime.timedelta(seconds=int(epoch_time))}")
