@@ -2134,13 +2134,13 @@ class SampleAnnotatedFrames(SampleFrames):
                 frame_inds += perframe_offsets
             
             # frame_inds = frame_inds.astype(np.int)
-            # frame_inds += start 
+            frame_inds = np.add(start, frame_inds) #@PQH shift to the start position
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
-                frame_inds = np.mod(frame_inds, total_frames)
+                frame_inds = np.mod(frame_inds, results["total_frames"])
             elif self.out_of_bound_opt == 'repeat_last':
-                safe_inds = frame_inds < total_frames # total_frames
+                safe_inds = frame_inds < results["total_frames"] # total_frames
                 unsafe_inds = 1 - safe_inds
                 last_ind = np.max(safe_inds * frame_inds, axis=1)
                 new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
@@ -2149,7 +2149,7 @@ class SampleAnnotatedFrames(SampleFrames):
                 raise ValueError('Illegal out_of_bound option.')
 
             start_index = results['start_index']
-            frame_inds = np.concatenate(frame_inds) + start #start_index #@PQH shift to the start position
+            frame_inds = np.concatenate(frame_inds) + start_index #start_index 
 
         results['frame_inds'] = frame_inds.astype(np.int)
         results['clip_len'] = self.clip_len
