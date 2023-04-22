@@ -20,6 +20,7 @@ from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
 from models import xclip
+import gc
 
 def parse_option():
     parser = argparse.ArgumentParser()
@@ -191,6 +192,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 f'time {batch_time.val:.4f} ({batch_time.avg:.4f})\t'
                 f'tot_loss {tot_loss_meter.val:.4f} ({tot_loss_meter.avg:.4f})\t'
                 f'mem {memory_used:.0f}MB')
+        del label_id, images
+        gc.collect()
     epoch_time = time.time() - start
     logger.info(f"EPOCH {epoch} training takes {datetime.timedelta(seconds=int(epoch_time))}")
 
