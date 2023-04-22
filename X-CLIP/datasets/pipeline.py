@@ -2102,7 +2102,6 @@ class SampleAnnotatedFrames(SampleFrames):
             chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "end"
             total_frames = (chosen_annotation["end"] - chosen_annotation["start"] + 1) * results["fps"]
             start = np.int(chosen_annotation["start"] * results["fps"])
-            
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
@@ -2120,7 +2119,8 @@ class SampleAnnotatedFrames(SampleFrames):
         
 
         if self.frame_uniform:  # sthv2 sampling strategy
-            assert results['start_index'] == 0
+            assert results['start_index'] == 0 
+            # @PQH: if having more than 1 annotations 
             frame_inds = self.get_seq_frames(total_frames)
         else:
             clip_offsets = self._sample_clips(total_frames)
@@ -2134,13 +2134,13 @@ class SampleAnnotatedFrames(SampleFrames):
                 frame_inds += perframe_offsets
             
             # frame_inds = frame_inds.astype(np.int)
-            frame_inds += start #@PQH shift to the start position
+            # frame_inds += start 
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
-                frame_inds = np.mod(frame_inds, results['total_frames'])
+                frame_inds = np.mod(frame_inds, total_frames)
             elif self.out_of_bound_opt == 'repeat_last':
-                safe_inds = frame_inds < results['total_frames']# total_frames
+                safe_inds = frame_inds < total_frames # total_frames
                 unsafe_inds = 1 - safe_inds
                 last_ind = np.max(safe_inds * frame_inds, axis=1)
                 new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
@@ -2149,7 +2149,7 @@ class SampleAnnotatedFrames(SampleFrames):
                 raise ValueError('Illegal out_of_bound option.')
 
             start_index = results['start_index']
-            frame_inds = np.concatenate(frame_inds) + start_index
+            frame_inds = np.concatenate(frame_inds) + start #start_index #@PQH shift to the start position
 
         results['frame_inds'] = frame_inds.astype(np.int)
         results['clip_len'] = self.clip_len
