@@ -3,7 +3,7 @@ import torch.distributed as dist
 import torch
 import clip
 import os
-
+import gc
 
 def reduce_tensor(tensor, n=None):
     if n is None:
@@ -80,11 +80,13 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
             logger.info(f"=> loaded successfully '{config.MODEL.RESUME}' (epoch {checkpoint['epoch']})")
             
             del checkpoint
+            gc.collect()
             torch.cuda.empty_cache()
 
             return start_epoch, max_accuracy
         except:
             del checkpoint
+            gc.collect()
             torch.cuda.empty_cache()
             return 0, 0.
 
