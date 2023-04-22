@@ -263,7 +263,7 @@ def build_dataloader(logger, config):
 
     train_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
         dict(
@@ -301,7 +301,7 @@ def build_dataloader(logger, config):
     
     val_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)),
         dict(type='CenterCrop', crop_size=config.DATA.INPUT_SIZE),
