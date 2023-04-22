@@ -71,8 +71,8 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
         logger.info(f"resume model: {msg}")
 
         try:
-            optimizer.load_state_dict(checkpoint['optimizer'])
-            lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
+            # optimizer.load_state_dict(checkpoint['optimizer'])
+            # lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
 
             start_epoch = checkpoint['epoch'] + 1
             max_accuracy = checkpoint['max_accuracy']
