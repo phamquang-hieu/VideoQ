@@ -1799,14 +1799,20 @@ class DecordInit:
         """
         try:
             import decord
-            class VideoReaderWrapper(decord.VideoReader):
+            class VideoReaderWrapper(VideoReader):
                 def __init__(self, *args, **kwargs):
                     super().__init__(*args, **kwargs)
                     self.seek(0)
+                    self.limit = 20 #after 20 frames, seek to 0 and free memory
+                    self.frame_count = 0
 
                 def __getitem__(self, key):
                     frames = super().__getitem__(key)
-                    self.seek(0)
+                    self.frame_count += 1
+                    print(self.frame_count)
+                    if self.frame_count > self.limit:
+                        self.frame_count = 0
+                        self.seek(0)
                     return frames
             
                 def get_avg_fps(self):
