@@ -1731,7 +1731,7 @@ class GrayScale:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
