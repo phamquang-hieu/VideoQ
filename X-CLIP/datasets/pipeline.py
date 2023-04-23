@@ -1188,7 +1188,9 @@ class Flip:
         self.lazy = lazy
 
     def _flip_imgs(self, imgs, modality):
-        _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        # _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        for img in imgs:
+            mmcv.imflip_(img, self.direction)
         lt = len(imgs)
         if modality == 'Flow':
             # The 1st frame of each 2 frames is flow-x
