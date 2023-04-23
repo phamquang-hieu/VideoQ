@@ -64,7 +64,7 @@ def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, l
 def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
     if os.path.isfile(config.MODEL.RESUME): 
         logger.info(f"==============> Resuming form {config.MODEL.RESUME}....................")
-        checkpoint = torch.load(config.MODEL.RESUME, map_location='cpu')
+        checkpoint = torch.load(config.MODEL.RESUME, map_location='gpu')
         load_state_dict = checkpoint['model']
 
         msg = model.load_state_dict(load_state_dict, strict=False)
