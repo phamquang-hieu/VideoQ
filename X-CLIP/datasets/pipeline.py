@@ -1799,7 +1799,7 @@ class DecordInit:
         """
         try:
             import decord
-            class VideoReaderWrapper(VideoReader):
+            class VideoReaderWrapper(decord.VideoReader):
                 def __init__(self, *args, **kwargs):
                     super().__init__(*args, **kwargs)
                     self.seek(0)
