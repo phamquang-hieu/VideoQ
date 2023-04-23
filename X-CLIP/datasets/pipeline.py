@@ -1809,7 +1809,7 @@ class DecordInit:
                 def __getitem__(self, key):
                     frames = super().__getitem__(key)
                     self.frame_count += 1
-                    print(self.frame_count)
+                    # print(self.frame_count)
                     if self.frame_count > self.limit:
                         self.frame_count = 0
                         self.seek(0)
