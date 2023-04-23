@@ -48,7 +48,7 @@ def parse_option():
 
 def main(config): 
     train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
-    model, _ = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
+    model_tmp, _ = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
                          device="cpu", jit=False, 
                          T=config.DATA.NUM_FRAMES, 
                          droppath=config.MODEL.DROP_PATH_RATE, 
@@ -56,7 +56,9 @@ def main(config):
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
                         )
-    model = model.cuda()
+    model = model_tmp.cuda()
+    del model_tmp, _
+    gc.collect()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
     mixup_fn = None
@@ -179,7 +181,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
         torch.cuda.synchronize()
         del batch_data
         gc.collect()
-        
+
         tot_loss_meter.update(total_loss.item(), len(label_id))
         batch_time.update(time.time() - end)
         end = time.time()
