@@ -1788,6 +1788,15 @@ class DecordInit:
         """
         try:
             import decord
+            class VideoReaderWrapper(decord.VideoReader):
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.seek(0)
+
+                def __getitem__(self, key):
+                    frames = super().__getitem__(key)
+                    self.seek(0)
+                    return frames
         except ImportError:
             raise ImportError(
                 'Please run "pip install decord" to install Decord first.')
@@ -1803,7 +1812,7 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
+        container = VideoReaderWrapper(file_obj, num_threads=self.num_threads)
         results["video_reader"] = container
         results["total_frames"] = len(container)
         results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
