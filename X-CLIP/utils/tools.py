@@ -73,7 +73,7 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
         try:
             optimizer.load_state_dict(checkpoint['optimizer'])
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
-            # checkpoint['optimizer'] = None
+            checkpoint['optimizer'] = None
             del checkpoint['optimizer']
             gc.collect()
             start_epoch = checkpoint['epoch'] + 1
