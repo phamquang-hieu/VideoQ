@@ -177,6 +177,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             lr_scheduler.step_update(epoch * num_steps + idx)
 
         torch.cuda.synchronize()
+        del batch_data
+        gc.collect()
         
         tot_loss_meter.update(total_loss.item(), len(label_id))
         batch_time.update(time.time() - end)
