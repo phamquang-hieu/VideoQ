@@ -1861,6 +1861,8 @@ class DecordDecode:
 
         results['video_reader'] = None
         del container
+        import gc
+        gc.collect()
 
         results['imgs'] = imgs
         results['original_shape'] = imgs[0].shape[:2]
