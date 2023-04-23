@@ -1330,9 +1330,9 @@ class Normalize:
             # imgs = np.empty((n, h, w, c), dtype=np.float32)
             # for i, img in enumerate(results['imgs']):
             #     imgs[i] = img
-            imgs = results['imgs']
+            imgs = results['imgs'].astype(np.uint8)
             assert isinstance(results['imgs'], np.ndarray), "Catch: results['imgs'] is not a ndarray"
-            
+
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
             results['imgs'] = imgs
