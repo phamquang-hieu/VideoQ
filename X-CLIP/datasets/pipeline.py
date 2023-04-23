@@ -383,7 +383,7 @@ class Fuse:
 
         # crop
         left, top, right, bottom = lazyop['crop_bbox'].round().astype(int)
-        imgs = [img[top:bottom, left:right] for img in imgs]
+        imgs = np.array([img[top:bottom, left:right] for img in imgs])
 
         # resize
         img_h, img_w = results['img_shape']
@@ -391,10 +391,10 @@ class Fuse:
             interpolation = 'bilinear'
         else:
             interpolation = lazyop['interpolation']
-        imgs = [
+        imgs = np.array([
             mmcv.imresize(img, (img_w, img_h), interpolation=interpolation)
             for img in imgs
-        ]
+        ])
 
         # flip
         if lazyop['flip']:
@@ -502,7 +502,7 @@ class RandomCrop:
     @staticmethod
     def _crop_imgs(imgs, crop_bbox):
         x1, y1, x2, y2 = crop_bbox
-        return [img[y1:y2, x1:x2] for img in imgs]
+        return np.array([img[y1:y2, x1:x2] for img in imgs])
 
     @staticmethod
     def _box_crop(box, crop_bbox):
@@ -1007,11 +1007,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
@@ -1524,16 +1524,22 @@ class ThreeCrop:
                 (0, h_step),  # middle
             ]
 
-        cropped = []
-        crop_bboxes = []
+        cropped = np.array([])
+        crop_bboxes = np.array([])
         for x_offset, y_offset in offsets:
-            bbox = [x_offset, y_offset, x_offset + crop_w, y_offset + crop_h]
-            crop = [
+            bbox = np.array([x_offset, y_offset, x_offset + crop_w, y_offset + crop_h])
+            crop = np.array([
                 img[y_offset:y_offset + crop_h, x_offset:x_offset + crop_w]
                 for img in imgs
-            ]
-            cropped.extend(crop)
-            crop_bboxes.extend([bbox for _ in range(len(imgs))])
+            ])
+            cropped = np.append(cropped, crop, axis=0)
+            
+            if len(crop_bboxes) == 0:
+                crop_bboxes = np.array([[bbox for _ in range(len(imgs))]])
+            else:
+                crop_bboxes = np.append(cropped, [bbox for _ in range(len(imgs))], axis=0)
+            # cropped.extend(crop)
+            # crop_bboxes.extend([bbox for _ in range(len(imgs))])
 
         crop_bboxes = np.array(crop_bboxes)
         results['imgs'] = cropped
@@ -1703,7 +1709,7 @@ class ColorJitter:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
