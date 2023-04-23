@@ -1797,6 +1797,10 @@ class DecordInit:
                     frames = super().__getitem__(key)
                     self.seek(0)
                     return frames
+            
+                def get_avg_fps(self):
+                    self.seek(0)
+                    return super().get_avg_fps()
         except ImportError:
             raise ImportError(
                 'Please run "pip install decord" to install Decord first.')
