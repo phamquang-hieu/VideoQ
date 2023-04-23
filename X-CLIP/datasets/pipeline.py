@@ -1852,12 +1852,12 @@ class DecordDecode:
 
         frame_inds = results['frame_inds']
         # Generate frame index mapping in order
-        frame_dict = {
-            idx: container[idx].asnumpy()
-            for idx in np.unique(frame_inds)
-        }
+        # frame_dict = {
+        #     idx: container[idx].asnumpy()
+        #     for idx in np.unique(frame_inds)
+        # }
 
-        imgs = np.array([frame_dict[idx] for idx in frame_inds])
+        imgs = np.array([container[idx].asnumpy() for idx in frame_inds])
 
         results['video_reader'] = None
         del container
