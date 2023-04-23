@@ -2324,15 +2324,18 @@ class Collect:
         data = {}
         for key in self.keys:
             data[key] = results[key]
+        del results
+        import gc
+        gc.collect()
 
-        if len(self.meta_keys) != 0:
-            meta = {}
-            for key in self.meta_keys:
-                meta[key] = results[key]
-            data[self.meta_name] = DC(meta, cpu_only=True)
-        if self.nested:
-            for k in data:
-                data[k] = [data[k]]
+        # if len(self.meta_keys) != 0:
+        #     meta = {}
+        #     for key in self.meta_keys:
+        #         meta[key] = results[key]
+        #     data[self.meta_name] = DC(meta, cpu_only=True)
+        # if self.nested:
+        #     for k in data:
+        #         data[k] = [data[k]]
 
         return data
 
