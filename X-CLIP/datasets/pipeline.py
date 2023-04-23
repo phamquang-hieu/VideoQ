@@ -1331,7 +1331,7 @@ class Normalize:
             # for i, img in enumerate(results['imgs']):
             #     imgs[i] = img
             imgs = results['imgs'].astype(np.float32)
-            print(imgs[0].dtype)
+            # print(imgs[0].dtype)
             assert isinstance(results['imgs'], np.ndarray), "Catch: results['imgs'] is not a ndarray"
 
             for img in imgs:
