@@ -1,0 +1,1406 @@
+{
+	"0": {
+		"Abuse/Abuse028_x264.mp4": {
+			"annotation": {
+				"end": 8,
+				"start": 6
+			},
+			"label": "0"
+		}
+	},
+	"1": {
+		"Abuse/Abuse030_x264.mp4": {
+			"annotation": {
+				"end": 45,
+				"start": 42
+			},
+			"label": "0"
+		}
+	},
+	"2": {
+		"Arrest/Arrest001_x264.mp4": {
+			"annotation": {
+				"end": 50,
+				"start": 40
+			},
+			"label": "1"
+		}
+	},
+	"3": {
+		"Arrest/Arrest007_x264.mp4": {
+			"annotation": {
+				"end": 72,
+				"start": 51
+			},
+			"label": "1"
+		}
+	},
+	"4": {
+		"Arrest/Arrest024_x264.mp4": {
+			"annotation": {
+				"end": 104,
+				"start": 34
+			},
+			"label": "1"
+		}
+	},
+	"5": {
+		"Arrest/Arrest030_x264.mp4": {
+			"annotation": {
+				"end": 240,
+				"start": 184
+			},
+			"label": "1"
+		}
+	},
+	"6": {
+		"Arrest/Arrest039_x264.mp4": {
+			"annotation": {
+				"end": 344,
+				"start": 240
+			},
+			"label": "1"
+		}
+	},
+	"7": {
+		"Arson/Arson007_x264.mp4": {
+			"annotation": {
+				"end": 190,
+				"start": 75
+			},
+			"label": "2"
+		}
+	},
+	"8": {
+		"Arson/Arson009_x264.mp4": {
+			"annotation": {
+				"end": 10,
+				"start": 7
+			},
+			"label": "2"
+		}
+	},
+	"9": {
+		"Arson/Arson010_x264.mp4": {
+			"annotation": {
+				"end": 41,
+				"start": 30
+			},
+			"label": "2"
+		}
+	},
+	"10": {
+		"Arson/Arson011_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 5
+			},
+			"label": "2"
+		}
+	},
+	"11": {
+		"Arson/Arson011_x264.mp4": {
+			"annotation": {
+				"end": 42,
+				"start": 23
+			},
+			"label": "2"
+		}
+	},
+	"12": {
+		"Arson/Arson016_x264.mp4": {
+			"annotation": {
+				"end": 60,
+				"start": 33
+			},
+			"label": "2"
+		}
+	},
+	"13": {
+		"Arson/Arson018_x264.mp4": {
+			"annotation": {
+				"end": 20,
+				"start": 9
+			},
+			"label": "2"
+		}
+	},
+	"14": {
+		"Arson/Arson022_x264.mp4": {
+			"annotation": {
+				"end": 133,
+				"start": 117
+			},
+			"label": "2"
+		}
+	},
+	"15": {
+		"Arson/Arson035_x264.mp4": {
+			"annotation": {
+				"end": 30,
+				"start": 20
+			},
+			"label": "2"
+		}
+	},
+	"16": {
+		"Arson/Arson041_x264.mp4": {
+			"annotation": {
+				"end": 120,
+				"start": 71
+			},
+			"label": "2"
+		}
+	},
+	"17": {
+		"Assault/Assault006_x264.mp4": {
+			"annotation": {
+				"end": 270,
+				"start": 40
+			},
+			"label": "3"
+		}
+	},
+	"18": {
+		"Assault/Assault010_x264.mp4": {
+			"annotation": {
+				"end": 389,
+				"start": 378
+			},
+			"label": "3"
+		}
+	},
+	"19": {
+		"Assault/Assault010_x264.mp4": {
+			"annotation": {
+				"end": 431,
+				"start": 409
+			},
+			"label": "3"
+		}
+	},
+	"20": {
+		"Assault/Assault011_x264.mp4": {
+			"annotation": {
+				"end": 32,
+				"start": 12
+			},
+			"label": "3"
+		}
+	},
+	"21": {
+		"Burglary/Burglary005_x264.mp4": {
+			"annotation": {
+				"end": 168,
+				"start": 157
+			},
+			"label": "5"
+		}
+	},
+	"22": {
+		"Burglary/Burglary017_x264.mp4": {
+			"annotation": {
+				"end": 20,
+				"start": 5
+			},
+			"label": "5"
+		}
+	},
+	"23": {
+		"Burglary/Burglary018_x264.mp4": {
+			"annotation": {
+				"end": 35,
+				"start": 24
+			},
+			"label": "5"
+		}
+	},
+	"24": {
+		"Burglary/Burglary021_x264.mp4": {
+			"annotation": {
+				"end": 7,
+				"start": 2
+			},
+			"label": "5"
+		}
+	},
+	"25": {
+		"Burglary/Burglary021_x264.mp4": {
+			"annotation": {
+				"end": 45,
+				"start": 28
+			},
+			"label": "5"
+		}
+	},
+	"26": {
+		"Burglary/Burglary024_x264.mp4": {
+			"annotation": {
+				"end": 41,
+				"start": 2
+			},
+			"label": "5"
+		}
+	},
+	"27": {
+		"Burglary/Burglary032_x264.mp4": {
+			"annotation": {
+				"end": 123,
+				"start": 43
+			},
+			"label": "5"
+		}
+	},
+	"28": {
+		"Burglary/Burglary033_x264.mp4": {
+			"annotation": {
+				"end": 11,
+				"start": 2
+			},
+			"label": "5"
+		}
+	},
+	"29": {
+		"Burglary/Burglary035_x264.mp4": {
+			"annotation": {
+				"end": 58,
+				"start": 0
+			},
+			"label": "5"
+		}
+	},
+	"30": {
+		"Burglary/Burglary037_x264.mp4": {
+			"annotation": {
+				"end": 13,
+				"start": 8
+			},
+			"label": "5"
+		}
+	},
+	"31": {
+		"Burglary/Burglary037_x264.mp4": {
+			"annotation": {
+				"end": 60,
+				"start": 18
+			},
+			"label": "5"
+		}
+	},
+	"32": {
+		"Burglary/Burglary061_x264.mp4": {
+			"annotation": {
+				"end": 190,
+				"start": 140
+			},
+			"label": "5"
+		}
+	},
+	"33": {
+		"Burglary/Burglary076_x264.mp4": {
+			"annotation": {
+				"end": 143,
+				"start": 53
+			},
+			"label": "5"
+		}
+	},
+	"34": {
+		"Burglary/Burglary079_x264.mp4": {
+			"annotation": {
+				"end": 357,
+				"start": 258
+			},
+			"label": "5"
+		}
+	},
+	"35": {
+		"Burglary/Burglary092_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 8
+			},
+			"label": "5"
+		}
+	},
+	"36": {
+		"Explosion/Explosion002_x264.mp4": {
+			"annotation": {
+				"end": 70,
+				"start": 50
+			},
+			"label": "6"
+		}
+	},
+	"37": {
+		"Explosion/Explosion004_x264.mp4": {
+			"annotation": {
+				"end": 8,
+				"start": 2
+			},
+			"label": "6"
+		}
+	},
+	"38": {
+		"Explosion/Explosion007_x264.mp4": {
+			"annotation": {
+				"end": 76,
+				"start": 53
+			},
+			"label": "6"
+		}
+	},
+	"39": {
+		"Explosion/Explosion008_x264.mp4": {
+			"annotation": {
+				"end": 42,
+				"start": 34
+			},
+			"label": "6"
+		}
+	},
+	"40": {
+		"Explosion/Explosion010_x264.mp4": {
+			"annotation": {
+				"end": 36,
+				"start": 10
+			},
+			"label": "6"
+		}
+	},
+	"41": {
+		"Explosion/Explosion011_x264.mp4": {
+			"annotation": {
+				"end": 32,
+				"start": 26
+			},
+			"label": "6"
+		}
+	},
+	"42": {
+		"Explosion/Explosion013_x264.mp4": {
+			"annotation": {
+				"end": 99,
+				"start": 84
+			},
+			"label": "6"
+		}
+	},
+	"43": {
+		"Explosion/Explosion016_x264.mp4": {
+			"annotation": {
+				"end": 15,
+				"start": 6
+			},
+			"label": "6"
+		}
+	},
+	"44": {
+		"Explosion/Explosion017_x264.mp4": {
+			"annotation": {
+				"end": 48,
+				"start": 33
+			},
+			"label": "6"
+		}
+	},
+	"45": {
+		"Explosion/Explosion020_x264.mp4": {
+			"annotation": {
+				"end": 9,
+				"start": 2
+			},
+			"label": "6"
+		}
+	},
+	"46": {
+		"Explosion/Explosion021_x264.mp4": {
+			"annotation": {
+				"end": 9,
+				"start": 4
+			},
+			"label": "6"
+		}
+	},
+	"47": {
+		"Explosion/Explosion022_x264.mp4": {
+			"annotation": {
+				"end": 81,
+				"start": 74
+			},
+			"label": "6"
+		}
+	},
+	"48": {
+		"Explosion/Explosion025_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 9
+			},
+			"label": "6"
+		}
+	},
+	"49": {
+		"Explosion/Explosion027_x264.mp4": {
+			"annotation": {
+				"end": 6,
+				"start": 4
+			},
+			"label": "6"
+		}
+	},
+	"50": {
+		"Explosion/Explosion028_x264.mp4": {
+			"annotation": {
+				"end": 23,
+				"start": 9
+			},
+			"label": "6"
+		}
+	},
+	"51": {
+		"Explosion/Explosion029_x264.mp4": {
+			"annotation": {
+				"end": 67,
+				"start": 61
+			},
+			"label": "6"
+		}
+	},
+	"52": {
+		"Explosion/Explosion033_x264.mp4": {
+			"annotation": {
+				"end": 45,
+				"start": 32
+			},
+			"label": "6"
+		}
+	},
+	"53": {
+		"Explosion/Explosion033_x264.mp4": {
+			"annotation": {
+				"end": 105,
+				"start": 52
+			},
+			"label": "6"
+		}
+	},
+	"54": {
+		"Explosion/Explosion035_x264.mp4": {
+			"annotation": {
+				"end": 12,
+				"start": 8
+			},
+			"label": "6"
+		}
+	},
+	"55": {
+		"Explosion/Explosion036_x264.mp4": {
+			"annotation": {
+				"end": 69,
+				"start": 65
+			},
+			"label": "6"
+		}
+	},
+	"56": {
+		"Explosion/Explosion039_x264.mp4": {
+			"annotation": {
+				"end": 5,
+				"start": 2
+			},
+			"label": "6"
+		}
+	},
+	"57": {
+		"Explosion/Explosion043_x264.mp4": {
+			"annotation": {
+				"end": 153,
+				"start": 149
+			},
+			"label": "6"
+		}
+	},
+	"58": {
+		"Fighting/Fighting003_x264.mp4": {
+			"annotation": {
+				"end": 103,
+				"start": 61
+			},
+			"label": "7"
+		}
+	},
+	"59": {
+		"Fighting/Fighting018_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 3
+			},
+			"label": "7"
+		}
+	},
+	"60": {
+		"Fighting/Fighting033_x264.mp4": {
+			"annotation": {
+				"end": 28,
+				"start": 19
+			},
+			"label": "7"
+		}
+	},
+	"61": {
+		"Fighting/Fighting042_x264.mp4": {
+			"annotation": {
+				"end": 40,
+				"start": 10
+			},
+			"label": "7"
+		}
+	},
+	"62": {
+		"Fighting/Fighting047_x264.mp4": {
+			"annotation": {
+				"end": 61,
+				"start": 7
+			},
+			"label": "7"
+		}
+	},
+	"63": {
+		"RoadAccidents/RoadAccidents001_x264.mp4": {
+			"annotation": {
+				"end": 10,
+				"start": 7
+			},
+			"label": "4"
+		}
+	},
+	"64": {
+		"RoadAccidents/RoadAccidents002_x264.mp4": {
+			"annotation": {
+				"end": 10,
+				"start": 8
+			},
+			"label": "4"
+		}
+	},
+	"65": {
+		"RoadAccidents/RoadAccidents004_x264.mp4": {
+			"annotation": {
+				"end": 6,
+				"start": 5
+			},
+			"label": "4"
+		}
+	},
+	"66": {
+		"RoadAccidents/RoadAccidents009_x264.mp4": {
+			"annotation": {
+				"end": 8,
+				"start": 7
+			},
+			"label": "4"
+		}
+	},
+	"67": {
+		"RoadAccidents/RoadAccidents010_x264.mp4": {
+			"annotation": {
+				"end": 9,
+				"start": 8
+			},
+			"label": "4"
+		}
+	},
+	"68": {
+		"RoadAccidents/RoadAccidents011_x264.mp4": {
+			"annotation": {
+				"end": 10,
+				"start": 9
+			},
+			"label": "4"
+		}
+	},
+	"69": {
+		"RoadAccidents/RoadAccidents012_x264.mp4": {
+			"annotation": {
+				"end": 13,
+				"start": 8
+			},
+			"label": "4"
+		}
+	},
+	"70": {
+		"RoadAccidents/RoadAccidents016_x264.mp4": {
+			"annotation": {
+				"end": 24,
+				"start": 18
+			},
+			"label": "4"
+		}
+	},
+	"71": {
+		"RoadAccidents/RoadAccidents017_x264.mp4": {
+			"annotation": {
+				"end": 4,
+				"start": 2
+			},
+			"label": "4"
+		}
+	},
+	"72": {
+		"RoadAccidents/RoadAccidents019_x264.mp4": {
+			"annotation": {
+				"end": 30,
+				"start": 25
+			},
+			"label": "4"
+		}
+	},
+	"73": {
+		"RoadAccidents/RoadAccidents020_x264.mp4": {
+			"annotation": {
+				"end": 24,
+				"start": 20
+			},
+			"label": "4"
+		}
+	},
+	"74": {
+		"RoadAccidents/RoadAccidents021_x264.mp4": {
+			"annotation": {
+				"end": 3,
+				"start": 1
+			},
+			"label": "4"
+		}
+	},
+	"75": {
+		"RoadAccidents/RoadAccidents022_x264.mp4": {
+			"annotation": {
+				"end": 7,
+				"start": 4
+			},
+			"label": "4"
+		}
+	},
+	"76": {
+		"RoadAccidents/RoadAccidents121_x264.mp4": {
+			"annotation": {
+				"end": 13,
+				"start": 11
+			},
+			"label": "4"
+		}
+	},
+	"77": {
+		"RoadAccidents/RoadAccidents122_x264.mp4": {
+			"annotation": {
+				"end": 12,
+				"start": 10
+			},
+			"label": "4"
+		}
+	},
+	"78": {
+		"RoadAccidents/RoadAccidents123_x264.mp4": {
+			"annotation": {
+				"end": 7,
+				"start": 4
+			},
+			"label": "4"
+		}
+	},
+	"79": {
+		"RoadAccidents/RoadAccidents124_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 8
+			},
+			"label": "4"
+		}
+	},
+	"80": {
+		"RoadAccidents/RoadAccidents125_x264.mp4": {
+			"annotation": {
+				"end": 20,
+				"start": 16
+			},
+			"label": "4"
+		}
+	},
+	"81": {
+		"RoadAccidents/RoadAccidents127_x264.mp4": {
+			"annotation": {
+				"end": 77,
+				"start": 72
+			},
+			"label": "4"
+		}
+	},
+	"82": {
+		"RoadAccidents/RoadAccidents128_x264.mp4": {
+			"annotation": {
+				"end": 7,
+				"start": 3
+			},
+			"label": "4"
+		}
+	},
+	"83": {
+		"RoadAccidents/RoadAccidents131_x264.mp4": {
+			"annotation": {
+				"end": 8,
+				"start": 6
+			},
+			"label": "4"
+		}
+	},
+	"84": {
+		"RoadAccidents/RoadAccidents132_x264.mp4": {
+			"annotation": {
+				"end": 11,
+				"start": 7
+			},
+			"label": "4"
+		}
+	},
+	"85": {
+		"RoadAccidents/RoadAccidents133_x264.mp4": {
+			"annotation": {
+				"end": 15,
+				"start": 9
+			},
+			"label": "4"
+		}
+	},
+	"86": {
+		"Robbery/Robbery048_x264.mp4": {
+			"annotation": {
+				"end": 31,
+				"start": 15
+			},
+			"label": "8"
+		}
+	},
+	"87": {
+		"Robbery/Robbery050_x264.mp4": {
+			"annotation": {
+				"end": 47,
+				"start": 16
+			},
+			"label": "8"
+		}
+	},
+	"88": {
+		"Robbery/Robbery102_x264.mp4": {
+			"annotation": {
+				"end": 52,
+				"start": 36
+			},
+			"label": "8"
+		}
+	},
+	"89": {
+		"Robbery/Robbery106_x264.mp4": {
+			"annotation": {
+				"end": 20,
+				"start": 16
+			},
+			"label": "8"
+		}
+	},
+	"90": {
+		"Robbery/Robbery137_x264.mp4": {
+			"annotation": {
+				"end": 65,
+				"start": 4
+			},
+			"label": "8"
+		}
+	},
+	"91": {
+		"Shooting/Shooting002_x264.mp4": {
+			"annotation": {
+				"end": 37,
+				"start": 34
+			},
+			"label": "9"
+		}
+	},
+	"92": {
+		"Shooting/Shooting004_x264.mp4": {
+			"annotation": {
+				"end": 22,
+				"start": 17
+			},
+			"label": "9"
+		}
+	},
+	"93": {
+		"Shooting/Shooting007_x264.mp4": {
+			"annotation": {
+				"end": 6,
+				"start": 2
+			},
+			"label": "9"
+		}
+	},
+	"94": {
+		"Shooting/Shooting008_x264.mp4": {
+			"annotation": {
+				"end": 10,
+				"start": 2
+			},
+			"label": "9"
+		}
+	},
+	"95": {
+		"Shooting/Shooting010_x264.mp4": {
+			"annotation": {
+				"end": 42,
+				"start": 36
+			},
+			"label": "9"
+		}
+	},
+	"96": {
+		"Shooting/Shooting011_x264.mp4": {
+			"annotation": {
+				"end": 58,
+				"start": 49
+			},
+			"label": "9"
+		}
+	},
+	"97": {
+		"Shooting/Shooting013_x264.mp4": {
+			"annotation": {
+				"end": 32,
+				"start": 29
+			},
+			"label": "9"
+		}
+	},
+	"98": {
+		"Shooting/Shooting015_x264.mp4": {
+			"annotation": {
+				"end": 57,
+				"start": 28
+			},
+			"label": "9"
+		}
+	},
+	"99": {
+		"Shooting/Shooting018_x264.mp4": {
+			"annotation": {
+				"end": 16,
+				"start": 10
+			},
+			"label": "9"
+		}
+	},
+	"100": {
+		"Shooting/Shooting019_x264.mp4": {
+			"annotation": {
+				"end": 48,
+				"start": 34
+			},
+			"label": "9"
+		}
+	},
+	"101": {
+		"Shooting/Shooting021_x264.mp4": {
+			"annotation": {
+				"end": 21,
+				"start": 16
+			},
+			"label": "9"
+		}
+	},
+	"102": {
+		"Shooting/Shooting022_x264.mp4": {
+			"annotation": {
+				"end": 110,
+				"start": 95
+			},
+			"label": "9"
+		}
+	},
+	"103": {
+		"Shooting/Shooting024_x264.mp4": {
+			"annotation": {
+				"end": 44,
+				"start": 24
+			},
+			"label": "9"
+		}
+	},
+	"104": {
+		"Shooting/Shooting026_x264.mp4": {
+			"annotation": {
+				"end": 20,
+				"start": 6
+			},
+			"label": "9"
+		}
+	},
+	"105": {
+		"Shooting/Shooting028_x264.mp4": {
+			"annotation": {
+				"end": 18,
+				"start": 10
+			},
+			"label": "9"
+		}
+	},
+	"106": {
+		"Shooting/Shooting032_x264.mp4": {
+			"annotation": {
+				"end": 274,
+				"start": 266
+			},
+			"label": "9"
+		}
+	},
+	"107": {
+		"Shooting/Shooting033_x264.mp4": {
+			"annotation": {
+				"end": 67,
+				"start": 56
+			},
+			"label": "9"
+		}
+	},
+	"108": {
+		"Shooting/Shooting034_x264.mp4": {
+			"annotation": {
+				"end": 35,
+				"start": 32
+			},
+			"label": "9"
+		}
+	},
+	"109": {
+		"Shooting/Shooting037_x264.mp4": {
+			"annotation": {
+				"end": 9,
+				"start": 5
+			},
+			"label": "9"
+		}
+	},
+	"110": {
+		"Shooting/Shooting043_x264.mp4": {
+			"annotation": {
+				"end": 41,
+				"start": 32
+			},
+			"label": "9"
+		}
+	},
+	"111": {
+		"Shooting/Shooting046_x264.mp4": {
+			"annotation": {
+				"end": 141,
+				"start": 134
+			},
+			"label": "9"
+		}
+	},
+	"112": {
+		"Shooting/Shooting046_x264.mp4": {
+			"annotation": {
+				"end": 170,
+				"start": 159
+			},
+			"label": "9"
+		}
+	},
+	"113": {
+		"Shooting/Shooting047_x264.mp4": {
+			"annotation": {
+				"end": 130,
+				"start": 72
+			},
+			"label": "9"
+		}
+	},
+	"114": {
+		"Shooting/Shooting047_x264.mp4": {
+			"annotation": {
+				"end": 220,
+				"start": 162
+			},
+			"label": "9"
+		}
+	},
+	"115": {
+		"Shooting/Shooting048_x264.mp4": {
+			"annotation": {
+				"end": 58,
+				"start": 47
+			},
+			"label": "9"
+		}
+	},
+	"116": {
+		"Shoplifting/Shoplifting001_x264.mp4": {
+			"annotation": {
+				"end": 67,
+				"start": 52
+			},
+			"label": "11"
+		}
+	},
+	"117": {
+		"Shoplifting/Shoplifting004_x264.mp4": {
+			"annotation": {
+				"end": 163,
+				"start": 73
+			},
+			"label": "11"
+		}
+	},
+	"118": {
+		"Shoplifting/Shoplifting005_x264.mp4": {
+			"annotation": {
+				"end": 31,
+				"start": 24
+			},
+			"label": "11"
+		}
+	},
+	"119": {
+		"Shoplifting/Shoplifting007_x264.mp4": {
+			"annotation": {
+				"end": 25,
+				"start": 18
+			},
+			"label": "11"
+		}
+	},
+	"120": {
+		"Shoplifting/Shoplifting007_x264.mp4": {
+			"annotation": {
+				"end": 164,
+				"start": 154
+			},
+			"label": "11"
+		}
+	},
+	"121": {
+		"Shoplifting/Shoplifting010_x264.mp4": {
+			"annotation": {
+				"end": 31,
+				"start": 25
+			},
+			"label": "11"
+		}
+	},
+	"122": {
+		"Shoplifting/Shoplifting010_x264.mp4": {
+			"annotation": {
+				"end": 66,
+				"start": 52
+			},
+			"label": "11"
+		}
+	},
+	"123": {
+		"Shoplifting/Shoplifting015_x264.mp4": {
+			"annotation": {
+				"end": 72,
+				"start": 67
+			},
+			"label": "11"
+		}
+	},
+	"124": {
+		"Shoplifting/Shoplifting016_x264.mp4": {
+			"annotation": {
+				"end": 24,
+				"start": 21
+			},
+			"label": "11"
+		}
+	},
+	"125": {
+		"Shoplifting/Shoplifting017_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 12
+			},
+			"label": "11"
+		}
+	},
+	"126": {
+		"Shoplifting/Shoplifting020_x264.mp4": {
+			"annotation": {
+				"end": 82,
+				"start": 78
+			},
+			"label": "11"
+		}
+	},
+	"127": {
+		"Shoplifting/Shoplifting021_x264.mp4": {
+			"annotation": {
+				"end": 74,
+				"start": 69
+			},
+			"label": "11"
+		}
+	},
+	"128": {
+		"Shoplifting/Shoplifting022_x264.mp4": {
+			"annotation": {
+				"end": 14,
+				"start": 9
+			},
+			"label": "11"
+		}
+	},
+	"129": {
+		"Shoplifting/Shoplifting022_x264.mp4": {
+			"annotation": {
+				"end": 52,
+				"start": 48
+			},
+			"label": "11"
+		}
+	},
+	"130": {
+		"Shoplifting/Shoplifting027_x264.mp4": {
+			"annotation": {
+				"end": 39,
+				"start": 36
+			},
+			"label": "11"
+		}
+	},
+	"131": {
+		"Shoplifting/Shoplifting027_x264.mp4": {
+			"annotation": {
+				"end": 57,
+				"start": 49
+			},
+			"label": "11"
+		}
+	},
+	"132": {
+		"Shoplifting/Shoplifting028_x264.mp4": {
+			"annotation": {
+				"end": 28,
+				"start": 19
+			},
+			"label": "11"
+		}
+	},
+	"133": {
+		"Shoplifting/Shoplifting029_x264.mp4": {
+			"annotation": {
+				"end": 49,
+				"start": 34
+			},
+			"label": "11"
+		}
+	},
+	"134": {
+		"Shoplifting/Shoplifting031_x264.mp4": {
+			"annotation": {
+				"end": 11,
+				"start": 4
+			},
+			"label": "11"
+		}
+	},
+	"135": {
+		"Shoplifting/Shoplifting033_x264.mp4": {
+			"annotation": {
+				"end": 25,
+				"start": 21
+			},
+			"label": "11"
+		}
+	},
+	"136": {
+		"Shoplifting/Shoplifting034_x264.mp4": {
+			"annotation": {
+				"end": 249,
+				"start": 245
+			},
+			"label": "11"
+		}
+	},
+	"137": {
+		"Shoplifting/Shoplifting037_x264.mp4": {
+			"annotation": {
+				"end": 40,
+				"start": 38
+			},
+			"label": "11"
+		}
+	},
+	"138": {
+		"Shoplifting/Shoplifting039_x264.mp4": {
+			"annotation": {
+				"end": 78,
+				"start": 73
+			},
+			"label": "11"
+		}
+	},
+	"139": {
+		"Shoplifting/Shoplifting044_x264.mp4": {
+			"annotation": {
+				"end": 375,
+				"start": 369
+			},
+			"label": "11"
+		}
+	},
+	"140": {
+		"Shoplifting/Shoplifting049_x264.mp4": {
+			"annotation": {
+				"end": 45,
+				"start": 34
+			},
+			"label": "11"
+		}
+	},
+	"141": {
+		"Stealing/Stealing019_x264.mp4": {
+			"annotation": {
+				"end": 93,
+				"start": 91
+			},
+			"label": "10"
+		}
+	},
+	"142": {
+		"Stealing/Stealing019_x264.mp4": {
+			"annotation": {
+				"end": 145,
+				"start": 139
+			},
+			"label": "10"
+		}
+	},
+	"143": {
+		"Stealing/Stealing036_x264.mp4": {
+			"annotation": {
+				"end": 53,
+				"start": 42
+			},
+			"label": "10"
+		}
+	},
+	"144": {
+		"Stealing/Stealing058_x264.mp4": {
+			"annotation": {
+				"end": 122,
+				"start": 19
+			},
+			"label": "10"
+		}
+	},
+	"145": {
+		"Stealing/Stealing062_x264.mp4": {
+			"annotation": {
+				"end": 35,
+				"start": 12
+			},
+			"label": "10"
+		}
+	},
+	"146": {
+		"Stealing/Stealing079_x264.mp4": {
+			"annotation": {
+				"end": 107,
+				"start": 85
+			},
+			"label": "10"
+		}
+	},
+	"147": {
+		"Stealing/Stealing079_x264.mp4": {
+			"annotation": {
+				"end": 150,
+				"start": 117
+			},
+			"label": "10"
+		}
+	},
+	"148": {
+		"Vandalism/Vandalism007_x264.mp4": {
+			"annotation": {
+				"end": 25,
+				"start": 8
+			},
+			"label": "12"
+		}
+	},
+	"149": {
+		"Vandalism/Vandalism015_x264.mp4": {
+			"annotation": {
+				"end": 90,
+				"start": 67
+			},
+			"label": "12"
+		}
+	},
+	"150": {
+		"Vandalism/Vandalism017_x264.mp4": {
+			"annotation": {
+				"end": 11,
+				"start": 9
+			},
+			"label": "12"
+		}
+	},
+	"151": {
+		"Vandalism/Vandalism017_x264.mp4": {
+			"annotation": {
+				"end": 28,
+				"start": 26
+			},
+			"label": "12"
+		}
+	},
+	"152": {
+		"Vandalism/Vandalism028_x264.mp4": {
+			"annotation": {
+				"end": 66,
+				"start": 61
+			},
+			"label": "12"
+		}
+	},
+	"153": {
+		"Vandalism/Vandalism028_x264.mp4": {
+			"annotation": {
+				"end": 89,
+				"start": 80
+			},
+			"label": "12"
+		}
+	},
+	"154": {
+		"Vandalism/Vandalism036_x264.mp4": {
+			"annotation": {
+				"end": 26,
+				"start": 18
+			},
+			"label": "12"
+		}
+	},
+	"155": {
+		"Vandalism/Vandalism036_x264.mp4": {
+			"annotation": {
+				"end": 36,
+				"start": 33
+			},
+			"label": "12"
+		}
+	}
+}

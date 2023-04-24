@@ -203,7 +203,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 @torch.no_grad()
 def validate(val_loader, text_labels, model, config):
     model.eval()
-    
     acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
     with torch.no_grad():
         text_inputs = text_labels.cuda()
