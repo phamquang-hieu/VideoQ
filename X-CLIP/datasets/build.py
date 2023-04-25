@@ -113,7 +113,6 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         """load json annotations from extended ucf crime"""
         video_infos = mmcv.load(self.ann_file)
         # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
-        idx = 0
         results = []
         for vid, values in video_infos.items():
             results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
@@ -121,6 +120,9 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                                 annotations=values["annotations"],
                                 tar=self.use_tar_format))
         return results
+    
+    def load_json_annotations_3(self):
+        return mmcv.load(self.ann_file)
 
 
     def parse_by_class(self):
@@ -203,7 +205,7 @@ class VideoDataset(BaseDataset):
     def load_annotations(self):
         """Load annotation file to get video information."""
         if self.ann_file.endswith('.json'):
-            return self.load_json_annotations_2()
+            return self.load_json_annotations_3()
 
         video_infos = []
         with open(self.ann_file, 'r') as fin:

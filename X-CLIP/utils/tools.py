@@ -61,7 +61,7 @@ def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, l
         logger.info(f"{best_path} saved !!!")
 
 
-def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
+def load_checkpoint(config, model, optimizer=None, lr_scheduler=None, logger=None):
     if os.path.isfile(config.MODEL.RESUME): 
         logger.info(f"==============> Resuming form {config.MODEL.RESUME}....................")
         checkpoint = torch.load(config.MODEL.RESUME, map_location='cuda:0')
@@ -71,8 +71,9 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
         logger.info(f"resume model: {msg}")
 
         try:
-            optimizer.load_state_dict(checkpoint['optimizer'])
-            lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
+            if optimizer and lr_scheduler is not None:
+                optimizer.load_state_dict(checkpoint['optimizer'])
+                lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             checkpoint['optimizer'] = None
             del checkpoint['optimizer']
             gc.collect()
