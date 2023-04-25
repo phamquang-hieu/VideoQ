@@ -125,7 +125,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         video_infos = mmcv.load(self.ann_file)
         results = []
         for vid in video_infos:
-            vid_name = list(vid.keys())[0]
+            vid_name = vid['filename']
             results.append(dict(filename=os.path.join(self.data_prefix, vid_name) if self.data_prefix is not None else vid_name,
                                 label=int(vid['label']),
                                 annotations=vid['annotations'],
