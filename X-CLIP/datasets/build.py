@@ -122,9 +122,16 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         return results
     
     def load_json_annotations_3(self):
-        results = mmcv.load(self.ann_file)
-        for vid in results:
-            vid['tar'] = False
+        video_infos = mmcv.load(self.ann_file)
+        results = []
+        for vid in video_infos:
+            vid_name = list(vid.keys())[0]
+            results.append(dict(filename=os.path.join(self.data_prefix, vid_name) if self.data_prefix is not None else vid_name,
+                                label=int(vid['label']),
+                                annotations=vid['annotations'],
+                                tar=self.use_tar_format
+                                )
+                        )
         return results
 
 
