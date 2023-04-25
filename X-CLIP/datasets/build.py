@@ -122,7 +122,10 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         return results
     
     def load_json_annotations_3(self):
-        return mmcv.load(self.ann_file)
+        results = mmcv.load(self.ann_file)
+        for vid in results:
+            vid['tar'] = False
+        return results
 
 
     def parse_by_class(self):
