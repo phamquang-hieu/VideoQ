@@ -212,7 +212,8 @@ def validate(val_loader, text_labels, model, config):
             _image = batch_data["imgs"]
             label_id = batch_data["label"]
             label_id = label_id.reshape(-1)
-
+            del batch_data
+            gc.collect()
             b, tn, c, h, w = _image.size()
             t = config.DATA.NUM_FRAMES # number of frames in a video
             n = tn // t # number of views
@@ -228,7 +229,8 @@ def validate(val_loader, text_labels, model, config):
                     image_input = image_input.half()
                 with torch.cuda.amp.autocast(enabled=True):
                     output = model(image_input, text_inputs)
-                
+                del image, label_id, image_input
+                gc.collect()
                 similarity = output.view(b, -1).softmax(dim=-1)
                 tot_similarity += similarity # accumulating simmilarity from views
 
