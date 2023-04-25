@@ -229,7 +229,7 @@ def validate(val_loader, text_labels, model, config):
                     image_input = image_input.half()
                 with torch.cuda.amp.autocast(enabled=True):
                     output = model(image_input, text_inputs)
-                del image, label_id, image_input
+                del image, image_input
                 gc.collect()
                 similarity = output.view(b, -1).softmax(dim=-1)
                 tot_similarity += similarity # accumulating simmilarity from views
