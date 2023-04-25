@@ -72,8 +72,8 @@ def load_checkpoint(config, model, optimizer=None, lr_scheduler=None, logger=Non
 
         try:
             if optimizer and lr_scheduler is not None:
-                optimizer.load_state_dict(checkpoint['optimizer'])
-                lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
+                # optimizer.load_state_dict(checkpoint['optimizer'])
+                # lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             checkpoint['optimizer'] = None
             del checkpoint['optimizer']
             gc.collect()
