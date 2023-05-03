@@ -1,15 +1,15 @@
 id,name
-0,abuse, bad, cruel or violent behavior.
-1,arrest, police arresting individuals.
-2,arson, people setting fire to property.
-3,assault, a sudden or violent physical attack.
-4,road accidents, traffic accidents, vehicles, pedestrians or cyclists.
-5,burglary, people (thieves) entering into a building or house with the intention to commit theft.
-6,explosion, destructive event of something blowing apart.
-7,fighting, people attacking one another.
-8,robbery, thieves taking money unlawfully by force or threat of force.
-9,shooting, shooting someone with a gun.
-10,stealing, people taking property or money without permission.
-11,shoplifting, stealing goods from a shop while posing as a shopper.
-12,vandalism, destruction of or damage to public or private property.
-13,daily video.
+0,abuse, bad, cruel or violent behavior
+1,arrest, police arresting individuals
+2,arson, people setting fire to property
+3,assault, a sudden or violent physical attack
+4,road accidents, traffic accidents, vehicles, pedestrians or cyclists
+5,burglary, people (thieves) entering into a house or building
+6,explosion, destructive event of something blowing apart
+7,fighting, people attacking one another
+8,robbery, thieves taking money unlawfully by force or threat of force
+9,shooting, shooting someone with a gun
+10,stealing, people taking property or money without permission
+11,shoplifting, stealing goods from a shop while posing as a shopper
+12,vandalism, destruction of or damage to public or private property
+13,daily video
