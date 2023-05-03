@@ -1,15 +1,15 @@
 id,name
-0,abuse: This video shows bad, cruel or violent behavior against children, old people, animals, and women.
-1,arrest: This video shows police arresting individuals.
-2,arson: This video shows people deliberately setting fire to property.
-3,assault: This video shows a sudden or violent physical attack on someone.
-4,road accidents: This video shows traffic accidents involving vehicles, pedestrians or cyclists.
-5,burglary: This video shows people (thieves) entering into a building or house with the intention to commit theft.
-6,explosion: This video shows destructive event of something blowing apart.
-7,fighting: This video displays two or more people attacking one another.
-8,robbery: This video shows thieves taking money unlawfully by force or threat of force.
-9,shooting: This video shows act of shooting someone with a gun.
-10,stealing: This video shows people taking property or money without permission.
-11,shoplifting: This video shows people stealing goods from a shop while posing as a shopper.
-12,vandalism: This video shows action involving deliberate destruction of or damage to public or private property.
-13,daily video: This video include both indoor (such as a shopping mall) or outdoor scenes as well as day and night-time scenes.
+0,abuse: bad, cruel or violent behavior against children, old people, animals, and women.
+1,arrest: police arresting individuals.
+2,arson: people deliberately setting fire to property.
+3,assault: a sudden or violent physical attack on someone.
+4,road accidents: traffic accidents involving vehicles, pedestrians or cyclists.
+5,burglary: people (thieves) entering into a building or house with the intention to commit theft.
+6,explosion: destructive event of something blowing apart.
+7,fighting: two or more people attacking one another.
+8,robbery: thieves taking money unlawfully by force or threat of force.
+9,shooting: act of shooting someone with a gun.
+10,stealing: people taking property or money without permission.
+11,shoplifting: people stealing goods from a shop while posing as a shopper.
+12,vandalism: action involving deliberate destruction of or damage to public or private property.
+13,daily video: indoor (such as a shopping mall) or outdoor scenes as well as day and night-time scenes.
