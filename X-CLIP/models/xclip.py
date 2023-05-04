@@ -199,8 +199,7 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
         model_path = clip._download(clip._MODELS[name])
     try:
         # loading JIT archive
-        model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
-        print("helooooo not jit mtfk")
+        model = torch.jit.load(model_path, map_location=device if jit else "cpu").cuda().eval()
         state_dict = None
     except RuntimeError:
         # loading saved state dict
@@ -219,4 +218,4 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         )
     if str(device) == "cpu":
         model.float()
-    return model, model.state_dict()
+    return model
