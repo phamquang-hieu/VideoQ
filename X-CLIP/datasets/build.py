@@ -289,7 +289,7 @@ def build_dataloader(logger, config):
         # dict(type='Flip', flip_ratio=0.5),
         # dict(type='ColorJitter', p=config.AUG.COLOR_JITTER),
         # dict(type='GrayScale', p=config.AUG.GRAY_SCALE),
-        # dict(type='Normalize', **img_norm_cfg),
+        dict(type='Normalize', **img_norm_cfg),
         dict(type='FormatShape', input_format='NCHW'),
         dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
         dict(type='ToTensor', keys=['imgs', 'label']),
