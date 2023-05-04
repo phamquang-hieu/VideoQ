@@ -1803,7 +1803,7 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
+        container = decord.VideoReader(file_obj, num_threads=self.num_threads, height=self.kwargs['imsize'], width=self.kwargs['imsize'])
         results["video_reader"] = container
         results["total_frames"] = len(container)
         results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.

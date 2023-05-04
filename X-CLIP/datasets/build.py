@@ -275,10 +275,10 @@ def build_dataloader(logger, config):
     scale_resize = int(256 / 224 * config.DATA.INPUT_SIZE)
 
     train_pipeline = [
-        dict(type='DecordInit'),
+        dict(type='DecordInit', imsize=config.DATA.INPUT_SIZE),
         dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
-        dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
+        # dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
         # dict(
         #     type='MultiScaleCrop',
         #     input_size=config.DATA.INPUT_SIZE,
