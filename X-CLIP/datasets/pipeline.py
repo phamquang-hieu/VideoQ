@@ -1330,7 +1330,7 @@ class Normalize:
             # imgs = np.empty((n, h, w, c), dtype=np.float32)
             # for i, img in enumerate(results['imgs']):
             #     imgs[i] = img
-            assert type(imgs) == np.ndarray
+            assert type(results['imgs']) == np.ndarray
             imgs = results['imgs']
 
             for img in imgs:
