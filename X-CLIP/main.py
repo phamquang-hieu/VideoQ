@@ -20,7 +20,6 @@ from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
 from models import xclip
-import gc
 
 def parse_option():
     parser = argparse.ArgumentParser()
@@ -56,7 +55,7 @@ def main(config):
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
                         )
-    model.cuda()
+    model = model.cuda()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
     mixup_fn = None
@@ -105,7 +104,7 @@ def main(config):
     for epoch in range(start_epoch, config.TRAIN.EPOCHS):
         train_loader.sampler.set_epoch(epoch)
         train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler)
-        torch.cuda.empty_cache()
+
         acc1 = validate(val_loader, text_labels, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
         is_best = acc1 > max_accuracy
@@ -140,9 +139,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
         images = batch_data["imgs"].cuda(non_blocking=True)
         label_id = batch_data["label"].cuda(non_blocking=True)
-        batch_data = None
-        del batch_data
-        gc.collect()
         label_id = label_id.reshape(-1)
         images = images.view((-1,config.DATA.NUM_FRAMES,3)+images.size()[-2:])
         
@@ -180,7 +176,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             lr_scheduler.step_update(epoch * num_steps + idx)
 
         torch.cuda.synchronize()
-
+        
         tot_loss_meter.update(total_loss.item(), len(label_id))
         batch_time.update(time.time() - end)
         end = time.time()
@@ -195,7 +191,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 f'time {batch_time.val:.4f} ({batch_time.avg:.4f})\t'
                 f'tot_loss {tot_loss_meter.val:.4f} ({tot_loss_meter.avg:.4f})\t'
                 f'mem {memory_used:.0f}MB')
-
     epoch_time = time.time() - start
     logger.info(f"EPOCH {epoch} training takes {datetime.timedelta(seconds=int(epoch_time))}")
 
