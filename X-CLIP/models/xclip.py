@@ -199,7 +199,7 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
         model_path = clip._download(clip._MODELS[name])
     try:
         # loading JIT archive
-        model = torch.jit.load(model_path, map_location=device if jit else "cpu").cuda().eval()
+        model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
         print("it's jit pls")
         state_dict = None
     except RuntimeError:
