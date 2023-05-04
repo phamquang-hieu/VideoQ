@@ -1806,6 +1806,7 @@ class DecordInit:
         container = decord.VideoReader(file_obj, num_threads=self.num_threads)
         results['video_reader'] = container
         results['total_frames'] = len(container)
+        results["fps"] = container.get_avg_fps()
         return results
 
     def __repr__(self):
