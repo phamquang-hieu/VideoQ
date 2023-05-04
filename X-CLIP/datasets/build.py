@@ -313,7 +313,7 @@ def build_dataloader(logger, config):
     )
     
     val_pipeline = [
-        dict(type='DecordInit'),
+        dict(type='DecordInit', imsize=config.DATA.INPUT_SIZE),
         dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)),
