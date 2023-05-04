@@ -1772,13 +1772,12 @@ class DecordInit:
     added or modified keys are "video_reader" and "total_frames".
     """
 
-    def __init__(self, io_backend='disk', num_threads=1, imsize=224, **kwargs):
+    def __init__(self, io_backend='disk', num_threads=0, **kwargs):
         self.io_backend = io_backend
         self.num_threads = num_threads
         self.kwargs = kwargs
         self.file_client = None
         self.tarfile = None
-        self.imsize = imsize
 
     def __call__(self, results):
         """Perform the Decord initialization.
@@ -1804,7 +1803,7 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads, height=self.imsize, width=self.imsize)
+        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
         results["video_reader"] = container
         results["total_frames"] = len(container)
         results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.

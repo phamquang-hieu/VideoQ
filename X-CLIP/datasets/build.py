@@ -275,7 +275,7 @@ def build_dataloader(logger, config):
     scale_resize = int(256 / 224 * config.DATA.INPUT_SIZE)
 
     train_pipeline = [
-        dict(type='DecordInit', imsize=config.DATA.INPUT_SIZE),
+        dict(type='DecordInit'),
         dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
         # dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
@@ -285,7 +285,7 @@ def build_dataloader(logger, config):
         #     scales=(1, 0.875, 0.75, 0.66),
         #     random_crop=False,
         #     max_wh_scale_gap=1),
-        # dict(type='Resize', scale=(config.DATA.INPUT_SIZE, config.DATA.INPUT_SIZE), keep_ratio=False),
+        dict(type='Resize', scale=(config.DATA.INPUT_SIZE, config.DATA.INPUT_SIZE), keep_ratio=False),
         # dict(type='Flip', flip_ratio=0.5),
         # dict(type='ColorJitter', p=config.AUG.COLOR_JITTER),
         # dict(type='GrayScale', p=config.AUG.GRAY_SCALE),
