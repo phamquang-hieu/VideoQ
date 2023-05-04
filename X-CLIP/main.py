@@ -54,7 +54,7 @@ def main(config):
                          use_checkpoint=config.TRAIN.USE_CHECKPOINT, 
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
-                        )[0]
+                        )
     
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
