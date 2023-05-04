@@ -1331,7 +1331,8 @@ class Normalize:
             # for i, img in enumerate(results['imgs']):
             #     imgs[i] = img
             assert type(results['imgs']) == np.ndarray
-            imgs = results['imgs']
+            imgs = results['imgs'].astype(np.float32)
+            del results['imgs']
 
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
