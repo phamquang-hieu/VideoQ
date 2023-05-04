@@ -1804,9 +1804,9 @@ class DecordInit:
             iob = iob.read()
             file_obj = io.BytesIO(iob)
         container = decord.VideoReader(file_obj, num_threads=self.num_threads)
-        results['video_reader'] = container
-        results['total_frames'] = len(container)
-        results["fps"] = container.get_avg_fps()
+        results["video_reader"] = container
+        results["total_frames"] = len(container)
+        results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
         return results
 
     def __repr__(self):
@@ -1982,7 +1982,7 @@ class SampleFrames:
         else:
             if self.multiview == 1:
                 clip_offsets = self._get_train_clips(num_frames)
-            else:
+            else: #@PQH: multiview -> sample multiple clips (each of e.g 32 frame) from the original video
                 clip_offsets = np.concatenate([self._get_train_clips(num_frames)  for _ in range(self.multiview)])
 
         return clip_offsets
@@ -2099,9 +2099,13 @@ class SampleAnnotatedFrames(SampleFrames):
         if n_annotations > 0:
             #@TODO: integrating the parameter self.from_annotated in future update
             n_annotations = len(results["annotations"])
-            chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "end"
+            chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "2"
             total_frames = (chosen_annotation["end"] - chosen_annotation["start"] + 1) * results["fps"]
             start = np.int(chosen_annotation["start"] * results["fps"])
+            # if total_frames < 0:
+            #     print("total_frames < 0", total_frames, start, chosen_annotation["start"], chosen_annotation["end"])
+            # if total_frames == start:
+            #     print("total_frames == start", total_frames, start)
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
@@ -2119,8 +2123,7 @@ class SampleAnnotatedFrames(SampleFrames):
         
 
         if self.frame_uniform:  # sthv2 sampling strategy
-            assert results['start_index'] == 0 
-            # @PQH: if having more than 1 annotations 
+            assert results['start_index'] == 0
             frame_inds = self.get_seq_frames(total_frames)
         else:
             clip_offsets = self._sample_clips(total_frames)
@@ -2134,13 +2137,13 @@ class SampleAnnotatedFrames(SampleFrames):
                 frame_inds += perframe_offsets
             
             # frame_inds = frame_inds.astype(np.int)
-            frame_inds = np.add(start, frame_inds) #@PQH shift to the start position
+            frame_inds += start #@PQH shift to the start position
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
-                frame_inds = np.mod(frame_inds, results["total_frames"])
+                frame_inds = np.mod(frame_inds, results['total_frames'])
             elif self.out_of_bound_opt == 'repeat_last':
-                safe_inds = frame_inds < results["total_frames"] # total_frames
+                safe_inds = frame_inds < results['total_frames']# total_frames
                 unsafe_inds = 1 - safe_inds
                 last_ind = np.max(safe_inds * frame_inds, axis=1)
                 new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
@@ -2148,14 +2151,15 @@ class SampleAnnotatedFrames(SampleFrames):
             else:
                 raise ValueError('Illegal out_of_bound option.')
 
-            # start_index = results['start_index']
-            frame_inds = np.concatenate(frame_inds) #+ start_index #start_index 
+            start_index = results['start_index']
+            frame_inds = np.concatenate(frame_inds) + start_index
 
         results['frame_inds'] = frame_inds.astype(np.int)
         results['clip_len'] = self.clip_len
         results['frame_interval'] = self.frame_interval
         results['num_clips'] = self.num_clips
         return results
+
 
 @PIPELINES.register_module()
 class FormatShape:
