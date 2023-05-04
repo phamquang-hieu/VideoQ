@@ -217,4 +217,4 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         )
     if str(device) == "cpu":
         model.float()
-    return model, model.state_dict()
+    return model

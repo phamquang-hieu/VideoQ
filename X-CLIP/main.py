@@ -56,7 +56,6 @@ def main(config):
                          logger=logger,
                         )[0]
     
-    return
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
     mixup_fn = None
