@@ -383,7 +383,7 @@ class Fuse:
 
         # crop
         left, top, right, bottom = lazyop['crop_bbox'].round().astype(int)
-        imgs = [img[top:bottom, left:right] for img in imgs]
+        imgs = np.array([img[top:bottom, left:right] for img in imgs])
 
         # resize
         img_h, img_w = results['img_shape']
@@ -391,10 +391,10 @@ class Fuse:
             interpolation = 'bilinear'
         else:
             interpolation = lazyop['interpolation']
-        imgs = [
+        imgs = np.array([
             mmcv.imresize(img, (img_w, img_h), interpolation=interpolation)
             for img in imgs
-        ]
+        ])
 
         # flip
         if lazyop['flip']:
@@ -502,7 +502,7 @@ class RandomCrop:
     @staticmethod
     def _crop_imgs(imgs, crop_bbox):
         x1, y1, x2, y2 = crop_bbox
-        return [img[y1:y2, x1:x2] for img in imgs]
+        return np.array([img[y1:y2, x1:x2] for img in imgs])
 
     @staticmethod
     def _box_crop(box, crop_bbox):
@@ -1007,11 +1007,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
@@ -1188,7 +1188,9 @@ class Flip:
         self.lazy = lazy
 
     def _flip_imgs(self, imgs, modality):
-        _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        # _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        for img in imgs:
+            mmcv.imflip_(img, self.direction)
         lt = len(imgs)
         if modality == 'Flow':
             # The 1st frame of each 2 frames is flow-x
@@ -1327,9 +1329,12 @@ class Normalize:
         if modality == 'RGB':
             n = len(results['imgs'])
             h, w, c = results['imgs'][0].shape
-            imgs = np.empty((n, h, w, c), dtype=np.float32)
-            for i, img in enumerate(results['imgs']):
-                imgs[i] = img
+            # imgs = np.empty((n, h, w, c), dtype=np.float32)
+            # for i, img in enumerate(results['imgs']):
+            #     imgs[i] = img
+            imgs = results['imgs'].astype(np.float32)
+            # print(imgs[0].dtype)
+            assert isinstance(results['imgs'], np.ndarray), "Catch: results['imgs'] is not a ndarray"
 
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
@@ -1524,16 +1529,22 @@ class ThreeCrop:
                 (0, h_step),  # middle
             ]
 
-        cropped = []
-        crop_bboxes = []
+        cropped = np.array([])
+        crop_bboxes = np.array([])
         for x_offset, y_offset in offsets:
-            bbox = [x_offset, y_offset, x_offset + crop_w, y_offset + crop_h]
-            crop = [
+            bbox = np.array([x_offset, y_offset, x_offset + crop_w, y_offset + crop_h])
+            crop = np.array([
                 img[y_offset:y_offset + crop_h, x_offset:x_offset + crop_w]
                 for img in imgs
-            ]
-            cropped.extend(crop)
-            crop_bboxes.extend([bbox for _ in range(len(imgs))])
+            ])
+            cropped = np.append(cropped, crop, axis=0)
+            
+            if len(crop_bboxes) == 0:
+                crop_bboxes = np.array([[bbox for _ in range(len(imgs))]])
+            else:
+                crop_bboxes = np.append(cropped, [bbox for _ in range(len(imgs))], axis=0)
+            # cropped.extend(crop)
+            # crop_bboxes.extend([bbox for _ in range(len(imgs))])
 
         crop_bboxes = np.array(crop_bboxes)
         results['imgs'] = cropped
@@ -1703,7 +1714,7 @@ class ColorJitter:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
@@ -1722,7 +1733,7 @@ class GrayScale:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
@@ -1788,6 +1799,25 @@ class DecordInit:
         """
         try:
             import decord
+            class VideoReaderWrapper(decord.VideoReader):
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.seek(0)
+                    self.limit = 20 #after 20 frames, seek to 0 and free memory
+                    self.frame_count = 0
+
+                def __getitem__(self, key):
+                    frames = super().__getitem__(key)
+                    self.frame_count += 1
+                    # print(self.frame_count)
+                    if self.frame_count > self.limit:
+                        self.frame_count = 0
+                        self.seek(0)
+                    return frames
+            
+                def get_avg_fps(self):
+                    self.seek(0)
+                    return super().get_avg_fps()
         except ImportError:
             raise ImportError(
                 'Please run "pip install decord" to install Decord first.')
@@ -1803,9 +1833,10 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
-        results['video_reader'] = container
-        results['total_frames'] = len(container)
+        container = VideoReaderWrapper(file_obj, num_threads=self.num_threads)
+        results["video_reader"] = container
+        results["total_frames"] = len(container)
+        results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
         return results
 
     def __repr__(self):
@@ -1838,15 +1869,18 @@ class DecordDecode:
 
         frame_inds = results['frame_inds']
         # Generate frame index mapping in order
-        frame_dict = {
-            idx: container[idx].asnumpy()
-            for idx in np.unique(frame_inds)
-        }
+        # frame_dict = {
+        #     idx: container[idx].asnumpy()
+        #     for idx in np.unique(frame_inds)
+        # }
 
-        imgs = [frame_dict[idx] for idx in frame_inds]
+        # imgs = np.array([container[idx].asnumpy() for idx in frame_inds])
+        imgs = container.get_batch(frame_inds).asnumpy()
 
         results['video_reader'] = None
         del container
+        import gc
+        gc.collect()
 
         results['imgs'] = imgs
         results['original_shape'] = imgs[0].shape[:2]
@@ -1981,7 +2015,7 @@ class SampleFrames:
         else:
             if self.multiview == 1:
                 clip_offsets = self._get_train_clips(num_frames)
-            else:
+            else: #@PQH: multiview -> sample multiple clips (each of e.g 32 frame) from the original video
                 clip_offsets = np.concatenate([self._get_train_clips(num_frames)  for _ in range(self.multiview)])
 
         return clip_offsets
@@ -2156,6 +2190,7 @@ class SampleAnnotatedFrames(SampleFrames):
         results['num_clips'] = self.num_clips
         return results
 
+
 @PIPELINES.register_module()
 class FormatShape:
     """Format final imgs shape to the given input_format.
@@ -2301,15 +2336,18 @@ class Collect:
         data = {}
         for key in self.keys:
             data[key] = results[key]
+        del results
+        import gc
+        gc.collect()
 
-        if len(self.meta_keys) != 0:
-            meta = {}
-            for key in self.meta_keys:
-                meta[key] = results[key]
-            data[self.meta_name] = DC(meta, cpu_only=True)
-        if self.nested:
-            for k in data:
-                data[k] = [data[k]]
+        # if len(self.meta_keys) != 0:
+        #     meta = {}
+        #     for key in self.meta_keys:
+        #         meta[key] = results[key]
+        #     data[self.meta_name] = DC(meta, cpu_only=True)
+        # if self.nested:
+        #     for k in data:
+        #         data[k] = [data[k]]
 
         return data
 
