@@ -1327,9 +1327,11 @@ class Normalize:
         if modality == 'RGB':
             n = len(results['imgs'])
             h, w, c = results['imgs'][0].shape
-            imgs = np.empty((n, h, w, c), dtype=np.float32)
-            for i, img in enumerate(results['imgs']):
-                imgs[i] = img
+            # imgs = np.empty((n, h, w, c), dtype=np.float32)
+            # for i, img in enumerate(results['imgs']):
+            #     imgs[i] = img
+            assert type(imgs) == np.ndarray
+            imgs = results['imgs']
 
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
@@ -1845,7 +1847,6 @@ class DecordDecode:
         }
 
         imgs = np.array([frame_dict[idx] for idx in frame_inds])
-        # imgs = container.get_batch(frame_inds).asnumpy()
 
         results['video_reader'] = None
         del container
