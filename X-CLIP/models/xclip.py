@@ -200,6 +200,7 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
     try:
         # loading JIT archive
         model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
+        print("helooooo not jit mtfk")
         state_dict = None
     except RuntimeError:
         # loading saved state dict
