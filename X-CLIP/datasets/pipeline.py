@@ -383,7 +383,7 @@ class Fuse:
 
         # crop
         left, top, right, bottom = lazyop['crop_bbox'].round().astype(int)
-        imgs = [img[top:bottom, left:right] for img in imgs]
+        imgs = np.array([img[top:bottom, left:right] for img in imgs])
 
         # resize
         img_h, img_w = results['img_shape']
@@ -391,10 +391,10 @@ class Fuse:
             interpolation = 'bilinear'
         else:
             interpolation = lazyop['interpolation']
-        imgs = [
+        imgs = np.array([
             mmcv.imresize(img, (img_w, img_h), interpolation=interpolation)
             for img in imgs
-        ]
+        ])
 
         # flip
         if lazyop['flip']:
@@ -502,7 +502,7 @@ class RandomCrop:
     @staticmethod
     def _crop_imgs(imgs, crop_bbox):
         x1, y1, x2, y2 = crop_bbox
-        return [img[y1:y2, x1:x2] for img in imgs]
+        return np.array([img[y1:y2, x1:x2] for img in imgs])
 
     @staticmethod
     def _box_crop(box, crop_bbox):
@@ -1007,11 +1007,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
@@ -1188,7 +1188,9 @@ class Flip:
         self.lazy = lazy
 
     def _flip_imgs(self, imgs, modality):
-        _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        # _ = [mmcv.imflip_(img, self.direction) for img in imgs]
+        for img in imgs:
+            mmcv.imflip_(img, self.direction)
         lt = len(imgs)
         if modality == 'Flow':
             # The 1st frame of each 2 frames is flow-x
@@ -1327,9 +1329,12 @@ class Normalize:
         if modality == 'RGB':
             n = len(results['imgs'])
             h, w, c = results['imgs'][0].shape
-            imgs = np.empty((n, h, w, c), dtype=np.float32)
-            for i, img in enumerate(results['imgs']):
-                imgs[i] = img
+            # imgs = np.empty((n, h, w, c), dtype=np.float32)
+            # for i, img in enumerate(results['imgs']):
+            #     imgs[i] = img
+            imgs = results['imgs'].astype(np.float32)
+            # print(imgs[0].dtype)
+            assert isinstance(results['imgs'], np.ndarray), "Catch: results['imgs'] is not a ndarray"
 
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
@@ -1524,16 +1529,22 @@ class ThreeCrop:
                 (0, h_step),  # middle
             ]
 
-        cropped = []
-        crop_bboxes = []
+        cropped = np.array([])
+        crop_bboxes = np.array([])
         for x_offset, y_offset in offsets:
-            bbox = [x_offset, y_offset, x_offset + crop_w, y_offset + crop_h]
-            crop = [
+            bbox = np.array([x_offset, y_offset, x_offset + crop_w, y_offset + crop_h])
+            crop = np.array([
                 img[y_offset:y_offset + crop_h, x_offset:x_offset + crop_w]
                 for img in imgs
-            ]
-            cropped.extend(crop)
-            crop_bboxes.extend([bbox for _ in range(len(imgs))])
+            ])
+            cropped = np.append(cropped, crop, axis=0)
+            
+            if len(crop_bboxes) == 0:
+                crop_bboxes = np.array([[bbox for _ in range(len(imgs))]])
+            else:
+                crop_bboxes = np.append(cropped, [bbox for _ in range(len(imgs))], axis=0)
+            # cropped.extend(crop)
+            # crop_bboxes.extend([bbox for _ in range(len(imgs))])
 
         crop_bboxes = np.array(crop_bboxes)
         results['imgs'] = cropped
@@ -1703,7 +1714,7 @@ class ColorJitter:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
@@ -1722,7 +1733,7 @@ class GrayScale:
         imgs = results['imgs']
         v = random.random()
         if v < self.p:
-            imgs = [np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs]
+            imgs = np.array([np.asarray(self.worker_gray(Image.fromarray(img))) for img in imgs])
         
         results['imgs'] = imgs
         return results
@@ -1788,6 +1799,25 @@ class DecordInit:
         """
         try:
             import decord
+            class VideoReaderWrapper(decord.VideoReader):
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.seek(0)
+                    self.limit = 20 #after 20 frames, seek to 0 and free memory
+                    self.frame_count = 0
+
+                def __getitem__(self, key):
+                    frames = super().__getitem__(key)
+                    self.frame_count += 1
+                    # print(self.frame_count)
+                    if self.frame_count > self.limit:
+                        self.frame_count = 0
+                        self.seek(0)
+                    return frames
+            
+                def get_avg_fps(self):
+                    self.seek(0)
+                    return super().get_avg_fps()
         except ImportError:
             raise ImportError(
                 'Please run "pip install decord" to install Decord first.')
@@ -1803,7 +1833,7 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
+        container = VideoReaderWrapper(file_obj, num_threads=self.num_threads)
         results["video_reader"] = container
         results["total_frames"] = len(container)
         results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
@@ -1839,15 +1869,18 @@ class DecordDecode:
 
         frame_inds = results['frame_inds']
         # Generate frame index mapping in order
-        frame_dict = {
-            idx: container[idx].asnumpy()
-            for idx in np.unique(frame_inds)
-        }
+        # frame_dict = {
+        #     idx: container[idx].asnumpy()
+        #     for idx in np.unique(frame_inds)
+        # }
 
-        imgs = [frame_dict[idx] for idx in frame_inds]
+        # imgs = np.array([container[idx].asnumpy() for idx in frame_inds])
+        imgs = container.get_batch(frame_inds).asnumpy()
 
         results['video_reader'] = None
         del container
+        import gc
+        gc.collect()
 
         results['imgs'] = imgs
         results['original_shape'] = imgs[0].shape[:2]
@@ -2099,13 +2132,9 @@ class SampleAnnotatedFrames(SampleFrames):
         if n_annotations > 0:
             #@TODO: integrating the parameter self.from_annotated in future update
             n_annotations = len(results["annotations"])
-            chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "2"
+            chosen_annotation = results["annotations"][np.random.randint(0, n_annotations)] # a dictionary containing 2 keys "start" and "end"
             total_frames = (chosen_annotation["end"] - chosen_annotation["start"] + 1) * results["fps"]
             start = np.int(chosen_annotation["start"] * results["fps"])
-            # if total_frames < 0:
-            #     print("total_frames < 0", total_frames, start, chosen_annotation["start"], chosen_annotation["end"])
-            # if total_frames == start:
-            #     print("total_frames == start", total_frames, start)
         else:
             # this is the case if the video is of a normal action
             # randomly sample an interval of around 10 times larger than the number of frame extracted to feed into the model
@@ -2123,7 +2152,8 @@ class SampleAnnotatedFrames(SampleFrames):
         
 
         if self.frame_uniform:  # sthv2 sampling strategy
-            assert results['start_index'] == 0
+            assert results['start_index'] == 0 
+            # @PQH: if having more than 1 annotations 
             frame_inds = self.get_seq_frames(total_frames)
         else:
             clip_offsets = self._sample_clips(total_frames)
@@ -2137,13 +2167,13 @@ class SampleAnnotatedFrames(SampleFrames):
                 frame_inds += perframe_offsets
             
             # frame_inds = frame_inds.astype(np.int)
-            frame_inds += start #@PQH shift to the start position
+            frame_inds = np.add(start, frame_inds) #@PQH shift to the start position
             
             frame_inds = frame_inds.reshape((-1, self.clip_len))
             if self.out_of_bound_opt == 'loop':
-                frame_inds = np.mod(frame_inds, results['total_frames'])
+                frame_inds = np.mod(frame_inds, results["total_frames"])
             elif self.out_of_bound_opt == 'repeat_last':
-                safe_inds = frame_inds < results['total_frames']# total_frames
+                safe_inds = frame_inds < results["total_frames"] # total_frames
                 unsafe_inds = 1 - safe_inds
                 last_ind = np.max(safe_inds * frame_inds, axis=1)
                 new_inds = (safe_inds * frame_inds + (unsafe_inds.T * last_ind).T)
@@ -2151,8 +2181,8 @@ class SampleAnnotatedFrames(SampleFrames):
             else:
                 raise ValueError('Illegal out_of_bound option.')
 
-            start_index = results['start_index']
-            frame_inds = np.concatenate(frame_inds) + start_index
+            # start_index = results['start_index']
+            frame_inds = np.concatenate(frame_inds) #+ start_index #start_index 
 
         results['frame_inds'] = frame_inds.astype(np.int)
         results['clip_len'] = self.clip_len
@@ -2306,15 +2336,18 @@ class Collect:
         data = {}
         for key in self.keys:
             data[key] = results[key]
+        del results
+        import gc
+        gc.collect()
 
-        if len(self.meta_keys) != 0:
-            meta = {}
-            for key in self.meta_keys:
-                meta[key] = results[key]
-            data[self.meta_name] = DC(meta, cpu_only=True)
-        if self.nested:
-            for k in data:
-                data[k] = [data[k]]
+        # if len(self.meta_keys) != 0:
+        #     meta = {}
+        #     for key in self.meta_keys:
+        #         meta[key] = results[key]
+        #     data[self.meta_name] = DC(meta, cpu_only=True)
+        # if self.nested:
+        #     for k in data:
+        #         data[k] = [data[k]]
 
         return data
 
@@ -2446,4 +2479,4 @@ class RandAugment:
     
     def __repr__(self):
         repr_str = self.__class__.__name__ + f'(transforms={self.aug})'
-        return repr_str
+        return repr_str        
