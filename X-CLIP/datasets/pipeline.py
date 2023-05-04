@@ -1007,11 +1007,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
