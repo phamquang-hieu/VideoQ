@@ -1007,11 +1007,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
@@ -1327,9 +1327,12 @@ class Normalize:
         if modality == 'RGB':
             n = len(results['imgs'])
             h, w, c = results['imgs'][0].shape
-            imgs = np.empty((n, h, w, c), dtype=np.float32)
-            for i, img in enumerate(results['imgs']):
-                imgs[i] = img
+            # imgs = np.empty((n, h, w, c), dtype=np.float32)
+            # for i, img in enumerate(results['imgs']):
+            #     imgs[i] = img
+            assert type(results['imgs']) == np.ndarray
+            imgs = results['imgs'].astype(np.float32)
+            del results['imgs']
 
             for img in imgs:
                 mmcv.imnormalize_(img, self.mean, self.std, self.to_bgr)
@@ -1772,7 +1775,7 @@ class DecordInit:
     added or modified keys are "video_reader" and "total_frames".
     """
 
-    def __init__(self, io_backend='disk', num_threads=1, **kwargs):
+    def __init__(self, io_backend='disk', num_threads=0, **kwargs):
         self.io_backend = io_backend
         self.num_threads = num_threads
         self.kwargs = kwargs
@@ -1844,7 +1847,7 @@ class DecordDecode:
             for idx in np.unique(frame_inds)
         }
 
-        imgs = [frame_dict[idx] for idx in frame_inds]
+        imgs = np.array([frame_dict[idx] for idx in frame_inds])
 
         results['video_reader'] = None
         del container
