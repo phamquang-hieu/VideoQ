@@ -502,7 +502,7 @@ class RandomCrop:
     @staticmethod
     def _crop_imgs(imgs, crop_bbox):
         x1, y1, x2, y2 = crop_bbox
-        return [img[y1:y2, x1:x2] for img in imgs]
+        return np.array([img[y1:y2, x1:x2] for img in imgs])
 
     @staticmethod
     def _box_crop(box, crop_bbox):
@@ -590,6 +590,7 @@ class RandomCrop:
                 results['keypoint'] = self._crop_kps(results['keypoint'],
                                                      crop_bbox)
             if 'imgs' in results:
+                print("shape", results['imgs'].shape)
                 results['imgs'] = self._crop_imgs(results['imgs'], crop_bbox)
         else:
             lazyop = results['lazy']
@@ -1007,11 +1008,11 @@ class Resize:
         self.lazy = lazy
 
     def _resize_imgs(self, imgs, new_w, new_h):
-        return [
+        return np.array([
             mmcv.imresize(
                 img, (new_w, new_h), interpolation=self.interpolation)
             for img in imgs
-        ]
+        ])
 
     @staticmethod
     def _resize_kps(kps, scale_factor):
