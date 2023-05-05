@@ -217,6 +217,6 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         use_cache=use_cache,
                         mit_layers=mit_layers,
                         )
-    # if str(device) == "cpu":
-    #     model.float()
+    if str(device) == "cpu":
+        model.float()
     return model.cuda()
