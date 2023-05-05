@@ -20,6 +20,7 @@ from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
 from models import xclip
+from sklearn.metrics import classification_report
 
 def parse_option():
     parser = argparse.ArgumentParser()
@@ -203,6 +204,7 @@ def validate(val_loader, text_labels, model, config):
     with torch.no_grad():
         text_inputs = text_labels.cuda()
         logger.info(f"{config.TEST.NUM_CLIP * config.TEST.NUM_CROP} views inference")
+        y_true, y_pred = [], []
         for idx, batch_data in enumerate(val_loader):
             _image = batch_data["imgs"]
             label_id = batch_data["label"]
@@ -229,6 +231,7 @@ def validate(val_loader, text_labels, model, config):
 
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
+            y_pred.append(indices_1.item()), y_true.append(label_id[i])
             acc1, acc5 = 0, 0
             for i in range(b):
                 if indices_1[i] == label_id[i]:
@@ -242,6 +245,7 @@ def validate(val_loader, text_labels, model, config):
                 logger.info(
                     f'Test: [{idx}/{len(val_loader)}]\t'
                     f'Acc@1: {acc1_meter.avg:.3f}\t'
+                    f'Classification report {classification_report(y_true=y_true, y_pred=y_pred)}'
                 )
     acc1_meter.sync()
     acc5_meter.sync()
