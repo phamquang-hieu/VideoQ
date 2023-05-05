@@ -590,7 +590,6 @@ class RandomCrop:
                 results['keypoint'] = self._crop_kps(results['keypoint'],
                                                      crop_bbox)
             if 'imgs' in results:
-                print("shape", results['imgs'].shape)
                 results['imgs'] = self._crop_imgs(results['imgs'], crop_bbox)
         else:
             lazyop = results['lazy']
@@ -927,6 +926,8 @@ class MultiScaleCrop(RandomCrop):
                 results['keypoint'] = self._crop_kps(results['keypoint'],
                                                      crop_bbox)
             if 'imgs' in results:
+                print("shape", results['imgs'].shape)
+
                 results['imgs'] = self._crop_imgs(results['imgs'], crop_bbox)
         else:
             lazyop = results['lazy']
