@@ -102,6 +102,7 @@ def main(config):
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
         return
 
+    validate(train_loader, text_labels, model, config)
     for epoch in range(start_epoch, config.TRAIN.EPOCHS):
         train_loader.sampler.set_epoch(epoch)
         train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler)
