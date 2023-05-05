@@ -244,7 +244,7 @@ def validate(val_loader, text_labels, model, config):
             if idx % config.PRINT_FREQ == 0:
                 logger.info(
                     f'Test: [{idx}/{len(val_loader)}]\t'
-                    f'Acc@1: {acc1_meter.avg:.3f}\t'
+                    f'Acc@1: {acc1_meter.avg:.3f}\n'
                     f'Classification report {classification_report(y_true=y_true, y_pred=y_pred)}'
                 )
     acc1_meter.sync()
