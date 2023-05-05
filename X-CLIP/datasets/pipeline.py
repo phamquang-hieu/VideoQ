@@ -1798,7 +1798,6 @@ class DecordInit:
             if self.file_client is None:
                 self.file_client = FileClient(self.io_backend, **self.kwargs)
             file_obj = io.BytesIO(self.file_client.get(results['filename']))
-            file_obj = self.file_client.get(results['filename'])
         else:
             if self.tarfile is None:
                 data_root = os.path.dirname(results['filename']) + '.tar'
