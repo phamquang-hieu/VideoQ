@@ -341,7 +341,7 @@ def build_dataloader(logger, config):
         batch_size=config.TEST.BATCH_SIZE,
         num_workers=1,
         pin_memory=True,
-        drop_last=True,
+        drop_last=False,
         collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE),
     )
 
