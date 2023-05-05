@@ -231,9 +231,9 @@ def validate(val_loader, text_labels, model, config):
 
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
-            y_pred.append(indices_1.item()), y_true.append(label_id[i])
             acc1, acc5 = 0, 0
             for i in range(b):
+                y_pred.append(indices_1[i].item()), y_true.append(label_id[i])
                 if indices_1[i] == label_id[i]:
                     acc1 += 1
                 if label_id[i] in indices_5[i]:
