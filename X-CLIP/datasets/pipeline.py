@@ -927,10 +927,10 @@ class MultiScaleCrop(RandomCrop):
                                                      crop_bbox)
             if 'imgs' in results:
                 #@PQH: assume that imgs is already a np array
-                assert type(results['imgs']) == np.ndarray and len(results['imgs'].shape) == 4
-                x1, y1, x2, y2 = crop_bbox
-                # self._crop_imgs(results['imgs'], crop_bbox)
-                results['imgs'] =  results['imgs'][:, y1:y2, x1:x2, :]
+                # assert type(results['imgs']) == np.ndarray and len(results['imgs'].shape) == 4
+                # x1, y1, x2, y2 = crop_bbox
+                results['imgs'] = self._crop_imgs(results['imgs'], crop_bbox)
+                # results['imgs'] =  results['imgs'][:, y1:y2, x1:x2, :]
         else:
             lazyop = results['lazy']
             if lazyop['flip']:
