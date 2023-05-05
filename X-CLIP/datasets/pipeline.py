@@ -1795,10 +1795,11 @@ class DecordInit:
             raise ImportError(
                 'Please run "pip install decord" to install Decord first.')
         if results['tar'] is False:
-            if self.file_client is None:
-                self.file_client = FileClient(self.io_backend, **self.kwargs)
+            # if self.file_client is None:
+                # self.file_client = FileClient(self.io_backend, **self.kwargs)
             # file_obj = io.BytesIO(self.file_client.get(results['filename']))
-            file_obj = self.file_client.get(results['filename'])
+            # file_obj = self.file_client.get(results['filename'])
+            pass
         else:
             if self.tarfile is None:
                 data_root = os.path.dirname(results['filename']) + '.tar'
@@ -1807,7 +1808,7 @@ class DecordInit:
             iob = self.tarfile.extractfile(video_name)
             iob = iob.read()
             file_obj = io.BytesIO(iob)
-        container = decord.VideoReader(file_obj, num_threads=self.num_threads)
+        container = decord.VideoReader(results['filename'], num_threads=self.num_threads)
         results["video_reader"] = container
         results["total_frames"] = len(container)
         results["fps"] = container.get_avg_fps() #@PQH: Added for the purpose of interpret annotations from second to frame.
