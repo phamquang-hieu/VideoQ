@@ -55,7 +55,7 @@ def main(config):
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
                         )
-    # model = model.cuda()
+
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
     mixup_fn = None
