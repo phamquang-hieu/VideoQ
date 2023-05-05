@@ -248,8 +248,8 @@ def validate(val_loader, text_labels, model, config):
                 )
     acc1_meter.sync()
     acc5_meter.sync()
-    logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}\n')
-    logger.info(f'{classification_report(y_true=y_true, y_pred=y_pred)}')
+    logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
+    logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
     return acc1_meter.avg
 
 
