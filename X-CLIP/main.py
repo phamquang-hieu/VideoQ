@@ -96,7 +96,7 @@ def main(config):
 
 
     text_labels = generate_text(train_data)
-    text_id = np.array([p[0] for p in train_data.classes.tolist()])
+    text_id = np.array([p[0] for p in train_data.classes])
     
     if config.TEST.ONLY_TEST:
         acc1 = validate(val_loader, text_labels, text_id, model, config)
