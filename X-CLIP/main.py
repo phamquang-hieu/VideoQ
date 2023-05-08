@@ -96,18 +96,19 @@ def main(config):
 
 
     text_labels = generate_text(train_data)
+    text_id = np.array([p[0] for p in train_data.classes.tolist()])
     
     if config.TEST.ONLY_TEST:
-        acc1 = validate(val_loader, text_labels, model, config)
+        acc1 = validate(val_loader, text_labels, text_id, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
         return
 
-    validate(train_loader, text_labels, model, config)
+    # validate(train_loader, text_labels, text_id, model, config)
     for epoch in range(start_epoch, config.TRAIN.EPOCHS):
         train_loader.sampler.set_epoch(epoch)
         train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler)
 
-        acc1 = validate(val_loader, text_labels, model, config)
+        acc1 = validate(val_loader, text_labels, text_id, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
         is_best = acc1 > max_accuracy
         max_accuracy = max(max_accuracy, acc1)
@@ -120,7 +121,7 @@ def main(config):
     config.TEST.NUM_CROP = 3
     config.freeze()
     train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
-    acc1 = validate(val_loader, text_labels, model, config)
+    acc1 = validate(val_loader, text_labels, text_id, model, config)
     logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
 
 
@@ -198,7 +199,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
 
 @torch.no_grad()
-def validate(val_loader, text_labels, model, config):
+def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
     model.eval()
     
     acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
@@ -234,10 +235,10 @@ def validate(val_loader, text_labels, model, config):
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
             for i in range(b):
-                y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu())
-                if indices_1[i] == label_id[i]:
+                y_pred.append(text_id[indices_1[i]].cpu().item()), y_true.append(label_id[i].cpu())
+                if text_id[indices_1[i]] == label_id[i]:
                     acc1 += 1
-                if label_id[i] in indices_5[i]:
+                if label_id[i] in text_id[indices_5[i]]:
                     acc5 += 1
            
             acc1_meter.update(float(acc1) / b * 100, b)
