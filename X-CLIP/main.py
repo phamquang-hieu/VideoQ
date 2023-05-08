@@ -238,7 +238,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 y_pred.append(text_id[indices_1[i].cpu().item()]), y_true.append(label_id[i].cpu().item())
                 if text_id[indices_1[i].cpu().item()] == label_id[i].cpu().item():
                     acc1 += 1
-                if label_id[i].cpu().item() in text_id[indices_5[i].cpu().item()]:
+                if label_id[i].cpu().item() in text_id[indices_5[i]]:
                     acc5 += 1
            
             acc1_meter.update(float(acc1) / b * 100, b)
