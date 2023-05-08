@@ -235,7 +235,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
             for i in range(b):
-                y_pred.append(text_id[indices_1[i]].cpu().item()), y_true.append(label_id[i].cpu())
+                y_pred.append(text_id[indices_1[i]]), y_true.append(label_id[i].cpu())
                 if text_id[indices_1[i]] == label_id[i]:
                     acc1 += 1
                 if label_id[i] in text_id[indices_5[i]]:
