@@ -46,6 +46,7 @@ def parse_option():
     return args, config
 
 
+
 def main(config): 
     train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
     model = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
