@@ -255,10 +255,12 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 )
     acc1_meter.sync()
     acc5_meter.sync()
-    with open("top1log.json", "w") as f:
-        json.dump(top1y_log, f)
-    with open("top5log.json", "w") as f:
-        json.dump(top5y_log, f)
+    # with open("top1log.json", "w") as f:
+    #     json.dump(top1y_log, f)
+    # with open("top5log.json", "w") as f:
+    #     json.dump(top5y_log, f)
+    torch.save(top1y_log, "top1log.pth")
+    torch.save(top5y_log, "top5log.pth")
     logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
     logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
     return acc1_meter.avg
