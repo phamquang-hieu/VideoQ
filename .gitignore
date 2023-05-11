@@ -13,3 +13,5 @@ trained_models/
 test.*
 *.zip
 ucfcrime_v2
+top1log.pth
+top5log.pth
