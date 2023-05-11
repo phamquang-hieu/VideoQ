@@ -20,3 +20,4 @@ X-CLIP/top5log_round2.pth
 X-CLIP/top5log_label_only.pth
 X-CLIP/top1log_round2.pth
 X-CLIP/top1log_label_only.pth
+X-CLIP/cached_prompt_k400_filtered_1st_round.pth
