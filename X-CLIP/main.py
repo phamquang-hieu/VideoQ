@@ -21,6 +21,7 @@ from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
 from models import xclip
 from sklearn.metrics import classification_report
+import json
 
 def parse_option():
     parser = argparse.ArgumentParser()
@@ -208,6 +209,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
         text_inputs = text_labels.cuda()
         logger.info(f"{config.TEST.NUM_CLIP * config.TEST.NUM_CROP} views inference")
         y_true, y_pred = [], []
+        top1y_log, top5y_log = [], []
         for idx, batch_data in enumerate(val_loader):
             _image = batch_data["imgs"]
             label_id = batch_data["label"]
@@ -237,6 +239,8 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
             acc1, acc5 = 0, 0
             for i in range(b):
                 y_pred.append(text_id[indices_1[i].cpu().item()]), y_true.append(label_id[i].cpu().item())
+                top1y_log.append(indices_1[i].cpu())
+                top5y_log.append(indices_5[i].cpu())
                 if text_id[indices_1[i].cpu().item()] == label_id[i].cpu().item():
                     acc1 += 1
                 if label_id[i].cpu().item() in text_id[indices_5[i].cpu()]:
@@ -251,6 +255,10 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 )
     acc1_meter.sync()
     acc5_meter.sync()
+    with open("top1log.json", "w") as f:
+        json.dump(top1y_log, f)
+    with open("top5log.json", "w") as f:
+        json.dump(top5y_log, f)
     logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
     logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
     return acc1_meter.avg
