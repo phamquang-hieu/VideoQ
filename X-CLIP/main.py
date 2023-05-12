@@ -289,12 +289,13 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             image = _image[b, :, :, :, :, :].unsqueeze(0)
         for i in range(n): # for view in views
             # label_id = label_id.cuda(non_blocking=True)
-            image = image[:, i, :, :, :, :]
-            image_input = image.cuda(non_blocking=True)
+            image_ = image[:, i, :, :, :, :]
+            image_input = image_.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
                 print("image shape", image_input.shape)
                 print("text_inputs shape", text_inputs.shape)
+                print(text_inputs)
                 output = model(image_input, text_inputs)
                 print("output shape", output.shape)
             
