@@ -325,6 +325,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
 
             acc5_meter.update(float(acc5) / b * 100, b)
             for i in range(b):
+                print(indices_5)
                 tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i],:], label_id=label_id)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 
