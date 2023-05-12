@@ -288,6 +288,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             image_input = image.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
+                print(image_input.shape, text_inputs.shape)
                 output = model(image_input, text_inputs)
             
             similarity = output.view(b, -1).softmax(dim=-1)
