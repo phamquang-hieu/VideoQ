@@ -280,7 +280,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
     model.eval()
     # print(text_labels_2.shape)
     def views_inference(text_inputs, label_id):
-        print(text_inputs)
+        print("text_intputs:", text_inputs.shape)
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         for i in range(n): # for view in views
             image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
@@ -292,7 +292,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             
             similarity = output.view(b, -1).softmax(dim=-1)
             tot_similarity += similarity # accumulating simmilarity from views
-        print(tot_similarity.shape)
+        print("tot_similarity shape", tot_similarity.shape)
         return tot_similarity
     
     acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
@@ -325,7 +325,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
 
             acc5_meter.update(float(acc5) / b * 100, b)
             for i in range(b):
-                print(indices_5[i].shape)
+                print(indices_5[i].shape, text_inputs_2[indices_5[i]].shape)
                 tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i],:], label_id=label_id)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 
