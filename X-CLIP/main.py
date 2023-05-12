@@ -296,6 +296,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                 print("image shape", image_input.shape)
                 print("text_inputs shape", text_inputs.shape)
                 print(text_inputs)
+                text_inputs = text_inputs[0].unsqueeze(0)
                 output = model(image_input, text_inputs)
                 print("output shape", output.shape)
             
