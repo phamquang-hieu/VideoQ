@@ -280,23 +280,21 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
     model.eval()
     # print(text_labels_2.shape)
     def views_inference(text_inputs, label_id, b):
-        print("text_intputs:", text_inputs.shape)
-        tot_similarity_1 = torch.zeros((b, text_inputs.shape[0])).cuda()
-        print("tot_similarity_1 shape", tot_similarity_1.shape)
+        tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         for i in range(n): # for view in views
-            image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
+            if b != 1:
+                image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
+            else: 
+                image = _image[b, i, :, :, :, :]
             label_id = label_id.cuda(non_blocking=True)
             image_input = image.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
-                print(image_input.shape, text_inputs.shape)
                 output = model(image_input, text_inputs)
             
-            print("output shape", output.shape, text_inputs.shape, image_input.shape)
             similarity = output.view(b, -1).softmax(dim=-1)
-            tot_similarity_1 += similarity # accumulating simmilarity from views
-        print("tot_similarity_1 shape", tot_similarity_1.shape)
-        return tot_similarity_1
+            tot_similarity += similarity # accumulating simmilarity from views
+        return tot_similarity
     
     acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
     with torch.no_grad():
@@ -327,9 +325,9 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                     acc5 += 1
 
             acc5_meter.update(float(acc5) / b * 100, b)
-            tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5,:], label_id=label_id, b=b)
             values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
             for i in range(b):                
+                tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i],:], label_id=label_id, b=1)
                 gt_label = label_id[i].cpu().item()
                 predicted = text_id[indices_5[indices_1[i]].cpu()]
                 y_true.append(gt_label), y_pred.append(predicted)
