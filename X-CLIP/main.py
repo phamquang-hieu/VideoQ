@@ -283,12 +283,13 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         print("tot_similarity shape before", tot_similarity.shape)
 
+        if b != 1:
+            image = _image[:, :, :, :, :, :] # [b,t,c,h,w]
+        else: 
+            image = _image[b, :, :, :, :, :].unsqueeze(0)
         for i in range(n): # for view in views
-            if b != 1:
-                image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
-            else: 
-                image = _image[b, i, :, :, :, :].unsqueeze(0)
             # label_id = label_id.cuda(non_blocking=True)
+            image = image[:, i, :, :, :, :]
             image_input = image.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
