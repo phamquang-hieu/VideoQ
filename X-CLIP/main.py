@@ -279,7 +279,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray, model, config):
     model.eval()
     def views_inference(text_inputs):
-        tot_similarity = torch.zeros((b, config.DATA.NUM_CLASSES)).cuda()
+        tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         for i in range(n): # for view in views
             image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
             label_id = label_id.cuda(non_blocking=True)
