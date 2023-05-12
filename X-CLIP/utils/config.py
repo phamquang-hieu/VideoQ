@@ -19,6 +19,7 @@ _C.DATA.INPUT_SIZE = 224
 _C.DATA.NUM_FRAMES = 8
 _C.DATA.NUM_CLASSES = 400
 _C.DATA.LABEL_LIST = 'labels/kinetics_400_labels.csv'
+_C.DATA.LABEL_2 = None
 
 # -----------------------------------------------------------------------------
 # Model settings

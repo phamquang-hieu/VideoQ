@@ -98,10 +98,20 @@ def main(config):
 
 
     text_labels = generate_text(train_data)
+    if config.DATA.LABEL_2 is not None:
+        import clip
+        import pandas as pd
+        classes_2 = pd.read_csv(config.DATA.LABEL_2).values.tolist()
+        text_aug = f"{{}}"
+        text_labels_2 = torch.cat([clip.tokenize(text_aug.format(c), context_length=77) for i, c in classes_2])
+    
     text_id = np.array([p[0] for p in train_data.classes])
     
     if config.TEST.ONLY_TEST:
-        acc1 = validate(val_loader, text_labels, text_id, model, config)
+        if config.DATA.LABEL_2 is not None:
+            acc1 = validate_2stage(val_loader, text_labels, text_labels_2, text_id, model, config)
+        else:
+            acc1 = validate(val_loader, text_labels, text_id, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
         return
 
@@ -265,6 +275,75 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
     logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
     return acc1_meter.avg
 
+@torch.no_grad()
+def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray, model, config):
+    model.eval()
+    def views_inference(text_inputs):
+        tot_similarity = torch.zeros((b, config.DATA.NUM_CLASSES)).cuda()
+        for i in range(n): # for view in views
+            image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
+            label_id = label_id.cuda(non_blocking=True)
+            image_input = image.cuda(non_blocking=True)
+
+            with torch.cuda.amp.autocast(enabled=True):
+                output = model(image_input, text_inputs)
+            
+            similarity = output.view(b, -1).softmax(dim=-1)
+            tot_similarity += similarity # accumulating simmilarity from views
+        return tot_similarity
+    
+    acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
+    with torch.no_grad():
+        text_inputs_1 = text_labels_1.cuda()
+        text_inputs_2 = text_labels_2.cuda()
+        logger.info(f"{config.TEST.NUM_CLIP * config.TEST.NUM_CROP} views inference")
+        y_true, y_pred = [], []
+        # top1y_log, top5y_log = [], []
+        for idx, batch_data in enumerate(val_loader):
+            _image = batch_data["imgs"]
+            label_id = batch_data["label"]
+            label_id = label_id.reshape(-1)
+
+            b, tn, c, h, w = _image.size()
+            t = config.DATA.NUM_FRAMES # number of frames in a video
+            n = tn // t # number of views
+            _image = _image.view(b, n, t, c, h, w)
+           
+            tot_similarity = views_inference(text_inputs=text_inputs_1)
+
+            # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
+            values_5, indices_5 = tot_similarity.topk(5, dim=-1)
+            acc1, acc5 = 0, 0
+            gt_label = label_id[i].cpu().item()
+            
+            for i in range(b):
+                if gt_label in text_id[indices_5[i].cpu()]:
+                    acc5 += 1
+
+            acc5_meter.update(float(acc5) / b * 100, b)
+            tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5])
+            values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
+            for i in range(b):
+                predicted = text_id[indices_5[indices_1[i]].cpu()]
+                y_true.append(gt_label), y_pred.append(predicted)
+
+                if label_id[i].cpu().item() == text_id[indices_5[indices_1[i]].cpu()]:
+                    acc1 += 1
+            acc1_meter.update(float(acc1) / b * 100, b)
+            
+            if idx % config.PRINT_FREQ == 0:
+                logger.info(
+                    f'Test: [{idx}/{len(val_loader)}]\t'
+                    f'Acc@1: {acc5_meter.avg:.3f}\t'
+                )
+    acc1_meter.sync()
+    acc5_meter.sync()
+
+    # torch.save(top1y_log, "top1log.pth")
+    # torch.save(top5y_log, "top5log.pth")
+    logger.info(f' * Acc@1 {acc1_meter.avg:.3f} Acc@5 {acc5_meter.avg:.3f}')
+    logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
+    return acc1_meter.avg
 
 if __name__ == '__main__':
     # prepare config
