@@ -278,7 +278,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 @torch.no_grad()
 def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray, model, config):
     model.eval()
-    def views_inference(text_inputs):
+    def views_inference(text_inputs, label_id):
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         for i in range(n): # for view in views
             image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
@@ -309,7 +309,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             n = tn // t # number of views
             _image = _image.view(b, n, t, c, h, w)
            
-            tot_similarity = views_inference(text_inputs=text_inputs_1)
+            tot_similarity = views_inference(text_inputs=text_inputs_1, label_id=label_id)
 
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
@@ -321,7 +321,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                     acc5 += 1
 
             acc5_meter.update(float(acc5) / b * 100, b)
-            tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5])
+            tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5], label_id=label_id)
             values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
             for i in range(b):
                 predicted = text_id[indices_5[indices_1[i]].cpu()]
