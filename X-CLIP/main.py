@@ -282,6 +282,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
     def views_inference(text_inputs, label_id, b):
         print("text_intputs:", text_inputs.shape)
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
+        print("tot_similarity shape", tot_similarity.shape)
         for i in range(n): # for view in views
             image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
             label_id = label_id.cuda(non_blocking=True)
