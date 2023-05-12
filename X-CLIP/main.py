@@ -290,7 +290,10 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             image_input = image.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
+                print("image shape", image_input.shape)
+                print("text_inputs shape", text_inputs.shape)
                 output = model(image_input, text_inputs)
+                print("output shape", output.shape)
             
             similarity = output.view(b, -1).softmax(dim=-1)
             tot_similarity += similarity # accumulating simmilarity from views
