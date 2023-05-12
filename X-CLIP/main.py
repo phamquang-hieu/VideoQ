@@ -285,7 +285,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             if b != 1:
                 image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
             else: 
-                image = _image[b, i, :, :, :, :]
+                image = _image[b, i, :, :, :, :].unsqueeze(0)
             label_id = label_id.cuda(non_blocking=True)
             image_input = image.cuda(non_blocking=True)
 
