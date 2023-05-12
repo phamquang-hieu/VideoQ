@@ -291,6 +291,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                 output = model(image_input, text_inputs)
             
             similarity = output.view(b, -1).softmax(dim=-1)
+            print("output shape", output.shape)
             tot_similarity += similarity # accumulating simmilarity from views
         print("tot_similarity shape", tot_similarity.shape)
         return tot_similarity
