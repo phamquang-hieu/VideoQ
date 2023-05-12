@@ -281,6 +281,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
     # print(text_labels_2.shape)
     def views_inference(text_inputs, label_id, b):
         text_inputs = text_inputs
+        print(b, text_inputs.shape[0])
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         print("tot_similarity shape before", tot_similarity.shape)
 
