@@ -279,7 +279,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray, model, config):
     model.eval()
     # print(text_labels_2.shape)
-    def views_inference(text_inputs, label_id):
+    def views_inference(text_inputs, label_id, b):
         print("text_intputs:", text_inputs.shape)
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
         for i in range(n): # for view in views
@@ -291,8 +291,8 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                 print(image_input.shape, text_inputs.shape)
                 output = model(image_input, text_inputs)
             
-            similarity = output.view(b, -1).softmax(dim=-1)
             print("output shape", output.shape, text_inputs.shape, image_input.shape)
+            similarity = output.view(b, -1).softmax(dim=-1)
             tot_similarity += similarity # accumulating simmilarity from views
         print("tot_similarity shape", tot_similarity.shape)
         return tot_similarity
@@ -314,7 +314,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             n = tn // t # number of views
             _image = _image.view(b, n, t, c, h, w)
            
-            tot_similarity = views_inference(text_inputs=text_inputs_1, label_id=label_id)
+            tot_similarity = views_inference(text_inputs=text_inputs_1, label_id=label_id, b=b)
 
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
@@ -328,7 +328,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             acc5_meter.update(float(acc5) / b * 100, b)
             for i in range(b):
                 print(indices_5[i].shape, text_inputs_2[indices_5[i]].shape)
-                tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i],:], label_id=label_id)
+                tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i],:], label_id=label_id, b=1)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 
                 gt_label = label_id[i].cpu().item()
