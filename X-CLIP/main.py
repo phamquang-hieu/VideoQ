@@ -333,7 +333,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
                 predicted = text_id[indices_5[indices_1[i]].cpu()]
                 y_true.append(gt_label), y_pred.append(predicted)
 
-                if label_id[i].cpu().item() == text_id[indices_5[indices_1[i]].cpu()]:
+                if gt_label == predicted:
                     acc1 += 1
             acc1_meter.update(float(acc1) / b * 100, b)
             
