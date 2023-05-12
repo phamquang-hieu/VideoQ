@@ -292,6 +292,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             
             similarity = output.view(b, -1).softmax(dim=-1)
             tot_similarity += similarity # accumulating simmilarity from views
+        print(tot_similarity.shape)
         return tot_similarity
     
     acc1_meter, acc5_meter = AverageMeter(), AverageMeter()
