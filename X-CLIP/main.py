@@ -276,6 +276,13 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
     logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
     return acc1_meter.avg
 
+def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
+    result = torch.zeros([1, n_classes])
+    for b in similarity:
+        for i, item in enumerate(b):
+             result[indices[i]] += item
+    return result
+    
 @torch.no_grad()
 def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarray, text_id_2:np.ndarray, model, config):
     model.eval()
@@ -331,13 +338,15 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
            
             tot_similarity = views_inference(text_inputs=text_inputs_1, label_id=label_id, b=b, nd_stage=False)
 
+            tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
             
             for i in range(b):
                 gt_label = label_id[i].cpu().item()
-                if gt_label in text_id_1[indices_5[i].cpu()]:
+                # if gt_label in text_id_1[indices_5[i].cpu()]:
+                if gt_label in indices_5[i].cpu()
                     acc5 += 1
 
             acc5_meter.update(float(acc5) / b * 100, b)
@@ -353,10 +362,12 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 text = text_inputs_2[mask]
                 # print("text shape", text.shape)
                 tot_similarity_2nd = views_inference(text_inputs=text, label_id=label_id, b=i, nd_stage=True)
+                tot_similarity_2nd = sum_by_index(tot_similarity_2nd, text_id_2)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 # print(indices_1)
                 gt_label = label_id[i].cpu().item()
-                predicted = text_id_2[mask][indices_1[0].cpu()]
+                # predicted = text_id_2[mask][indices_1[0].cpu()]
+                predicted = indices_1.cpu()
                 y_true.append(gt_label), y_pred.append(predicted)
 
                 if gt_label == predicted:
