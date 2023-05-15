@@ -345,7 +345,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             for i in range(b):
                 # print("hej", text_id_2, text_id_2.reshape(1, -1))
                 mask = [idx in indices_5[i] for idx in text_id_2]
-                print("mask", mask)
+                # print("mask", mask)
                 text = text_inputs_2[mask]
                 tot_similarity_2nd = views_inference(text_inputs=text, label_id=label_id, b=i, nd_stage=True)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
