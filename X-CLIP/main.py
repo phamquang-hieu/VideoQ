@@ -283,6 +283,7 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
         for i, item in enumerate(b):
             # print("item", item) 
             result[b_id, indices[i]] += item
+    print("check if the sum is a distribution", result.sum(dim=-1))
     return result
     
 @torch.no_grad()
