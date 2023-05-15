@@ -296,10 +296,10 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
 
         if not nd_stage:
             image = _image[:, :, :, :, :, :] # [b,t,c,h,w]
-            tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
+            tot_similarity = torch.zeros((b, config.DATA.NUM_CLASSES)).cuda()
         else: 
             image = _image[b, :, :, :, :, :].unsqueeze(0)
-            tot_similarity = torch.zeros((1, text_inputs.shape[0])).cuda()
+            tot_similarity = torch.zeros((1, config.DATA.NUM_CLASSES)).cuda()
         for i in range(n): # for view in views
             # label_id = label_id.cuda(non_blocking=True)
             image_ = image[:, i, :, :, :, :]
