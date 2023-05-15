@@ -344,7 +344,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
             for i in range(b):
                 # print("hej", text_id_2, text_id_2.reshape(1, -1))
-                mask = [idx in indices_5[i] for idx in text_id_2]
+                mask = [index in indices_5[i] for index in text_id_2]
                 # print("mask", mask)
                 text = text_inputs_2[mask]
                 print("text shape", text.shape)
