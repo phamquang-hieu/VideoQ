@@ -283,8 +283,6 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
         for i, item in enumerate(b):
             # print("item", item) 
             result[b_id, indices[i]] += item
-    # print("check if the sum is a distribution", result.sum(dim=-1))
-    print("check the top5 similarity after aggregated", result.topk(5, dim=-1))
     return result
     
 @torch.no_grad()
@@ -346,7 +344,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             # tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
-            print("top 5", indices_5, values_5)
+            print("top 5", indices_5)
             acc1, acc5 = 0, 0
             
             for i in range(b):
@@ -360,14 +358,10 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             indices_5 = [np.unique(text_id_1[index]) for index in indices_5]
             # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
             for i in range(b):
-                # print("hej", text_id_2, text_id_2.reshape(1, -1))
                 mask = [index in indices_5[i] for index in text_id_2]
-                # print("mask", mask)
-                # print("mask", mask)
                 text = text_inputs_2[mask]
-                # print("text shape", text.shape)
                 tot_similarity_2nd = views_inference(text_inputs=text, text_id=text_id_2[mask], b=i, nd_stage=True)
-                # tot_similarity_2nd = sum_by_index(tot_similarity_2nd, text_id_2[mask])
+                print("top 5", tot_similarity_2nd.topk(5, dim=-1))
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 # print(indices_1)
                 gt_label = label_id[i].cpu().item()
