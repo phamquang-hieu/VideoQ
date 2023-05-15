@@ -243,9 +243,9 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                     output = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
-                similarity = sum_by_index(similarity, text_id)
+                similarity = sum_by_index(similarity, text_id).cuda()
                 tot_similarity += similarity # accumulating simmilarity from views
-            # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)
+            # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)s
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
