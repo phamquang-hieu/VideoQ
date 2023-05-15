@@ -319,6 +319,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
         y_true, y_pred = [], []
         # top1y_log, top5y_log = [], []
         for idx, batch_data in enumerate(val_loader):
+            if idx < 104: continue
             _image = batch_data["imgs"]
             label_id = batch_data["label"]
             label_id = label_id.reshape(-1)
