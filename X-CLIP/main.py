@@ -244,17 +244,17 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
                 tot_similarity += similarity # accumulating simmilarity from views
-
+            tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
             for i in range(b):
-                y_pred.append(text_id[indices_1[i].cpu().item()]), y_true.append(label_id[i].cpu().item())
+                y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu().item())
                 top1y_log.append(indices_1[i].cpu())
                 top5y_log.append(indices_5[i].cpu())
-                if text_id[indices_1[i].cpu().item()] == label_id[i].cpu().item():
+                if indices_1[i].cpu().item() == label_id[i].cpu().item():
                     acc1 += 1
-                if label_id[i].cpu().item() in text_id[indices_5[i].cpu()]:
+                if label_id[i].cpu().item() in indices_5[i].cpu():
                     acc5 += 1
            
             acc1_meter.update(float(acc1) / b * 100, b)
