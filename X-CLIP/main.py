@@ -282,9 +282,9 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
     # print(text_labels_2.shape)
     def views_inference(text_inputs, label_id, b):
         text_inputs = text_inputs
-        print(b, text_inputs.shape[0])
+        # print(b, text_inputs.shape[0])
         tot_similarity = torch.zeros((b, text_inputs.shape[0])).cuda()
-        print("tot_similarity shape before", tot_similarity.shape)
+        # print("tot_similarity shape before", tot_similarity.shape)
 
         if b != 1:
             image = _image[:, :, :, :, :, :] # [b,t,c,h,w]
@@ -296,15 +296,15 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             image_input = image_.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
-                print("image shape", image_input.shape)
-                print("text_inputs shape", text_inputs.shape)
-                print(text_inputs)
+                # print("image shape", image_input.shape)
+                # print("text_inputs shape", text_inputs.shape)
+                # print(text_inputs)
                 # text_inputs = text_inputs[[0, 1, 2]]
                 output = model(image_input, text_inputs)
-                print("output shape", output.shape)
+                # print("output shape", output.shape)
             
             similarity = output.view(b, -1).softmax(dim=-1)
-            print("tot_similarity shape", tot_similarity.shape)
+            # print("tot_similarity shape", tot_similarity.shape)
             tot_similarity += similarity # accumulating simmilarity from views
         return tot_similarity
     
@@ -340,7 +340,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             indices_5 = indices_5.cpu()
             # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
             for i in range(b):
-                print("hej", text_id_2, text_id_2.reshape(1, -1))
+                # print("hej", text_id_2, text_id_2.reshape(1, -1))
                 mask = [idx in indices_5[i] for idx in text_id_2]
                 text = text_inputs_2[mask]
                 tot_similarity_2nd = views_inference(text_inputs=text, label_id=label_id, b=1)
