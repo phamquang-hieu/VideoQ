@@ -104,12 +104,13 @@ def main(config):
         classes_2 = pd.read_csv(config.DATA.LABEL_2).values.tolist()
         text_aug = f"{{}}"
         text_labels_2 = torch.cat([clip.tokenize(text_aug.format(c), context_length=77) for i, c in classes_2])
+        text_id_2 = np.array[p[0] for p in classes_2]
     
     text_id = np.array([p[0] for p in train_data.classes])
     
     if config.TEST.ONLY_TEST:
         if config.DATA.LABEL_2 is not None:
-            acc1 = validate_2stage(val_loader, text_labels, text_labels_2, text_id, model, config)
+            acc1 = validate_2stage(val_loader, text_labels, text_labels_2, text_id, text_id_2, model, config)
         else:
             acc1 = validate(val_loader, text_labels, text_id, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
@@ -276,7 +277,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
     return acc1_meter.avg
 
 @torch.no_grad()
-def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray, model, config):
+def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarray, text_id_2:np.ndarray, model, config):
     model.eval()
     # print(text_labels_2.shape)
     def views_inference(text_inputs, label_id, b):
@@ -332,17 +333,19 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id:np.ndarray
             
             for i in range(b):
                 gt_label = label_id[i].cpu().item()
-                if gt_label in text_id[indices_5[i].cpu()]:
+                if gt_label in text_id_1[indices_5[i].cpu()]:
                     acc5 += 1
 
             acc5_meter.update(float(acc5) / b * 100, b)
             indices_5 = indices_5.cpu()
-            print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
-            for i in range(b):                
-                tot_similarity_2nd = views_inference(text_inputs=text_inputs_2[indices_5[i], :], label_id=label_id, b=1)
+            # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
+            for i in range(b):
+                mask = [idx in indices_5[i] for idx in text_id_2]
+                text = text_inputs_2[mask]
+                tot_similarity_2nd = views_inference(text_inputs=text, label_id=label_id, b=1)
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 gt_label = label_id[i].cpu().item()
-                predicted = text_id[indices_5[i][indices_1[0].cpu()]]
+                predicted = text_id_2[indices_1[0].cpu()]
                 y_true.append(gt_label), y_pred.append(predicted)
 
                 if gt_label == predicted:
