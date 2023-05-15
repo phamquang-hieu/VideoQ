@@ -33,7 +33,7 @@ class XCLIP(CLIP):
                  prompts_alpha=1e-4,
                  prompts_layers=1,
                  # other
-                 use_cache=F,
+                 use_cache=True,
                  use_checkpoint=False,
                  ):
         super().__init__(
