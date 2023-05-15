@@ -371,6 +371,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 gt_label = label_id[i].cpu().item()
                 # predicted = text_id_2[mask][indices_1[0].cpu()]
                 predicted = indices_1[0].cpu()
+                print("predicted", int(predicted.numpy()))
                 y_true.append(gt_label), y_pred.append(int(predicted.numpy()))
 
                 if gt_label == predicted:
