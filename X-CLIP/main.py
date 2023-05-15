@@ -280,7 +280,7 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
     result = torch.zeros([1, n_classes])
     for b in similarity.cpu():
         for i, item in enumerate(b):
-             result[indices[i]] += item
+             result[0, indices[i]] += item
     return result
     
 @torch.no_grad()
