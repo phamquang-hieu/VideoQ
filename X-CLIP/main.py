@@ -359,7 +359,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             indices_5 = [np.unique(index) for index in indices_5]
             print("indices_5 after", indices_5)
 
-            print("text_inputs_1 == text_inputs_2?", (text_inputs_1 == text_inputs_2).sum(), text_inputs_1.shape)
+            # print("text_inputs_1 == text_inputs_2?", (text_inputs_1 == text_inputs_2).sum(), text_inputs_1.shape)
             # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
             for i in range(b):
                 mask = [index in indices_5[i] for index in text_id_2]
