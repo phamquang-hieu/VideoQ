@@ -243,8 +243,9 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                     output = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
+                similarity = sum_by_index(similarity, text_id)
                 tot_similarity += similarity # accumulating simmilarity from views
-            tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)
+            # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
@@ -288,7 +289,7 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
 def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarray, text_id_2:np.ndarray, model, config):
     model.eval()
     # print(text_labels_2.shape)
-    def views_inference(text_inputs, label_id, b, nd_stage):
+    def views_inference(text_inputs, text_id, b, nd_stage):
         text_inputs = text_inputs
         # print(b, text_inputs.shape[0])
         # print("tot_similarity shape before", tot_similarity.shape)
@@ -316,6 +317,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             else:
                 similarity = output.view(1, -1).softmax(dim=-1)
             # print("tot_similarity shape", tot_similarity.shape)
+            similarity = sum_by_index(similarity, text_id)
             tot_similarity += similarity # accumulating simmilarity from views
         return tot_similarity
     
@@ -337,9 +339,9 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             n = tn // t # number of views
             _image = _image.view(b, n, t, c, h, w)
            
-            tot_similarity = views_inference(text_inputs=text_inputs_1, label_id=label_id, b=b, nd_stage=False)
+            tot_similarity = views_inference(text_inputs=text_inputs_1, text_id=text_id_1, b=b, nd_stage=False)
 
-            tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
+            # tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
@@ -362,8 +364,8 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 # print("mask", mask)
                 text = text_inputs_2[mask]
                 # print("text shape", text.shape)
-                tot_similarity_2nd = views_inference(text_inputs=text, label_id=label_id, b=i, nd_stage=True)
-                tot_similarity_2nd = sum_by_index(tot_similarity_2nd, text_id_2[mask])
+                tot_similarity_2nd = views_inference(text_inputs=text, text_id=text_id_2[mask], b=i, nd_stage=True)
+                # tot_similarity_2nd = sum_by_index(tot_similarity_2nd, text_id_2[mask])
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 # print(indices_1)
                 gt_label = label_id[i].cpu().item()
