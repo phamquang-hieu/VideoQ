@@ -346,6 +346,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             # tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
             # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
+            print("top 5",i, indices_5, values_5)
             acc1, acc5 = 0, 0
             
             for i in range(b):
@@ -361,7 +362,6 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             for i in range(b):
                 # print("hej", text_id_2, text_id_2.reshape(1, -1))
                 mask = [index in indices_5[i] for index in text_id_2]
-                print("top 5",i, indices_5[i], values_5)
                 # print("mask", mask)
                 # print("mask", mask)
                 text = text_inputs_2[mask]
