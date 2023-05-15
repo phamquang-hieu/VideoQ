@@ -351,7 +351,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
                 # print(indices_1)
                 gt_label = label_id[i].cpu().item()
-                predicted = text_id_2[indices_1[0].cpu()]
+                predicted = text_id_2[mask][indices_1[0].cpu()]
                 y_true.append(gt_label), y_pred.append(predicted)
 
                 if gt_label == predicted:
