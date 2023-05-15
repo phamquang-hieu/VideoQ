@@ -365,7 +365,6 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 mask = [index in indices_5[i] for index in text_id_2]
                 text = text_inputs_2[mask]
                 print("text_id_2", np.unique(text_id_2[mask]))
-                print("text_id_1", np.unique(text_id_1[mask]))
                 tot_similarity_2nd = views_inference(text_inputs=text, text_id=text_id_2[mask], b=i, nd_stage=True)
                 print("top 5", tot_similarity_2nd.topk(5, dim=-1))
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
