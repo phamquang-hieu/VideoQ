@@ -346,7 +346,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             for i in range(b):
                 gt_label = label_id[i].cpu().item()
                 # if gt_label in text_id_1[indices_5[i].cpu()]:
-                if gt_label in indices_5[i].cpu()
+                if gt_label in indices_5[i].cpu():
                     acc5 += 1
 
             acc5_meter.update(float(acc5) / b * 100, b)
@@ -367,7 +367,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                 # print(indices_1)
                 gt_label = label_id[i].cpu().item()
                 # predicted = text_id_2[mask][indices_1[0].cpu()]
-                predicted = indices_1.cpu()
+                predicted = indices_1[0].cpu()
                 y_true.append(gt_label), y_pred.append(predicted)
 
                 if gt_label == predicted:
