@@ -243,7 +243,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                     output = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
-                similarity = sum_by_index(similarity, text_id).cuda()
+                similarity = sum_by_index(similarity, text_id)
                 tot_similarity += similarity # accumulating simmilarity from views
             # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)s
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
@@ -278,8 +278,8 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
     return acc1_meter.avg
 
 def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
-    result = torch.zeros([similarity.shape[0], n_classes])
-    for b_id, b in enumerate(similarity.cpu()):
+    result = torch.zeros([similarity.shape[0], n_classes], device=similarity.device)
+    for b_id, b in enumerate(similarity):
         for i, item in enumerate(b):
             # print("item", item) 
             result[b_id, indices[i]] += item
