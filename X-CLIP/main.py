@@ -380,7 +380,6 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
                     f'Test: [{idx}/{len(val_loader)}]\t'
                     f'Acc@1: {acc1_meter.avg:.3f}\t'
                 )
-            break
     acc1_meter.sync()
     acc5_meter.sync()
 
