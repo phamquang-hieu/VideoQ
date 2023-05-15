@@ -359,7 +359,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             for i in range(b):
                 # print("hej", text_id_2, text_id_2.reshape(1, -1))
                 mask = [index in indices_5[i] for index in text_id_2]
-                # print("top 5",i, indices_5[i])
+                print("top 5",i, indices_5[i])
                 # print("mask", mask)
                 # print("mask", mask)
                 text = text_inputs_2[mask]
