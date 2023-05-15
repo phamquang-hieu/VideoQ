@@ -356,7 +356,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             acc5_meter.update(float(acc5) / b * 100, b)
             indices_5 = indices_5.cpu()
             print("indices_5 before", indices_5)
-            indices_5 = [np.unique(text_id_1[index]) for index in indices_5]
+            indices_5 = [np.unique(index) for index in indices_5]
             print("indices_5 after", indices_5)
 
             print("text_inputs_1 == text_inputs_2?", (text_inputs_1 == text_inputs_2).sum(), text_inputs_1.shape)
