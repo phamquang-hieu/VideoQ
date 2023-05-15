@@ -278,7 +278,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 
 def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
     result = torch.zeros([1, n_classes])
-    for b in similarity:
+    for b in similarity.cpu():
         for i, item in enumerate(b):
              result[indices[i]] += item
     return result
