@@ -104,7 +104,7 @@ def main(config):
         classes_2 = pd.read_csv(config.DATA.LABEL_2).values.tolist()
         text_aug = f"{{}}"
         text_labels_2 = torch.cat([clip.tokenize(text_aug.format(c), context_length=77) for i, c in classes_2])
-        text_id_2 = np.array[p[0] for p in classes_2]
+        text_id_2 = np.array(p[0] for p in classes_2)
     
     text_id = np.array([p[0] for p in train_data.classes])
     
