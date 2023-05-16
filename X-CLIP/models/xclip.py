@@ -105,7 +105,7 @@ class XCLIP(CLIP):
 
     def encode_video(self, image):
         b,t,c,h,w = image.size()
-        image = image.reshape(-1,c,h,w)
+        image = image.reshape(-1,c,h,w) #[bach_size*num_frame, c, h, w]
 
         cls_features, img_features = self.encode_image(image)
         img_features = self.prompts_visual_ln(img_features)
@@ -113,7 +113,7 @@ class XCLIP(CLIP):
         
         cls_features = cls_features.view(b, t, -1)
         img_features = img_features.view(b,t,-1,cls_features.shape[-1])
-        
+        #@TODO: prompt goes here
         video_features = self.mit(cls_features)
 
         return video_features, img_features
