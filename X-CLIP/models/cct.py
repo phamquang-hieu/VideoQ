@@ -118,7 +118,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
     def forward(self, x: torch.Tensor):
         # x.shape = b*t = batchsize * num_frames extracted from a video
         x = self.conv1(x)  # shape = [*, width, grid, grid] grid: number of token along 1 spatial dimension
-        print(x.shape)
         x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = [*, width, grid ** 2] -> flatten to a matrix of tokens
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
         # prepending the class_embedding token to the begining of the sequence
