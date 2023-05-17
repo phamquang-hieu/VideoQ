@@ -57,6 +57,8 @@ def main(config):
                          use_checkpoint=config.TRAIN.USE_CHECKPOINT, 
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
+                         pool_size=config.MODEL.POOL_SIZE,
+                         pool_use_freq=config.MODEL.POOL_USE_FREQ
                         )
     # model = model.cuda()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
@@ -164,9 +166,13 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
         if texts.shape[0] == 1:
             texts = texts.view(1, -1)
         with torch.cuda.amp.autocast(enabled=True):
-            output = model(images, texts)
+            output, prompt_key_loss = model(images, texts)
 
-            total_loss = criterion(output, label_id)
+            if prompt_key_loss is not None:
+                total_loss = criterion(output, label_id) + prompt_key_loss
+            else:
+                total_loss = criterion(output, label_id)
+
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         scaler.scale(total_loss).backward()
         

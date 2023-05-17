@@ -35,6 +35,8 @@ class XCLIP(CLIP):
                  # other
                  use_cache=True,
                  use_checkpoint=False,
+                 pool_size=25, # number of prompts in the prompt pool
+                 pool_use_freq=False
                  ):
         super().__init__(
             embed_dim,
@@ -59,6 +61,8 @@ class XCLIP(CLIP):
             droppath=dpr,
             T=T,
             use_checkpoint=use_checkpoint,
+            pool_size=pool_size, 
+            pool_use_freq=pool_use_freq
         )
 
         self.transformer = Transformer(
@@ -107,7 +111,7 @@ class XCLIP(CLIP):
         b,t,c,h,w = image.size()
         image = image.reshape(-1,c,h,w) #[bach_size*num_frame, c, h, w]
 
-        cls_features, img_features = self.encode_image(image)
+        cls_features, img_features, prompt_key_loss = self.encode_image(image)
         img_features = self.prompts_visual_ln(img_features)
         img_features = img_features @ self.prompts_visual_proj
         
@@ -116,7 +120,7 @@ class XCLIP(CLIP):
         #@TODO: prompt goes here
         video_features = self.mit(cls_features)
 
-        return video_features, img_features
+        return video_features, img_features, prompt_key_loss
 
     def cache_text(self, text):
         self.eval()
@@ -128,7 +132,7 @@ class XCLIP(CLIP):
 
     def forward(self, image, text):
         b = image.shape[0]
-        video_features, img_features = self.encode_video(image) 
+        video_features, img_features, prompt_key_loss = self.encode_video(image) 
         img_features = img_features.mean(dim=1, keepdim=False)
 
         if self.use_cache:
@@ -144,10 +148,21 @@ class XCLIP(CLIP):
         logit_scale = self.logit_scale.exp()
         logits = torch.einsum("bd,bkd->bk", video_features, logit_scale * text_features)
         
-        return logits
+        return logits, prompt_key_loss
 
 
-def build_model(state_dict: dict, T=8, droppath=0., use_checkpoint=False, logger=None, prompts_alpha=1e-1, prompts_layers=2, use_cache=True, mit_layers=4,):
+def build_model(state_dict: dict, 
+                T=8, 
+                droppath=0., 
+                use_checkpoint=False, 
+                logger=None, 
+                prompts_alpha=1e-1, 
+                prompts_layers=2, 
+                use_cache=True, 
+                mit_layers=4, 
+                pool_size=25, 
+                pool_use_freq=False # use frequency counting for prompt layer
+                ):
     vit = "visual.proj" in state_dict
 
     if vit:
@@ -180,6 +195,8 @@ def build_model(state_dict: dict, T=8, droppath=0., use_checkpoint=False, logger
         T=T, droppath=droppath, mit_layers=mit_layers,
         prompts_alpha=prompts_alpha, prompts_layers=prompts_layers,
         use_checkpoint=use_checkpoint, use_cache=use_cache,
+        pool_size=pool_size,
+        pool_use_freq=pool_use_freq
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
@@ -194,6 +211,8 @@ def build_model(state_dict: dict, T=8, droppath=0., use_checkpoint=False, logger
 
 def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", 
          jit=True, T=8, droppath=0., use_checkpoint=False, logger=None, use_cache=True, prompts_alpha=1e-1, prompts_layers=2, mit_layers=1,
+         pool_size=25,
+         pool_use_freq=False
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -216,6 +235,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         prompts_layers=prompts_layers,
                         use_cache=use_cache,
                         mit_layers=mit_layers,
+                        pool_size=pool_size,
+                        pool_use_freq=pool_use_freq
                         )
     if str(device) == "cpu":
         model.float()

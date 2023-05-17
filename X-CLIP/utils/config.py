@@ -30,6 +30,8 @@ _C.MODEL.DROP_PATH_RATE = 0.
 _C.MODEL.PRETRAINED = None
 _C.MODEL.RESUME = None
 _C.MODEL.FIX_TEXT = True
+_C.MODEL.POOL_SIZE = 25
+_C.MODEL.POOL_USE_FREQ = False
 
 # -----------------------------------------------------------------------------
 # Training settings

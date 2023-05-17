@@ -6,6 +6,7 @@ from torch.utils.checkpoint import checkpoint_sequential
 import sys
 sys.path.append("../")
 from clip.model import LayerNorm, QuickGELU, DropPath
+from prompt import PromptPool
 
 
 class CrossFramelAttentionBlock(nn.Module):
@@ -80,7 +81,7 @@ class Transformer(nn.Module):
 
 class CrossFrameCommunicationTransformer(nn.Module):
     def __init__(self, input_resolution: int, patch_size: int, width: int, layers: int, heads: int, output_dim: int,
-                 droppath = None, T = 8, use_checkpoint = False,):
+                 droppath = None, T = 8, use_checkpoint = False, pool_size:int = -1, pool_use_freq=False):
         """
             width: size of the message token as well as class embedding
             class embedding is a token prepened at the beginning of the sequence of image patch
@@ -101,7 +102,10 @@ class CrossFrameCommunicationTransformer(nn.Module):
         self.transformer = Transformer(width, layers, heads, droppath=droppath, use_checkpoint=use_checkpoint, T=T,)
         self.ln_post = LayerNorm(width)
         self.proj = nn.Parameter(scale * torch.randn(width, output_dim))
-
+        self.pool = None
+        ## Prompt pool
+        if pool_size > 0:
+            self.prompt_pool = PromptPool(pool_size=pool_size, embedd_dim=width, use_freq=pool_use_freq)
 
     def init_weights(self):
         self.apply(self._init_weights)
@@ -121,8 +125,13 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = [*, width, grid ** 2] -> flatten to a matrix of tokens
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
         # prepending the class_embedding token to the begining of the sequence
-        x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        cls = self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device)
         #@TODO: use the [class] token as query to query the prompt pool
+        prompt_key_loss = None
+        if self.prompt_pool is not None:
+            prompt, prompt_key_loss = self.prompt_pool(cls)
+            cls = torch.cat([cls, prompt], dim=1)
+        x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
         x = x + self.positional_embedding.to(x.dtype)
         
         x = self.ln_pre(x)
@@ -136,4 +145,4 @@ class CrossFrameCommunicationTransformer(nn.Module):
         if self.proj is not None:
             cls_x = cls_x @ self.proj
         
-        return cls_x, x[:,1:,:]
+        return cls_x, x[:,1:,:], prompt_key_loss
