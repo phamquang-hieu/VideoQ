@@ -36,7 +36,8 @@ class XCLIP(CLIP):
                  use_cache=True,
                  use_checkpoint=False,
                  pool_size=25, # number of prompts in the prompt pool
-                 pool_use_freq=False
+                 pool_use_freq=False,
+                 pool_prompts_per_sample=5
                  ):
         super().__init__(
             embed_dim,
@@ -62,7 +63,8 @@ class XCLIP(CLIP):
             T=T,
             use_checkpoint=use_checkpoint,
             pool_size=pool_size, 
-            pool_use_freq=pool_use_freq
+            pool_use_freq=pool_use_freq,
+            pool_prompts_per_sample=pool_prompts_per_sample
         )
 
         self.transformer = Transformer(
@@ -161,7 +163,8 @@ def build_model(state_dict: dict,
                 use_cache=True, 
                 mit_layers=4, 
                 pool_size=25, 
-                pool_use_freq=False # use frequency counting for prompt layer
+                pool_use_freq=False, # use frequency counting for prompt layer
+                pool_prompts_per_sample=5
                 ):
     vit = "visual.proj" in state_dict
 
@@ -196,7 +199,8 @@ def build_model(state_dict: dict,
         prompts_alpha=prompts_alpha, prompts_layers=prompts_layers,
         use_checkpoint=use_checkpoint, use_cache=use_cache,
         pool_size=pool_size,
-        pool_use_freq=pool_use_freq
+        pool_use_freq=pool_use_freq,
+        pool_prompts_per_sample=pool_prompts_per_sample
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
@@ -212,7 +216,8 @@ def build_model(state_dict: dict,
 def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", 
          jit=True, T=8, droppath=0., use_checkpoint=False, logger=None, use_cache=True, prompts_alpha=1e-1, prompts_layers=2, mit_layers=1,
          pool_size=25,
-         pool_use_freq=False
+         pool_use_freq=False,
+         pool_prompts_per_sample=5
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -236,7 +241,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         use_cache=use_cache,
                         mit_layers=mit_layers,
                         pool_size=pool_size,
-                        pool_use_freq=pool_use_freq
+                        pool_use_freq=pool_use_freq,
+                        pool_prompts_per_sample=pool_prompts_per_sample
                         )
     if str(device) == "cpu":
         model.float()

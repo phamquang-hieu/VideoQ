@@ -97,21 +97,22 @@ class VideoSpecificPrompt(nn.Module):
         return self.alpha * text
 
 class PromptPool(nn.Module):
-    def __init__(self, pool_size, embedd_dim, use_freq=False) -> None:
+    def __init__(self, pool_size, embedd_dim, use_freq=False, pool_prompts_per_sample=5) -> None:
         super().__init__()
         self.pool_size = pool_size
         self.embedd_dim = embedd_dim
         self.use_freq = use_freq
+        self.pool_prompts_per_sample = pool_prompts_per_sample
         self.keys = nn.Parameter(torch.randn([pool_size, embedd_dim]))
         self.values = nn.Parameter(torch.randn([pool_size, embedd_dim]))
         self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
     
-    def forward(self, x, k=5):
+    def forward(self, x):
         # x.shape = [b*t, 1, d]: shape of the [class token]
         key_loss = None
         cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
         
-        cosine_distance, idx = cosine_distance.topk(k, dim=-1, largest=False) # [x.shape[0], k]
+        cosine_distance, idx = cosine_distance.topk(self.pool_prompts_per_sample, dim=-1, largest=False) # [x.shape[0], k]
         
         if self.training: # if in train mode
             if self.use_freq:

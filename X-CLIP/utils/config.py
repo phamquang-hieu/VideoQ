@@ -31,7 +31,7 @@ _C.MODEL.PRETRAINED = None
 _C.MODEL.RESUME = None
 _C.MODEL.FIX_TEXT = True
 _C.MODEL.POOL_SIZE = 25
-_C.MODEL.POOL_USE_FREQ = False
+_C.MODEL.POOL_PROMPTS_PER_SAMPLE
 
 # -----------------------------------------------------------------------------
 # Training settings
@@ -49,6 +49,7 @@ _C.TRAIN.OPT_LEVEL = 'O1'
 _C.TRAIN.AUTO_RESUME = False
 _C.TRAIN.USE_CHECKPOINT = False
 _C.TRAIN.POOL_LAMBDA = 1.0
+_C.TRAIN.POOL_USE_FREQ = False
 
 # -----------------------------------------------------------------------------
 # Augmentation settings

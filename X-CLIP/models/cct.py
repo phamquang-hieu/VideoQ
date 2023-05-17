@@ -81,7 +81,7 @@ class Transformer(nn.Module):
 
 class CrossFrameCommunicationTransformer(nn.Module):
     def __init__(self, input_resolution: int, patch_size: int, width: int, layers: int, heads: int, output_dim: int,
-                 droppath = None, T = 8, use_checkpoint = False, pool_size:int = -1, pool_use_freq=False):
+                 droppath = None, T = 8, use_checkpoint = False, pool_size:int = 0, pool_use_freq=False, pool_prompts_per_sample=5):
         """
             width: size of the message token as well as class embedding
             class embedding is a token prepened at the beginning of the sequence of image patch
@@ -95,7 +95,15 @@ class CrossFrameCommunicationTransformer(nn.Module):
 
         scale = width ** -0.5
         self.class_embedding = nn.Parameter(scale * torch.randn(width))
-        self.positional_embedding = nn.Parameter(scale * torch.randn((input_resolution // patch_size) ** 2 + 1, width))
+        
+        ## Prompt pool
+        if pool_size > 0:
+            self.prompt_pool = PromptPool(pool_size=pool_size, embedd_dim=width, use_freq=pool_use_freq, pool_prompts_per_sample=pool_prompts_per_sample)
+        else:
+            pool_prompts_per_sample = 0 # this is to ensure that if there is no prompt module, the size of the positional embedding stays the same
+        
+        # (input_resolution // patch_size) ** 2 + 1 = number of token (grid **2) + 1 class token 
+        self.positional_embedding = nn.Parameter(scale * torch.randn((input_resolution // patch_size) ** 2 + 1 + pool_prompts_per_sample, width))
         self.ln_pre = LayerNorm(width)
 
         ## Attention Blocks
@@ -103,9 +111,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
         self.ln_post = LayerNorm(width)
         self.proj = nn.Parameter(scale * torch.randn(width, output_dim))
         self.pool = None
-        ## Prompt pool
-        if pool_size > 0:
-            self.prompt_pool = PromptPool(pool_size=pool_size, embedd_dim=width, use_freq=pool_use_freq)
 
     def init_weights(self):
         self.apply(self._init_weights)

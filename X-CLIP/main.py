@@ -58,7 +58,8 @@ def main(config):
                          use_cache=config.MODEL.FIX_TEXT,
                          logger=logger,
                          pool_size=config.MODEL.POOL_SIZE,
-                         pool_use_freq=config.MODEL.POOL_USE_FREQ
+                         pool_use_freq=config.TRAIN.POOL_USE_FREQ,
+                         pool_prompts_per_sample=config.MODEL.POOL_PROMPTS_PER_SAMPLE
                         )
     # model = model.cuda()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
