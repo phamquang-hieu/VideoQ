@@ -248,7 +248,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 if config.TRAIN.OPT_LEVEL == 'O2':
                     image_input = image_input.half()
                 with torch.cuda.amp.autocast(enabled=True):
-                    output = model(image_input, text_inputs)
+                    output, _ = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
                 similarity = sum_by_index(similarity, text_id)
@@ -314,12 +314,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             image_input = image_.cuda(non_blocking=True)
 
             with torch.cuda.amp.autocast(enabled=True):
-                # print("image shape", image_input.shape)
-                # print("text_inputs shape", text_inputs.shape)
-                # print(text_inputs)
-                # text_inputs = text_inputs[[0, 1, 2]]
-                output = model(image_input, text_inputs)
-                # print("output shape", output.shape)
+                output, _ = model(image_input, text_inputs)
             if not nd_stage:
                 similarity = output.view(b, -1).softmax(dim=-1)
             else:
