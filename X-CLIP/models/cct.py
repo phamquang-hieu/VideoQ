@@ -6,7 +6,7 @@ from torch.utils.checkpoint import checkpoint_sequential
 import sys
 sys.path.append("../")
 from clip.model import LayerNorm, QuickGELU, DropPath
-from prompt import PromptPool
+from .prompt import PromptPool
 
 
 class CrossFramelAttentionBlock(nn.Module):
