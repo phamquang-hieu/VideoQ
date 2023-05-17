@@ -32,6 +32,7 @@ _C.MODEL.RESUME = None
 _C.MODEL.FIX_TEXT = True
 _C.MODEL.POOL_SIZE = 25
 _C.MODEL.POOL_PROMPTS_PER_SAMPLE = 5
+_C.MODEL.POOL_PROMPT_LENGTH = 5
 
 # -----------------------------------------------------------------------------
 # Training settings

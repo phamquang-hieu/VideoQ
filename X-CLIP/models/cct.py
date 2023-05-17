@@ -81,7 +81,8 @@ class Transformer(nn.Module):
 
 class CrossFrameCommunicationTransformer(nn.Module):
     def __init__(self, input_resolution: int, patch_size: int, width: int, layers: int, heads: int, output_dim: int,
-                 droppath = None, T = 8, use_checkpoint = False, pool_size:int = 0, pool_use_freq=False, pool_prompts_per_sample=5):
+                 droppath = None, T = 8, use_checkpoint = False, 
+                 pool_size:int = 0, pool_use_freq=False, pool_prompts_per_sample=5, pool_prompt_length=5):
         """
             width: size of the message token as well as class embedding
             class embedding is a token prepened at the beginning of the sequence of image patch
@@ -89,7 +90,8 @@ class CrossFrameCommunicationTransformer(nn.Module):
         super().__init__()
         self.input_resolution = input_resolution
         self.output_dim = output_dim
-        
+        self.pool_size = pool_size
+        self.pool_prompt_length = pool_prompt_length
         # to extract tokens out of the original image
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=width, kernel_size=patch_size, stride=patch_size, bias=False)
 
@@ -98,12 +100,14 @@ class CrossFrameCommunicationTransformer(nn.Module):
         
         ## Prompt pool
         if pool_size > 0:
-            self.prompt_pool = PromptPool(pool_size=pool_size, embedd_dim=width, use_freq=pool_use_freq, pool_prompts_per_sample=pool_prompts_per_sample)
-        else:
-            pool_prompts_per_sample = 0 # this is to ensure that if there is no prompt module, the size of the positional embedding stays the same
+            self.prompt_pool = PromptPool(pool_size=pool_size, 
+                                          embedd_dim=width, 
+                                          use_freq=pool_use_freq, 
+                                          pool_prompts_per_sample=pool_prompts_per_sample,
+                                          pool_prompt_length=pool_prompt_length)
         
         # (input_resolution // patch_size) ** 2 + 1 = number of token (grid **2) + 1 class token 
-        self.positional_embedding = nn.Parameter(scale * torch.randn((input_resolution // patch_size) ** 2 + 1 + pool_prompts_per_sample, width))
+        self.positional_embedding = nn.Parameter(scale * torch.randn((input_resolution // patch_size) ** 2 + 1, width))
         self.ln_pre = LayerNorm(width)
 
         ## Attention Blocks
@@ -131,13 +135,14 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
         # prepending the class_embedding token to the begining of the sequence
         cls = self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device)
+        x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        x = x + self.positional_embedding.to(x.dtype)
+       
         #@TODO: use the [class] token as query to query the prompt pool
         prompt_key_loss = None
         if self.prompt_pool is not None:
             prompt, prompt_key_loss = self.prompt_pool(cls)
-            cls = torch.cat([cls, prompt], dim=1)
-        x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
-        x = x + self.positional_embedding.to(x.dtype)
+            x = torch.cat([prompt, x], dim=1)
         
         x = self.ln_pre(x)
 
@@ -145,9 +150,16 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
 
-        cls_x = self.ln_post(x[:, 0, :])
+        prompt_idx = self.pool_size*self.pool_prompt_length 
+        if prompt_idx == 0: 
+            # in this case pool_size == 0 ->
+            # the model don't use a prompt pool
+            # -> the first token is the [class] token, which is used as the image representation
+            prompt_idx = 1
+
+        cls_x = self.ln_post(x[:, 0:prompt_idx, :].mean(dim=1))
 
         if self.proj is not None:
             cls_x = cls_x @ self.proj
         
-        return cls_x, x[:,1:,:], prompt_key_loss
+        return cls_x, x[:,prompt_idx:,:], prompt_key_loss

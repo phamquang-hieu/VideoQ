@@ -97,14 +97,14 @@ class VideoSpecificPrompt(nn.Module):
         return self.alpha * text
 
 class PromptPool(nn.Module):
-    def __init__(self, pool_size, embedd_dim, use_freq=False, pool_prompts_per_sample=5) -> None:
+    def __init__(self, pool_size, embedd_dim, use_freq=False, pool_prompts_per_sample=5, pool_prompt_length=5) -> None:
         super().__init__()
         self.pool_size = pool_size
         self.embedd_dim = embedd_dim
         self.use_freq = use_freq
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.keys = nn.Parameter(torch.randn([pool_size, embedd_dim]))
-        self.values = nn.Parameter(torch.randn([pool_size, embedd_dim]))
+        self.values = nn.Parameter(torch.randn([pool_size, pool_prompt_length, embedd_dim]))
         self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
     
     def forward(self, x):
@@ -126,4 +126,4 @@ class PromptPool(nn.Module):
             else:
                 key_loss = cosine_distance.mean()
 
-        return self.values[idx, :], key_loss
+        return self.values[idx, :].reshape(x.shape[0], -1, self.embedd_dim), key_loss
