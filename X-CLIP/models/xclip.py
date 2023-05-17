@@ -38,7 +38,8 @@ class XCLIP(CLIP):
                  pool_size=25, # number of prompts in the prompt pool
                  pool_use_freq=False,
                  pool_prompts_per_sample=5,
-                 pool_prompt_length=5
+                 pool_prompt_length=5,
+                 pool_freeze_video=False
                  ):
         super().__init__(
             embed_dim,
@@ -87,6 +88,9 @@ class XCLIP(CLIP):
         self.prompts_visual_proj = nn.Parameter(torch.randn(vision_width, embed_dim))
         
         self.initialize_parameters()
+        # if training with prompt pool -> can choose whether or not to freeze the video encoder
+        if pool_freeze_video:
+            self.freeze_video_encoder()
     
     @torch.jit.ignore
     def no_weight_decay_keywords(self):
@@ -127,12 +131,20 @@ class XCLIP(CLIP):
         return video_features, img_features, prompt_key_loss
 
     def cache_text(self, text):
+        """This function is used when freezing the text encoder during training"""
         self.eval()
         with torch.no_grad():
             if self.cache_text_features is None:
                 self.cache_text_features = self.encode_text(text)
         self.train()
         return self.cache_text_features
+    
+    def freeze_video_encoder(self): 
+        for name, module in self.named_modules():
+            if 'visual.prompt_pool' in name:
+                module.requires_grad_(True)
+            else:
+                module.requires_grad_(False)
 
     def forward(self, image, text):
         b = image.shape[0]
@@ -167,7 +179,8 @@ def build_model(state_dict: dict,
                 pool_size=25, 
                 pool_use_freq=False, # use frequency counting for prompt layer
                 pool_prompts_per_sample=5,
-                pool_prompt_length=5
+                pool_prompt_length=5,
+                pool_freeze_video=False
                 ):
     vit = "visual.proj" in state_dict
 
@@ -204,7 +217,8 @@ def build_model(state_dict: dict,
         pool_size=pool_size,
         pool_use_freq=pool_use_freq,
         pool_prompts_per_sample=pool_prompts_per_sample,
-        pool_prompt_length=pool_prompt_length
+        pool_prompt_length=pool_prompt_length,
+        pool_freeze_video=pool_freeze_video
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
@@ -222,7 +236,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
          pool_size=25,
          pool_use_freq=False,
          pool_prompts_per_sample=5,
-         pool_prompt_length=5
+         pool_prompt_length=5,
+         pool_freeze_video=False
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -248,7 +263,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         pool_size=pool_size,
                         pool_use_freq=pool_use_freq,
                         pool_prompts_per_sample=pool_prompts_per_sample,
-                        pool_prompt_length=pool_prompt_length
+                        pool_prompt_length=pool_prompt_length,
+                        pool_freeze_video=pool_freeze_video
                         )
     if str(device) == "cpu":
         model.float()

@@ -60,7 +60,8 @@ def main(config):
                          pool_size=config.MODEL.POOL_SIZE,
                          pool_use_freq=config.TRAIN.POOL_USE_FREQ,
                          pool_prompts_per_sample=config.MODEL.POOL_PROMPTS_PER_SAMPLE,
-                         pool_prompt_length=config.MODEL.POOL_PROMPT_LENGTH
+                         pool_prompt_length=config.MODEL.POOL_PROMPT_LENGTH,
+                         pool_freeze_video=config.TRAIN.POOL_FREEZE_VIDEO
                         )
     # model = model.cuda()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
