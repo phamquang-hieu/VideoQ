@@ -122,11 +122,12 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
         # prepending the class_embedding token to the begining of the sequence
         x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        #@TODO: use the [class] token as query to query the prompt pool
         x = x + self.positional_embedding.to(x.dtype)
         
         x = self.ln_pre(x)
 
-        x = x.permute(1, 0, 2) # [b*t, grid**2, width]-> [grid**2, (b*t), width] this is needed for multihead self attn when batch_first = false
+        x = x.permute(1, 0, 2) # [b*t, grid**2 + 1(class token), width]-> [grid**2 + 1 (class token), (b*t), width] this is needed for multihead self attn when batch_first = false
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
 

@@ -95,3 +95,34 @@ class VideoSpecificPrompt(nn.Module):
             text = layer(text, visual)
         
         return self.alpha * text
+
+class PromptPool(nn.Module):
+    def __init__(self, pool_size, embedd_dim, use_freq=False) -> None:
+        super().__init__()
+        self.pool_size = pool_size
+        self.embedd_dim = embedd_dim
+        self.use_freq = use_freq
+        self.keys = nn.Parameter(torch.randn([pool_size, embedd_dim]))
+        self.values = nn.Parameter(torch.randn([pool_size, embedd_dim]))
+        self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
+    
+    def forward(self, x, k=5):
+        # x.shape = [b*t, 1, d]: shape of the [class token]
+        key_loss = None
+        cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
+        
+        cosine_distance, idx = cosine_distance.topk(k, dim=-1, largest=False) # [x.shape[0], k]
+        
+        if self.training: # if in train mode
+            if self.use_freq:
+                selected_prompts, freqs = torch.unique(idx, return_counts=True)
+                for prompt in selected_prompts:
+                    self.prompt_freq += freqs[prompt]
+                penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
+                penalty = penalty/penalty.sum()
+                key_loss = cosine_distance * penalty[idx]
+                key_loss = key_loss.sum(dim=-1).mean()
+            else:
+                key_loss = cosine_distance.mean()
+
+        return self.values[idx, :], key_loss
