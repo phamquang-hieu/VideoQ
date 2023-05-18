@@ -112,7 +112,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
     def load_json_annotations_2(self):
         """load json annotations from extended ucf crime"""
         video_infos = mmcv.load(self.ann_file)
-        # video_infos = {"<class_name>/file_name>":[{"start": val_1, "end": val_1'}, {...}, ...]}
+        # video_infos = {"<class_name>/filename>":[{"start": val_1, "end": val_1'}, {...}, ...]}
         results = []
         for vid, values in video_infos.items():
             results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
