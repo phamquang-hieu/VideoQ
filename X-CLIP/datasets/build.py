@@ -203,9 +203,18 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         return self.prepare_train_frames(idx)
 
 class VideoDataset(BaseDataset):
-    def __init__(self, ann_file, pipeline, labels_file, start_index=0, **kwargs):
+    def __init__(self, ann_file, pipeline, labels_file, start_index=0, normal_label=13, **kwargs):
         super().__init__(ann_file, pipeline, start_index=start_index, **kwargs)
         self.labels_file = labels_file
+        self.normal_indices = []
+        self.abnormal_indices = []
+        for i, video in enumerate(self.video_infos):
+            if video['label'] == normal_label:
+                self.normal_indices.append(i)
+            else:
+                self.abnormal_indices.append(i)
+        self.normal_indices = np.array(self.normal_indices)
+        self.abnormal_indices = np.array(self.abnormal_indices)
 
     @property
     def classes(self):
@@ -234,6 +243,41 @@ class VideoDataset(BaseDataset):
                 video_infos.append(dict(filename=filename, label=label, tar=self.use_tar_format))
         return video_infos
 
+class BalanceBatchSampler(torch.utils.data.Sampler):
+    """Balancing the number of positive and negative samples within a batch"""
+
+    def __init__(self, normal_indices, abnormal_indices, batch_size=6) -> None:
+        self.normal_indices = normal_indices #[#data points]
+        self.abnormal_indices = abnormal_indices #[#data points]
+        self.batch_size = batch_size
+        self.num_normal = len(normal_indices)
+        self.num_abnormal = len(abnormal_indices)
+    
+    def random_sample_extend(self, array:np.ndarray, desired_len):
+        return np.concatenate((array, np.random.choice(array, size=desired_len-len(array), replace=False)), axis=-1)
+    
+    def truncate_indices(self, array, half):
+        end = len(array)%half
+        if end == 0: return array.reshape(-1, half)
+        return array[:-end].reshape(-1, half) 
+
+    def __iter__(self):
+        half = self.batch_size//2
+        normal_indices = np.random.permutation(self.normal_indices)
+        abnormal_indices = np.random.permutation(self.abnormal_indices)        
+        if self.num_normal < self.num_abnormal:
+            normal_indices = self.random_sample_extend(normal_indices, self.num_abnormal)
+        elif self.num_normal > self.num_abnormal:
+            abnormal_indices = self.random_sample_extend(abnormal_indices, self.num_normal)
+        
+        normal_indices = self.truncate_indices(normal_indices, half=half)
+        abnormal_indices = self.truncate_indices(abnormal_indices, half=half)
+
+        batch = np.concatenate((abnormal_indices, normal_indices), axis=-1)
+        return (batch[i] for i in range(len(batch)))
+    
+    def __len__(self):
+        return len(self.labels)
 
 class SubsetRandomSampler(torch.utils.data.Sampler):
     r"""Samples elements randomly from a given list of indices, without replacement.
@@ -298,19 +342,19 @@ def build_dataloader(logger, config):
     
     train_data = VideoDataset(ann_file=config.DATA.TRAIN_FILE, data_prefix=config.DATA.ROOT,
                               labels_file=config.DATA.LABEL_LIST, pipeline=train_pipeline)
-    num_tasks = dist.get_world_size()
-    global_rank = dist.get_rank()
-    sampler_train = torch.utils.data.DistributedSampler(
-        train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
-    )
+    # num_tasks = dist.get_world_size()
+    # global_rank = dist.get_rank()
+    # sampler_train = torch.utils.data.DistributedSampler(
+    #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
+    # )
+    sampler_train = BalanceBatchSampler(normal_indices=train_data.normal_indices, abnormal_indices=train_data.abnormal_indices, batch_size=config.TRAIN.BATCH_SIZE) #@TODO: finish this line
     train_loader = DataLoader(
-        train_data, sampler=sampler_train,
-        batch_size=config.TRAIN.BATCH_SIZE,
+        train_data, batch_sampler=sampler_train,
         num_workers=1,
         pin_memory=True,
-        drop_last=True,
-        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TRAIN.BATCH_SIZE),
+        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE)
     )
+    
     
     val_pipeline = [
         dict(type='DecordInit'),
@@ -333,9 +377,7 @@ def build_dataloader(logger, config):
     val_data = VideoDataset(ann_file=config.DATA.VAL_FILE, data_prefix=config.DATA.ROOT, labels_file=config.DATA.LABEL_LIST, pipeline=val_pipeline)
     indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size()) # assume having 4 processes -> process #0 handles indices 0, 4, 8, 12,... process #2 handles indices 1, 5, 9, 13,...
     sampler_val = SubsetRandomSampler(indices)
-    import json
-    with open("log.json", "w") as f:
-        json.dump(val_data.video_infos, f, indent="\t")
+    
     val_loader = DataLoader(
         val_data, sampler=sampler_val,
         batch_size=config.TEST.BATCH_SIZE,

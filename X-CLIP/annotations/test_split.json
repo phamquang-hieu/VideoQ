@@ -1,0 +1,3802 @@
+[
+	{
+		"filename": "Abuse/Abuse028_x264.mp4",
+		"annotations": [
+			{
+				"end": 8,
+				"start": 6
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "Abuse/Abuse030_x264.mp4",
+		"annotations": [
+			{
+				"end": 45,
+				"start": 42
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "Arrest/Arrest001_x264.mp4",
+		"annotations": [
+			{
+				"end": 50,
+				"start": 40
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Arrest/Arrest007_x264.mp4",
+		"annotations": [
+			{
+				"end": 72,
+				"start": 51
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Arrest/Arrest024_x264.mp4",
+		"annotations": [
+			{
+				"end": 104,
+				"start": 34
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Arrest/Arrest030_x264.mp4",
+		"annotations": [
+			{
+				"end": 240,
+				"start": 184
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Arrest/Arrest039_x264.mp4",
+		"annotations": [
+			{
+				"end": 344,
+				"start": 240
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Arson/Arson007_x264.mp4",
+		"annotations": [
+			{
+				"end": 190,
+				"start": 75
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson009_x264.mp4",
+		"annotations": [
+			{
+				"end": 10,
+				"start": 7
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson010_x264.mp4",
+		"annotations": [
+			{
+				"end": 41,
+				"start": 30
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson011_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson011_x264.mp4",
+		"annotations": [
+			{
+				"end": 42,
+				"start": 23
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson016_x264.mp4",
+		"annotations": [
+			{
+				"end": 60,
+				"start": 33
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson018_x264.mp4",
+		"annotations": [
+			{
+				"end": 20,
+				"start": 9
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson022_x264.mp4",
+		"annotations": [
+			{
+				"end": 133,
+				"start": 117
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson035_x264.mp4",
+		"annotations": [
+			{
+				"end": 30,
+				"start": 20
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Arson/Arson041_x264.mp4",
+		"annotations": [
+			{
+				"end": 120,
+				"start": 71
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Assault/Assault006_x264.mp4",
+		"annotations": [
+			{
+				"end": 270,
+				"start": 40
+			}
+		],
+		"label": "3"
+	},
+	{
+		"filename": "Assault/Assault010_x264.mp4",
+		"annotations": [
+			{
+				"end": 389,
+				"start": 378
+			}
+		],
+		"label": "3"
+	},
+	{
+		"filename": "Assault/Assault010_x264.mp4",
+		"annotations": [
+			{
+				"end": 431,
+				"start": 409
+			}
+		],
+		"label": "3"
+	},
+	{
+		"filename": "Assault/Assault011_x264.mp4",
+		"annotations": [
+			{
+				"end": 32,
+				"start": 12
+			}
+		],
+		"label": "3"
+	},
+	{
+		"filename": "Burglary/Burglary005_x264.mp4",
+		"annotations": [
+			{
+				"end": 168,
+				"start": 157
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary017_x264.mp4",
+		"annotations": [
+			{
+				"end": 20,
+				"start": 5
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary018_x264.mp4",
+		"annotations": [
+			{
+				"end": 35,
+				"start": 24
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary021_x264.mp4",
+		"annotations": [
+			{
+				"end": 7,
+				"start": 2
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary021_x264.mp4",
+		"annotations": [
+			{
+				"end": 45,
+				"start": 28
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary024_x264.mp4",
+		"annotations": [
+			{
+				"end": 41,
+				"start": 2
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary032_x264.mp4",
+		"annotations": [
+			{
+				"end": 123,
+				"start": 43
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary033_x264.mp4",
+		"annotations": [
+			{
+				"end": 11,
+				"start": 2
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary035_x264.mp4",
+		"annotations": [
+			{
+				"end": 58,
+				"start": 0
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary037_x264.mp4",
+		"annotations": [
+			{
+				"end": 13,
+				"start": 8
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary037_x264.mp4",
+		"annotations": [
+			{
+				"end": 60,
+				"start": 18
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary061_x264.mp4",
+		"annotations": [
+			{
+				"end": 190,
+				"start": 140
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary076_x264.mp4",
+		"annotations": [
+			{
+				"end": 143,
+				"start": 53
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary079_x264.mp4",
+		"annotations": [
+			{
+				"end": 357,
+				"start": 258
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Burglary/Burglary092_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 8
+			}
+		],
+		"label": "5"
+	},
+	{
+		"filename": "Explosion/Explosion002_x264.mp4",
+		"annotations": [
+			{
+				"end": 70,
+				"start": 50
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion004_x264.mp4",
+		"annotations": [
+			{
+				"end": 8,
+				"start": 2
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion007_x264.mp4",
+		"annotations": [
+			{
+				"end": 76,
+				"start": 53
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion008_x264.mp4",
+		"annotations": [
+			{
+				"end": 42,
+				"start": 34
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion010_x264.mp4",
+		"annotations": [
+			{
+				"end": 36,
+				"start": 10
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion011_x264.mp4",
+		"annotations": [
+			{
+				"end": 32,
+				"start": 26
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion013_x264.mp4",
+		"annotations": [
+			{
+				"end": 99,
+				"start": 84
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion016_x264.mp4",
+		"annotations": [
+			{
+				"end": 15,
+				"start": 6
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion017_x264.mp4",
+		"annotations": [
+			{
+				"end": 48,
+				"start": 33
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion020_x264.mp4",
+		"annotations": [
+			{
+				"end": 9,
+				"start": 2
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion021_x264.mp4",
+		"annotations": [
+			{
+				"end": 9,
+				"start": 4
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion022_x264.mp4",
+		"annotations": [
+			{
+				"end": 81,
+				"start": 74
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion025_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 9
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion027_x264.mp4",
+		"annotations": [
+			{
+				"end": 6,
+				"start": 4
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion028_x264.mp4",
+		"annotations": [
+			{
+				"end": 23,
+				"start": 9
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion029_x264.mp4",
+		"annotations": [
+			{
+				"end": 67,
+				"start": 61
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion033_x264.mp4",
+		"annotations": [
+			{
+				"end": 45,
+				"start": 32
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion033_x264.mp4",
+		"annotations": [
+			{
+				"end": 105,
+				"start": 52
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion035_x264.mp4",
+		"annotations": [
+			{
+				"end": 12,
+				"start": 8
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion036_x264.mp4",
+		"annotations": [
+			{
+				"end": 69,
+				"start": 65
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion039_x264.mp4",
+		"annotations": [
+			{
+				"end": 5,
+				"start": 2
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Explosion/Explosion043_x264.mp4",
+		"annotations": [
+			{
+				"end": 153,
+				"start": 149
+			}
+		],
+		"label": "6"
+	},
+	{
+		"filename": "Fighting/Fighting003_x264.mp4",
+		"annotations": [
+			{
+				"end": 103,
+				"start": 61
+			}
+		],
+		"label": "7"
+	},
+	{
+		"filename": "Fighting/Fighting018_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 3
+			}
+		],
+		"label": "7"
+	},
+	{
+		"filename": "Fighting/Fighting033_x264.mp4",
+		"annotations": [
+			{
+				"end": 28,
+				"start": 19
+			}
+		],
+		"label": "7"
+	},
+	{
+		"filename": "Fighting/Fighting042_x264.mp4",
+		"annotations": [
+			{
+				"end": 40,
+				"start": 10
+			}
+		],
+		"label": "7"
+	},
+	{
+		"filename": "Fighting/Fighting047_x264.mp4",
+		"annotations": [
+			{
+				"end": 61,
+				"start": 7
+			}
+		],
+		"label": "7"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents001_x264.mp4",
+		"annotations": [
+			{
+				"end": 10,
+				"start": 7
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents002_x264.mp4",
+		"annotations": [
+			{
+				"end": 10,
+				"start": 8
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents004_x264.mp4",
+		"annotations": [
+			{
+				"end": 6,
+				"start": 5
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents009_x264.mp4",
+		"annotations": [
+			{
+				"end": 8,
+				"start": 7
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents010_x264.mp4",
+		"annotations": [
+			{
+				"end": 9,
+				"start": 8
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents011_x264.mp4",
+		"annotations": [
+			{
+				"end": 10,
+				"start": 9
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents012_x264.mp4",
+		"annotations": [
+			{
+				"end": 13,
+				"start": 8
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents016_x264.mp4",
+		"annotations": [
+			{
+				"end": 24,
+				"start": 18
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents017_x264.mp4",
+		"annotations": [
+			{
+				"end": 4,
+				"start": 2
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents019_x264.mp4",
+		"annotations": [
+			{
+				"end": 30,
+				"start": 25
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents020_x264.mp4",
+		"annotations": [
+			{
+				"end": 24,
+				"start": 20
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents021_x264.mp4",
+		"annotations": [
+			{
+				"end": 3,
+				"start": 1
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents022_x264.mp4",
+		"annotations": [
+			{
+				"end": 7,
+				"start": 4
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents121_x264.mp4",
+		"annotations": [
+			{
+				"end": 13,
+				"start": 11
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents122_x264.mp4",
+		"annotations": [
+			{
+				"end": 12,
+				"start": 10
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents123_x264.mp4",
+		"annotations": [
+			{
+				"end": 7,
+				"start": 4
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents124_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 8
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents125_x264.mp4",
+		"annotations": [
+			{
+				"end": 20,
+				"start": 16
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents127_x264.mp4",
+		"annotations": [
+			{
+				"end": 77,
+				"start": 72
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents128_x264.mp4",
+		"annotations": [
+			{
+				"end": 7,
+				"start": 3
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents131_x264.mp4",
+		"annotations": [
+			{
+				"end": 8,
+				"start": 6
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents132_x264.mp4",
+		"annotations": [
+			{
+				"end": 11,
+				"start": 7
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "RoadAccidents/RoadAccidents133_x264.mp4",
+		"annotations": [
+			{
+				"end": 15,
+				"start": 9
+			}
+		],
+		"label": "4"
+	},
+	{
+		"filename": "Robbery/Robbery048_x264.mp4",
+		"annotations": [
+			{
+				"end": 31,
+				"start": 15
+			}
+		],
+		"label": "8"
+	},
+	{
+		"filename": "Robbery/Robbery050_x264.mp4",
+		"annotations": [
+			{
+				"end": 47,
+				"start": 16
+			}
+		],
+		"label": "8"
+	},
+	{
+		"filename": "Robbery/Robbery102_x264.mp4",
+		"annotations": [
+			{
+				"end": 52,
+				"start": 36
+			}
+		],
+		"label": "8"
+	},
+	{
+		"filename": "Robbery/Robbery106_x264.mp4",
+		"annotations": [
+			{
+				"end": 20,
+				"start": 16
+			}
+		],
+		"label": "8"
+	},
+	{
+		"filename": "Robbery/Robbery137_x264.mp4",
+		"annotations": [
+			{
+				"end": 65,
+				"start": 4
+			}
+		],
+		"label": "8"
+	},
+	{
+		"filename": "Shooting/Shooting002_x264.mp4",
+		"annotations": [
+			{
+				"end": 37,
+				"start": 34
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting004_x264.mp4",
+		"annotations": [
+			{
+				"end": 22,
+				"start": 17
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting007_x264.mp4",
+		"annotations": [
+			{
+				"end": 6,
+				"start": 2
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting008_x264.mp4",
+		"annotations": [
+			{
+				"end": 10,
+				"start": 2
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting010_x264.mp4",
+		"annotations": [
+			{
+				"end": 42,
+				"start": 36
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting011_x264.mp4",
+		"annotations": [
+			{
+				"end": 58,
+				"start": 49
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting013_x264.mp4",
+		"annotations": [
+			{
+				"end": 32,
+				"start": 29
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting015_x264.mp4",
+		"annotations": [
+			{
+				"end": 57,
+				"start": 28
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting018_x264.mp4",
+		"annotations": [
+			{
+				"end": 16,
+				"start": 10
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting019_x264.mp4",
+		"annotations": [
+			{
+				"end": 48,
+				"start": 34
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting021_x264.mp4",
+		"annotations": [
+			{
+				"end": 21,
+				"start": 16
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting022_x264.mp4",
+		"annotations": [
+			{
+				"end": 110,
+				"start": 95
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting024_x264.mp4",
+		"annotations": [
+			{
+				"end": 44,
+				"start": 24
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting026_x264.mp4",
+		"annotations": [
+			{
+				"end": 20,
+				"start": 6
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting028_x264.mp4",
+		"annotations": [
+			{
+				"end": 18,
+				"start": 10
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting032_x264.mp4",
+		"annotations": [
+			{
+				"end": 274,
+				"start": 266
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting033_x264.mp4",
+		"annotations": [
+			{
+				"end": 67,
+				"start": 56
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting034_x264.mp4",
+		"annotations": [
+			{
+				"end": 35,
+				"start": 32
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting037_x264.mp4",
+		"annotations": [
+			{
+				"end": 9,
+				"start": 5
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting043_x264.mp4",
+		"annotations": [
+			{
+				"end": 41,
+				"start": 32
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting046_x264.mp4",
+		"annotations": [
+			{
+				"end": 141,
+				"start": 134
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting046_x264.mp4",
+		"annotations": [
+			{
+				"end": 170,
+				"start": 159
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting047_x264.mp4",
+		"annotations": [
+			{
+				"end": 130,
+				"start": 72
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting047_x264.mp4",
+		"annotations": [
+			{
+				"end": 220,
+				"start": 162
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shooting/Shooting048_x264.mp4",
+		"annotations": [
+			{
+				"end": 58,
+				"start": 47
+			}
+		],
+		"label": "9"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting001_x264.mp4",
+		"annotations": [
+			{
+				"end": 67,
+				"start": 52
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting004_x264.mp4",
+		"annotations": [
+			{
+				"end": 163,
+				"start": 73
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting005_x264.mp4",
+		"annotations": [
+			{
+				"end": 31,
+				"start": 24
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting007_x264.mp4",
+		"annotations": [
+			{
+				"end": 25,
+				"start": 18
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting007_x264.mp4",
+		"annotations": [
+			{
+				"end": 164,
+				"start": 154
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting010_x264.mp4",
+		"annotations": [
+			{
+				"end": 31,
+				"start": 25
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting010_x264.mp4",
+		"annotations": [
+			{
+				"end": 66,
+				"start": 52
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting015_x264.mp4",
+		"annotations": [
+			{
+				"end": 72,
+				"start": 67
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting016_x264.mp4",
+		"annotations": [
+			{
+				"end": 24,
+				"start": 21
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting017_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 12
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting020_x264.mp4",
+		"annotations": [
+			{
+				"end": 82,
+				"start": 78
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting021_x264.mp4",
+		"annotations": [
+			{
+				"end": 74,
+				"start": 69
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting022_x264.mp4",
+		"annotations": [
+			{
+				"end": 14,
+				"start": 9
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting022_x264.mp4",
+		"annotations": [
+			{
+				"end": 52,
+				"start": 48
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting027_x264.mp4",
+		"annotations": [
+			{
+				"end": 39,
+				"start": 36
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting027_x264.mp4",
+		"annotations": [
+			{
+				"end": 57,
+				"start": 49
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting028_x264.mp4",
+		"annotations": [
+			{
+				"end": 28,
+				"start": 19
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting029_x264.mp4",
+		"annotations": [
+			{
+				"end": 49,
+				"start": 34
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting031_x264.mp4",
+		"annotations": [
+			{
+				"end": 11,
+				"start": 4
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting033_x264.mp4",
+		"annotations": [
+			{
+				"end": 25,
+				"start": 21
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting034_x264.mp4",
+		"annotations": [
+			{
+				"end": 249,
+				"start": 245
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting037_x264.mp4",
+		"annotations": [
+			{
+				"end": 40,
+				"start": 38
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting039_x264.mp4",
+		"annotations": [
+			{
+				"end": 78,
+				"start": 73
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting044_x264.mp4",
+		"annotations": [
+			{
+				"end": 375,
+				"start": 369
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Shoplifting/Shoplifting049_x264.mp4",
+		"annotations": [
+			{
+				"end": 45,
+				"start": 34
+			}
+		],
+		"label": "11"
+	},
+	{
+		"filename": "Stealing/Stealing019_x264.mp4",
+		"annotations": [
+			{
+				"end": 93,
+				"start": 91
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing019_x264.mp4",
+		"annotations": [
+			{
+				"end": 145,
+				"start": 139
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing036_x264.mp4",
+		"annotations": [
+			{
+				"end": 53,
+				"start": 42
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing058_x264.mp4",
+		"annotations": [
+			{
+				"end": 122,
+				"start": 19
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing062_x264.mp4",
+		"annotations": [
+			{
+				"end": 35,
+				"start": 12
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing079_x264.mp4",
+		"annotations": [
+			{
+				"end": 107,
+				"start": 85
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Stealing/Stealing079_x264.mp4",
+		"annotations": [
+			{
+				"end": 150,
+				"start": 117
+			}
+		],
+		"label": "10"
+	},
+	{
+		"filename": "Vandalism/Vandalism007_x264.mp4",
+		"annotations": [
+			{
+				"end": 25,
+				"start": 8
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism015_x264.mp4",
+		"annotations": [
+			{
+				"end": 90,
+				"start": 67
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism017_x264.mp4",
+		"annotations": [
+			{
+				"end": 11,
+				"start": 9
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism017_x264.mp4",
+		"annotations": [
+			{
+				"end": 28,
+				"start": 26
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism028_x264.mp4",
+		"annotations": [
+			{
+				"end": 66,
+				"start": 61
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism028_x264.mp4",
+		"annotations": [
+			{
+				"end": 89,
+				"start": 80
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism036_x264.mp4",
+		"annotations": [
+			{
+				"end": 26,
+				"start": 18
+			}
+		],
+		"label": "12"
+	},
+	{
+		"filename": "Vandalism/Vandalism036_x264.mp4",
+		"annotations": [
+			{
+				"end": 36,
+				"start": 33
+			}
+		],
+		"label": "12"
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_892_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_704_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_828_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 55,
+				"end": 60
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 60,
+				"end": 65
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 65,
+				"end": 70
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 70,
+				"end": 75
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 75,
+				"end": 80
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 80,
+				"end": 85
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 85,
+				"end": 90
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 90,
+				"end": 95
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 95,
+				"end": 100
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 100,
+				"end": 105
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 105,
+				"end": 110
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 110,
+				"end": 115
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 115,
+				"end": 120
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 120,
+				"end": 125
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 125,
+				"end": 130
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 130,
+				"end": 135
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 135,
+				"end": 140
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 140,
+				"end": 145
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 145,
+				"end": 150
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 150,
+				"end": 155
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 155,
+				"end": 160
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 160,
+				"end": 165
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 165,
+				"end": 170
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 170,
+				"end": 175
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 175,
+				"end": 180
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 180,
+				"end": 185
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 185,
+				"end": 190
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 190,
+				"end": 195
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 195,
+				"end": 200
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 200,
+				"end": 205
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 205,
+				"end": 210
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 210,
+				"end": 215
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 215,
+				"end": 220
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 220,
+				"end": 225
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 225,
+				"end": 230
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 230,
+				"end": 235
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 235,
+				"end": 240
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 240,
+				"end": 245
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 245,
+				"end": 250
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 250,
+				"end": 255
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 255,
+				"end": 260
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 260,
+				"end": 265
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 265,
+				"end": 270
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 270,
+				"end": 275
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 275,
+				"end": 280
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 280,
+				"end": 285
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 285,
+				"end": 290
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 290,
+				"end": 295
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 295,
+				"end": 300
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 300,
+				"end": 305
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 305,
+				"end": 310
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 310,
+				"end": 315
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 315,
+				"end": 320
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 320,
+				"end": 325
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 325,
+				"end": 330
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 330,
+				"end": 335
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 335,
+				"end": 340
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 340,
+				"end": 345
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 345,
+				"end": 350
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 350,
+				"end": 355
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 355,
+				"end": 360
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 360,
+				"end": 365
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 365,
+				"end": 370
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_576_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 370,
+				"end": 375
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 55,
+				"end": 60
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 60,
+				"end": 65
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 65,
+				"end": 70
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 70,
+				"end": 75
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 75,
+				"end": 80
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 80,
+				"end": 85
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 85,
+				"end": 90
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 90,
+				"end": 95
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 95,
+				"end": 100
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 100,
+				"end": 105
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 105,
+				"end": 110
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 110,
+				"end": 115
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 115,
+				"end": 120
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 120,
+				"end": 125
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 125,
+				"end": 130
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 130,
+				"end": 135
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 135,
+				"end": 140
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 140,
+				"end": 145
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 145,
+				"end": 150
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 150,
+				"end": 155
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 155,
+				"end": 160
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 160,
+				"end": 165
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 165,
+				"end": 170
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 170,
+				"end": 175
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 175,
+				"end": 180
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 180,
+				"end": 185
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 185,
+				"end": 190
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 190,
+				"end": 195
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 195,
+				"end": 200
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 200,
+				"end": 205
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 205,
+				"end": 210
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 210,
+				"end": 215
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 215,
+				"end": 220
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 220,
+				"end": 225
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 225,
+				"end": 230
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 230,
+				"end": 235
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 235,
+				"end": 240
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 240,
+				"end": 245
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 245,
+				"end": 250
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 250,
+				"end": 255
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 255,
+				"end": 260
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 260,
+				"end": 265
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 265,
+				"end": 270
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 270,
+				"end": 275
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 275,
+				"end": 280
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 280,
+				"end": 285
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_722_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 285,
+				"end": 290
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_345_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 55,
+				"end": 60
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 60,
+				"end": 65
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_597_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 65,
+				"end": 70
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 35,
+				"end": 40
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 40,
+				"end": 45
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 45,
+				"end": 50
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 50,
+				"end": 55
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 55,
+				"end": 60
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 60,
+				"end": 65
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 65,
+				"end": 70
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 70,
+				"end": 75
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 75,
+				"end": 80
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 80,
+				"end": 85
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 85,
+				"end": 90
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 90,
+				"end": 95
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 95,
+				"end": 100
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 100,
+				"end": 105
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 105,
+				"end": 110
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 110,
+				"end": 115
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 115,
+				"end": 120
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 120,
+				"end": 125
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 125,
+				"end": 130
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 130,
+				"end": 135
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 135,
+				"end": 140
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 140,
+				"end": 145
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 145,
+				"end": 150
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 150,
+				"end": 155
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 155,
+				"end": 160
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 160,
+				"end": 165
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 165,
+				"end": 170
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 170,
+				"end": 175
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 175,
+				"end": 180
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 180,
+				"end": 185
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 185,
+				"end": 190
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 190,
+				"end": 195
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_798_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 195,
+				"end": 200
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_881_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 5,
+				"end": 10
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 10,
+				"end": 15
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 15,
+				"end": 20
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 20,
+				"end": 25
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 25,
+				"end": 30
+			}
+		]
+	},
+	{
+		"file_name": "Normal_Videos_for_Event_Recognition/Normal_Videos_905_x264.mp4",
+		"label": "13",
+		"annotations": [
+			{
+				"start": 30,
+				"end": 35
+			}
+		]
+	}
+]
