@@ -277,7 +277,8 @@ class BalanceBatchSampler(torch.utils.data.Sampler):
         return (batch[i] for i in range(len(batch)))
     
     def __len__(self):
-        return self.num_normal if self.num_normal > self.num_abnormal else self.num_abnormal
+        """This function returns the number of batch"""
+        return self.num_normal//self.batch_size if self.num_normal > self.num_abnormal else self.num_abnormal//self.batch_size
 class SubsetRandomSampler(torch.utils.data.Sampler):
     r"""Samples elements randomly from a given list of indices, without replacement.
 
