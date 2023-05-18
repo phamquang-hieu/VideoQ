@@ -161,6 +161,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
         images = batch_data["imgs"].cuda(non_blocking=True)
         label_id = batch_data["label"].cuda(non_blocking=True)
         label_id = label_id.reshape(-1)
+        print("label_id:", label_id)
         images = images.view((-1,config.DATA.NUM_FRAMES,3)+images.size()[-2:])
         
         if mixup_fn is not None:
