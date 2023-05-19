@@ -3,7 +3,7 @@ import torch
 from torch import nn
 import numpy as np
 from .mit import MultiframeIntegrationTransformer
-from .prompt import VideoSpecificPrompt
+from .prompt import VideoSpecificPrompt, PromptPool
 from .cct import CrossFrameCommunicationTransformer
 import sys
 import warnings
@@ -46,7 +46,18 @@ class XCLIP(CLIP):
             image_resolution, vision_layers, vision_width, vision_patch_size,
             context_length, vocab_size, transformer_width, transformer_heads, transformer_layers
         )
+        self.pool_size = pool_size
+        self.pool_use_freq = pool_use_freq
+        self.pool_prompts_per_sample = pool_prompts_per_sample
+        self.pool_prompt_length = pool_prompt_length
         
+        if self.pool_size > 0:
+            self.prompt_pool = PromptPool(pool_size=pool_size, 
+                                          embedd_dim=vision_width, 
+                                          use_freq=pool_use_freq, 
+                                          pool_prompts_per_sample=pool_prompts_per_sample,
+                                          pool_prompt_length=pool_prompt_length)
+
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
         self.use_cache=use_cache
         self.mit = MultiframeIntegrationTransformer(T=T, embed_dim=embed_dim, layers=mit_layers,)
@@ -123,7 +134,15 @@ class XCLIP(CLIP):
         img_features = self.prompts_visual_ln(img_features)
         img_features = img_features @ self.prompts_visual_proj
         
-        cls_features = cls_features.view(b, t, -1)
+        cls_features = cls_features.view(b, t, -1) # [b*t, 1, width] -> [b, t, width]
+
+        if self.pool_size > 0:
+            cls_features = cls_features.view(b*t, 1, -1)
+            cls_features, prompt_key_loss_2 = self.prompt_pool(cls_features)
+            cls_features = cls_features.mean(dim=1)
+            prompt_key_loss += prompt_key_loss_2
+            cls_features = cls_features.view(b, t, -1)
+
         img_features = img_features.view(b,t,-1,cls_features.shape[-1])
         #@TODO: prompt goes here
         video_features = self.mit(cls_features)
