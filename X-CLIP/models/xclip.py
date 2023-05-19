@@ -136,13 +136,13 @@ class XCLIP(CLIP):
         
         cls_features = cls_features.view(b, t, -1) # [b*t, 1, width] -> [b, t, width]
 
-        if self.pool_size > 0:
-            cls_features = cls_features.view(b*t, 1, -1)
-            cls_features, prompt_key_loss_2 = self.prompt_pool(cls_features)
-            cls_features = cls_features.mean(dim=1)
-            if self.training:
-                prompt_key_loss += prompt_key_loss_2
-            cls_features = cls_features.view(b, t, -1)
+        # if self.pool_size > 0:
+        #     cls_features = cls_features.view(b*t, 1, -1)
+        #     cls_features, prompt_key_loss_2 = self.prompt_pool(cls_features)
+        #     cls_features = cls_features.mean(dim=1)
+        #     if self.training:
+        #         prompt_key_loss += prompt_key_loss_2
+        #     cls_features = cls_features.view(b, t, -1)
 
         img_features = img_features.view(b,t,-1,cls_features.shape[-1])
         #@TODO: prompt goes here
