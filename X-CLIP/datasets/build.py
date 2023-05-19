@@ -347,14 +347,26 @@ def build_dataloader(logger, config):
     # sampler_train = torch.utils.data.DistributedSampler(
     #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
     # )
-    sampler_train = BalanceBatchSampler(normal_indices=train_data.normal_indices, abnormal_indices=train_data.abnormal_indices, batch_size=config.TRAIN.BATCH_SIZE) #@TODO: finish this line
+    # sampler_train = BalanceBatchSampler(normal_indices=train_data.normal_indices, abnormal_indices=train_data.abnormal_indices, batch_size=config.TRAIN.BATCH_SIZE) #@TODO: finish this line
+    # train_loader = DataLoader(
+    #     train_data, batch_sampler=sampler_train,
+    #     num_workers=1,
+    #     pin_memory=True,
+    #     collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE)
+    # )
+    num_tasks = dist.get_world_size()
+    global_rank = dist.get_rank()
+    sampler_train = torch.utils.data.DistributedSampler(
+        train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
+    )
     train_loader = DataLoader(
-        train_data, batch_sampler=sampler_train,
+        train_data, sampler=sampler_train,
+        batch_size=config.TRAIN.BATCH_SIZE,
         num_workers=1,
         pin_memory=True,
-        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE)
+        drop_last=True,
+        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TRAIN.BATCH_SIZE),
     )
-    
     
     val_pipeline = [
         dict(type='DecordInit'),
