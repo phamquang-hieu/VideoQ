@@ -51,12 +51,12 @@ class XCLIP(CLIP):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.pool_prompt_length = pool_prompt_length
         
-        if self.pool_size > 0:
-            self.prompt_pool = PromptPool(pool_size=pool_size, 
-                                          embedd_dim=embed_dim, 
-                                          use_freq=pool_use_freq, 
-                                          pool_prompts_per_sample=pool_prompts_per_sample,
-                                          pool_prompt_length=pool_prompt_length)
+        # if self.pool_size > 0:
+        #     self.prompt_pool = PromptPool(pool_size=pool_size, 
+        #                                   embedd_dim=embed_dim, 
+        #                                   use_freq=pool_use_freq, 
+        #                                   pool_prompts_per_sample=pool_prompts_per_sample,
+        #                                   pool_prompt_length=pool_prompt_length)
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
         self.use_cache=use_cache
