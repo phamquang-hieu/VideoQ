@@ -117,9 +117,9 @@ class PromptPool(nn.Module):
         if self.training: # if in train mode
             if self.use_freq:
                 selected_prompts, freqs = torch.unique(idx, return_counts=True)
-                selected_prompts.to(self.prompt_freq.device)
-                freqs.to(self.prompt_freq.device)
-                
+                selected_prompts = selected_prompts.to(self.prompt_freq.device)
+                freqs = freqs.to(self.prompt_freq.device)
+
                 for i, prompt in enumerate(selected_prompts):
                     self.prompt_freq[prompt] += freqs[i]
                 penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
