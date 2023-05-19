@@ -97,7 +97,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
 
         scale = width ** -0.5
         self.class_embedding = nn.Parameter(scale * torch.randn(width))
-        
+        self.prompt_pool = None
         ## Prompt pool
         if pool_size > 0:
             self.prompt_pool = PromptPool(pool_size=pool_size, 
