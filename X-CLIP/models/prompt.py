@@ -110,6 +110,8 @@ class PromptPool(nn.Module):
     def forward(self, x):
         # x.shape = [b*t, 1, d]: shape of the [class token]
         key_loss = None
+        self.prompt_freq = self.prompt_freq.to(self.keys.device)
+
         cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
         
         cosine_distance, idx = cosine_distance.topk(self.pool_prompts_per_sample, dim=-1, largest=False) # [x.shape[0], k]
