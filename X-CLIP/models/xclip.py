@@ -53,7 +53,7 @@ class XCLIP(CLIP):
         
         if self.pool_size > 0:
             self.prompt_pool = PromptPool(pool_size=pool_size, 
-                                          embedd_dim=vision_width, 
+                                          embedd_dim=embed_dim, 
                                           use_freq=pool_use_freq, 
                                           pool_prompts_per_sample=pool_prompts_per_sample,
                                           pool_prompt_length=pool_prompt_length)
