@@ -162,6 +162,7 @@ class XCLIP(CLIP):
     def freeze_video_encoder(self): 
         for name, module in self.named_modules():
             if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name:
+                print("freezing", name)
                 module.requires_grad_(True)
             else:
                 module.requires_grad_(False)
