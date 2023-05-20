@@ -160,9 +160,9 @@ class XCLIP(CLIP):
         return self.cache_text_features
     
     def freeze_video_encoder(self): 
-        for name, module in self.named_modules():
+        for name, module in self.named_parameters():
             if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name:
-                print("freezing", name)
+                print("unfreeze", name)
                 module.requires_grad_(True)
             else:
                 module.requires_grad_(False)
