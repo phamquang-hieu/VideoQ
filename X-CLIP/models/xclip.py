@@ -51,8 +51,9 @@ class XCLIP(CLIP):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.pool_prompt_length = pool_prompt_length
         
-        self.prompt_text_prefix = nn.Parameter(torch.randn(16, transformer_width))
-        self.prompt_text_postfix = nn.Parameter(torch.randn(16, transformer_width))
+        if self.use_cache:
+            self.prompt_text_prefix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_text_postfix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
@@ -119,9 +120,9 @@ class XCLIP(CLIP):
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width]).to(x.device)
         prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([49406]).to(x.device)) # start of sentence embedding
-        prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
         
         for idx, category in enumerate(x):
+            prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
 
             prompted_text[idx, prompt_len+1:prompt_len + category_len+1, :] = category[text_mask[idx]][1:]
