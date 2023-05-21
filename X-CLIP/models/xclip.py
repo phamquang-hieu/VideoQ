@@ -115,7 +115,7 @@ class XCLIP(CLIP):
             text_mask: a binary mask which mask out padding element
         """
         prompt_len = len(self.prompt_text_prefix)
-        mask_token = self.token_embedding(torch.IntTensor([0])) # index 0 is the mask token
+        mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width])
         prompted_text[:, 0, :] = x[0, 0, :] # start of sentence embedding
