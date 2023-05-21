@@ -118,7 +118,7 @@ class XCLIP(CLIP):
         mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width]).to(x.device)
-        prompted_text[:, 0, :] = x[0, 0, :] # start of sentence embedding
+        prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([0]).to(x.device)) # start of sentence embedding
         prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
         
         for idx, category in enumerate(x):
