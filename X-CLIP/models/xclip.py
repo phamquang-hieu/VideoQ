@@ -98,7 +98,8 @@ class XCLIP(CLIP):
         self.initialize_parameters()
         # if training with prompt pool -> can choose whether or not to freeze the video encoder
         if pool_freeze_video:
-            self.freeze_video_encoder()
+            self.freeze_no_prompt()
+        
     
     @torch.jit.ignore
     def no_weight_decay_keywords(self):
@@ -130,12 +131,13 @@ class XCLIP(CLIP):
             
         return prompted_text
 
-
-
     def encode_text(self, text):
         x = self.token_embedding(text)
         eos_indx = text.argmax(dim=-1)
         K, N1, C = x.shape
+
+        if not self.cache_text:
+            x = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
         x = x.permute(1, 0, 2)  # NLD -> LND
@@ -181,13 +183,14 @@ class XCLIP(CLIP):
         self.train()
         return self.cache_text_features
     
-    def freeze_video_encoder(self): 
-        for name, module in self.named_parameters():
-            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name:
+    def freeze_no_prompt(self): 
+        for name, param in self.named_parameters():
+            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_text_postfix" in name:
                 print("unfreeze", name)
-                module.requires_grad_(True)
+                param.requires_grad_(True)
             else:
-                module.requires_grad_(False)
+                param.requires_grad_(False)
+
 
     def forward(self, image, text):
         b = image.shape[0]
