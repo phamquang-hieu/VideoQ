@@ -118,7 +118,7 @@ class XCLIP(CLIP):
         mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width]).to(x.device)
-        prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([0]).to(x.device)) # start of sentence embedding
+        prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([49406]).to(x.device)) # start of sentence embedding
         prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
         
         for idx, category in enumerate(x):
@@ -185,9 +185,10 @@ class XCLIP(CLIP):
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
-            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_text_postfix" in name:
+            if 'visual.prompt_pool' in name:
                 print("unfreeze", name)
                 param.requires_grad_(True)
+                # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_text_postfix" in name
             else:
                 param.requires_grad_(False)
 
