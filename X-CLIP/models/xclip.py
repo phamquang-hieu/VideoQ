@@ -136,7 +136,7 @@ class XCLIP(CLIP):
         eos_indx = text.argmax(dim=-1)
         K, N1, C = x.shape
 
-        if not self.cache_text:
+        if not self.use_cache:
             x = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
