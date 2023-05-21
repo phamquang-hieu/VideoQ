@@ -51,12 +51,9 @@ class XCLIP(CLIP):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.pool_prompt_length = pool_prompt_length
         
-        # if self.pool_size > 0:
-        #     self.prompt_pool = PromptPool(pool_size=pool_size, 
-        #                                   embedd_dim=embed_dim, 
-        #                                   use_freq=pool_use_freq, 
-        #                                   pool_prompts_per_sample=pool_prompts_per_sample,
-        #                                   pool_prompt_length=pool_prompt_length)
+        self.prompt_text_prefix = nn.Parameter(torch.randn(16, transformer_width))
+        self.prompt_text_postfix = nn.Parameter(torch.randn(16, transformer_width))
+        self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
         self.use_cache=use_cache
@@ -109,6 +106,31 @@ class XCLIP(CLIP):
 
     def encode_image(self, image):
         return self.visual(image)
+
+    def prompt_text(self, x:torch.Tensor, text_mask:torch.Tensor):
+        """
+            Given the tokenized + embedded string -> replace some padding token with learnable prompt
+            x: a text vector after the embedding layer. x.shape = [num_text, ctx_len=77, embedding_dim]
+            text_mask: a binary mask which mask out padding element
+        """
+        prompt_len = len(self.prompt_text_prefix)
+        mask_token = self.token_embedding(torch.IntTensor([0])) # index 0 is the mask token
+
+        prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width])
+        prompted_text[:, 0, :] = x[0, 0, :] # start of sentence embedding
+        prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
+        
+        for idx, category in enumerate(x):
+            category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
+
+            prompted_text[idx, prompt_len+1:prompt_len + category_len+1, :] = category[text_mask[idx]][1:]
+            prompted_text[idx, prompt_len+category_len+1:prompt_len*2+category_len+1, : ] = self.prompt_text_postfix
+
+            prompted_text[idx, prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
+            
+        return prompted_text
+
+
 
     def encode_text(self, text):
         x = self.token_embedding(text)
