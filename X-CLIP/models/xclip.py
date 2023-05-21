@@ -51,7 +51,7 @@ class XCLIP(CLIP):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.pool_prompt_length = pool_prompt_length
         
-        if self.use_cache:
+        if use_cache:
             self.prompt_text_prefix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
             self.prompt_text_postfix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
