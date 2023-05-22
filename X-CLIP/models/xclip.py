@@ -129,13 +129,13 @@ class XCLIP(CLIP):
         for idx, category in enumerate(x):
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
 
-            prompted_text[idx, prompt_len+1:prompt_len*2+1, :] = self.prompt_class_prefix # class prefix
+            prompted_text[idx, prompt_len+1:prompt_len*2+1, :] = self.prompt_class_prefix[idx] # class prefix
             prompted_text[idx, prompt_len*2+1: prompt_len*2 + 1 + category_len-1, :] = category[text_mask[idx]][1:-1]
-            prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix # class prefix
+            prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
 
             prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = self.prompt_context_postfix
 
-            prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
+            prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*4-category_len-1, 1))
             
         return prompted_text
 
@@ -193,12 +193,12 @@ class XCLIP(CLIP):
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
-            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_context_prefix" in name or "prompt_context_postfix" in name:
+            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "self." in name or "prompt_context_postfix" in name:
                 print("unfreeze", name)
                 param.requires_grad_(True)
                 # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_context_postfix" in name
             else:
-                param.requires_grad_(False)
+                param.requires_grad_(False)self.
 
 
     def forward(self, image, text):
