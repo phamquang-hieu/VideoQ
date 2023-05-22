@@ -53,10 +53,10 @@ class XCLIP(CLIP):
         self.pool_prompt_length = pool_prompt_length
         
         if not use_cache:
-            self.prompt_context_prefix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
-            self.prompt_context_postfix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
-            # self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
-            # self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_prefix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_postfix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
@@ -125,14 +125,17 @@ class XCLIP(CLIP):
         prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([49406]).to(x.device)) # start of sentence embedding
         prompted_text[:, -1, :] = self.token_embedding(torch.IntTensor([49407]).to(x.device)) # end of sentence embedding
         
+        prompted_text[:, 1:prompt_len+1, :] = self.prompt_context_prefix 
         for idx, category in enumerate(x):
-            prompted_text[:, 1:prompt_len+1, :] = self.prompt_context_prefix 
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
 
-            prompted_text[idx, prompt_len+1:prompt_len + category_len+1-1, :] = category[text_mask[idx]][1:-1]
-            prompted_text[idx, prompt_len+category_len+1-1:prompt_len*2+category_len+1-1, : ] = self.prompt_context_postfix
+            prompted_text[idx, prompt_len+1:prompt_len*2+1, :] = self.prompt_class_prefix # class prefix
+            prompted_text[idx, prompt_len*2+1: prompt_len*2 + 1 + category_len-1, :] = category[text_mask[idx]][1:-1]
+            prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix # class prefix
 
-            prompted_text[idx, prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
+            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = self.prompt_context_postfix
+
+            prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
             
         return prompted_text
 
