@@ -133,7 +133,7 @@ class XCLIP(CLIP):
             prompted_text[idx, prompt_len*2+1: prompt_len*2 + 1 + category_len-1, :] = category[text_mask[idx]][1:-1]
             prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
 
-            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = self.prompt_context_postfix
+            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = prompt_context_postfix
 
             prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*4-category_len-1, 1))
             
@@ -198,7 +198,7 @@ class XCLIP(CLIP):
                 param.requires_grad_(True)
                 # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_context_postfix" in name
             else:
-                param.requires_grad_(False)self.
+                param.requires_grad_(False)
 
 
     def forward(self, image, text):
