@@ -133,7 +133,7 @@ class XCLIP(CLIP):
             prompted_text[idx, prompt_len*2+1: prompt_len*2 + 1 + category_len-1, :] = category[text_mask[idx]][1:-1]
             prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
 
-            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = prompt_context_postfix
+            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = self.prompt_context_postfix
 
             prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*4-category_len-1, 1))
             
