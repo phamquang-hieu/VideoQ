@@ -55,8 +55,8 @@ def build_optimizer(config, model):
     if hasattr(model, 'no_weight_decay_keywords'):
         skip_keywords = model.no_weight_decay_keywords()
     clip_parameters = set_weight_decay(model, skip, skip_keywords, 
-        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR, 
-        have=(), not_have=("prompts", "mit", "message_", "prompt")
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR, # config.TRAIN.LR is of order e-6
+        have=(), not_have=("prompts", "mit", "message_", "prefix", "postfix", "prompt_pool")
     )
     msg_parameters = set_weight_decay(model, skip, skip_keywords,
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
@@ -68,10 +68,20 @@ def build_optimizer(config, model):
     )
     prompts_parameters = set_weight_decay(model, skip, skip_keywords, 
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
-        have=("prompts", "prompt"), not_have=()
+        have=("prompts"), not_have=()
     )
+    text_soft_prompts = set_weight_decay(model, skip, skip_keywords,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*1000,
+        have=("prefix", "postfix"), not_have=()
+        )
+    
+    visual_soft_prompts = set_weight_decay(model, skip, skip_keywords,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10000,
+        have=("prompt_pool"), not_have=()
+        ) 
+    
 
-    optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters,
+    optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters + text_soft_prompts + visual_soft_prompts,
                         betas=(0.9, 0.98), eps=1e-8,)
    
     return optimizer
