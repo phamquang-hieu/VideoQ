@@ -39,7 +39,8 @@ class XCLIP(CLIP):
                  pool_use_freq=False,
                  pool_prompts_per_sample=5,
                  pool_prompt_length=5,
-                 pool_freeze_video=False
+                 pool_freeze_video=False,
+                 num_classes = 14
                  ):
         super().__init__(
             embed_dim,
@@ -52,8 +53,10 @@ class XCLIP(CLIP):
         self.pool_prompt_length = pool_prompt_length
         
         if not use_cache:
-            self.prompt_text_prefix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
-            self.prompt_text_postfix = nn.Parameter(torch.empty(16, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_prefix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_postfix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
+            # self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
+            # self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
@@ -115,18 +118,19 @@ class XCLIP(CLIP):
             x: a text vector after the embedding layer. x.shape = [num_text, ctx_len=77, embedding_dim]
             text_mask: a binary mask which mask out padding element
         """
-        prompt_len = len(self.prompt_text_prefix)
+        prompt_len = len(self.prompt_context_prefix)
         mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width]).to(x.device)
         prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([49406]).to(x.device)) # start of sentence embedding
+        prompted_text[:, -1, :] = self.token_embedding(torch.IntTensor([49407]).to(x.device)) # end of sentence embedding
         
         for idx, category in enumerate(x):
-            prompted_text[:, 1:prompt_len+1, :] = self.prompt_text_prefix 
+            prompted_text[:, 1:prompt_len+1, :] = self.prompt_context_prefix 
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
 
-            prompted_text[idx, prompt_len+1:prompt_len + category_len+1, :] = category[text_mask[idx]][1:]
-            prompted_text[idx, prompt_len+category_len+1:prompt_len*2+category_len+1, : ] = self.prompt_text_postfix
+            prompted_text[idx, prompt_len+1:prompt_len + category_len+1, :] = category[text_mask[idx]][1:-1]
+            prompted_text[idx, prompt_len+category_len+1:prompt_len*2+category_len+1 - 1, : ] = self.prompt_context_postfix
 
             prompted_text[idx, prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
             
@@ -186,10 +190,10 @@ class XCLIP(CLIP):
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
-            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_text_postfix" in name:
+            if 'visual.prompt_pool' in name or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_context_prefix" in name or "prompt_context_postfix" in name:
                 print("unfreeze", name)
                 param.requires_grad_(True)
-                # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_text_postfix" in name
+                # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_text_prefix" in name or "prompt_context_postfix" in name
             else:
                 param.requires_grad_(False)
 
@@ -228,7 +232,8 @@ def build_model(state_dict: dict,
                 pool_use_freq=False, # use frequency counting for prompt layer
                 pool_prompts_per_sample=5,
                 pool_prompt_length=5,
-                pool_freeze_video=False
+                pool_freeze_video=False,
+                num_classes=14
                 ):
     vit = "visual.proj" in state_dict
 
@@ -266,7 +271,8 @@ def build_model(state_dict: dict,
         pool_use_freq=pool_use_freq,
         pool_prompts_per_sample=pool_prompts_per_sample,
         pool_prompt_length=pool_prompt_length,
-        pool_freeze_video=pool_freeze_video
+        pool_freeze_video=pool_freeze_video,
+        num_classes=num_classes
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
@@ -285,7 +291,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
          pool_use_freq=False,
          pool_prompts_per_sample=5,
          pool_prompt_length=5,
-         pool_freeze_video=False
+         pool_freeze_video=False,
+         num_classes=14
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -312,7 +319,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         pool_use_freq=pool_use_freq,
                         pool_prompts_per_sample=pool_prompts_per_sample,
                         pool_prompt_length=pool_prompt_length,
-                        pool_freeze_video=pool_freeze_video
+                        pool_freeze_video=pool_freeze_video,
+                        num_classes=num_classes
                         )
     if str(device) == "cpu":
         model.float()
