@@ -56,7 +56,7 @@ def build_optimizer(config, model):
         skip_keywords = model.no_weight_decay_keywords()
     clip_parameters = set_weight_decay(model, skip, skip_keywords, 
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR, 
-        have=(), not_have=("prompts", "mit", "message_")
+        have=(), not_have=("prompts", "mit", "message_", "prompt")
     )
     msg_parameters = set_weight_decay(model, skip, skip_keywords,
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
