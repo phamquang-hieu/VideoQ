@@ -43,9 +43,9 @@ def fix_text(model):
 def build_optimizer(config, model):
     model = model.module if hasattr(model, 'module') else model
     
-    # fix text
-    if config.MODEL.FIX_TEXT:
-        fix_text(model)
+    # # fix text
+    # if config.MODEL.FIX_TEXT:
+    #     fix_text(model)
     
     # set decay and lr
     skip = {}
