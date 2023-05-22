@@ -68,7 +68,7 @@ def build_optimizer(config, model):
     )
     prompts_parameters = set_weight_decay(model, skip, skip_keywords, 
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
-        have=("prompts",), not_have=()
+        have=("prompts", "prompt"), not_have=()
     )
 
     optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters,
