@@ -129,8 +129,8 @@ class XCLIP(CLIP):
             prompted_text[:, 1:prompt_len+1, :] = self.prompt_context_prefix 
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
 
-            prompted_text[idx, prompt_len+1:prompt_len + category_len+1, :] = category[text_mask[idx]][1:-1]
-            prompted_text[idx, prompt_len+category_len+1:prompt_len*2+category_len+1 - 1, : ] = self.prompt_context_postfix
+            prompted_text[idx, prompt_len+1:prompt_len + category_len+1-1, :] = category[text_mask[idx]][1:-1]
+            prompted_text[idx, prompt_len+category_len+1-1:prompt_len*2+category_len+1-1, : ] = self.prompt_context_postfix
 
             prompted_text[idx, prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-prompt_len*2-category_len-1, 1))
             
