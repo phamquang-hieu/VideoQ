@@ -106,6 +106,7 @@ class PromptPool(nn.Module):
         self.keys = nn.Parameter(torch.empty([pool_size, embedd_dim]).uniform_(0, 0.01))
         self.values = nn.Parameter(torch.empty([pool_size, pool_prompt_length, embedd_dim]).uniform_(0, 0.01))
         self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
+        torch.autograd.set_detect_anomaly(True)
     
     def forward(self, x):
         # x.shape = [b*t, 1, d]: shape of the [class token]
@@ -114,6 +115,8 @@ class PromptPool(nn.Module):
         self.prompt_freq.requires_grad_(False)
         
         if self.use_freq:
+            
+            print(self.prompt_freq.reshape(-1, 1)*self.keys)
             cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq.reshape(-1, 1)*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
         else:
             cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
