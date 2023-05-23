@@ -114,7 +114,10 @@ class PromptPool(nn.Module):
         self.prompt_freq = self.prompt_freq.to(self.keys.device)
         
         if self.use_freq:
-            cosine_distance = 1 - self.prompt_freq.clone()*torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
+            penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
+            penalty = penalty/penalty.sum()
+            
+            cosine_distance = 1 - penalty.clone()*torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
         else:
             cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
 
