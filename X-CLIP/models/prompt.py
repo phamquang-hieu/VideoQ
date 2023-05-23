@@ -112,22 +112,27 @@ class PromptPool(nn.Module):
         key_loss = None
         self.prompt_freq = self.prompt_freq.to(self.keys.device)
 
-        cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
+        
+        if self.use_freq:
+            cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq.reshape(1, -1)*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
+        else:
+            cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
         
         cosine_distance, idx = cosine_distance.topk(self.pool_prompts_per_sample, dim=-1, largest=False) # [x.shape[0], k]
-        
+
         if self.training: # if in train mode
             if self.use_freq:
                 selected_prompts, freqs = torch.unique(idx, return_counts=True)
                 selected_prompts = selected_prompts.to(self.prompt_freq.device)
                 freqs = freqs.to(self.prompt_freq.device)
-
-                for i, prompt in enumerate(selected_prompts):
-                    self.prompt_freq[prompt] += freqs[i]
+                
                 penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
                 penalty = penalty/penalty.sum()
                 key_loss = cosine_distance * penalty[idx]
                 key_loss = key_loss.sum(dim=-1).mean()
+
+                for i, prompt in enumerate(selected_prompts):
+                    self.prompt_freq[prompt] += freqs[i]
             else:
                 key_loss = cosine_distance.mean()
 
