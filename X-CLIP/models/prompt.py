@@ -111,7 +111,7 @@ class PromptPool(nn.Module):
         # x.shape = [b*t, 1, d]: shape of the [class token]
         key_loss = None
         self.prompt_freq = self.prompt_freq.to(self.keys.device)
-
+        self.prompt_freq.requires_grad_(False)
         
         if self.use_freq:
             cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq.reshape(-1, 1)*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
