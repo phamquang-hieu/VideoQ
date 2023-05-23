@@ -131,7 +131,7 @@ class PromptPool(nn.Module):
                 # key_loss = cosine_distance * penalty[idx]
 
                 for i, prompt in enumerate(selected_prompts):
-                    self.prompt_freq[prompt] += freqs[i]
+                    self.prompt_freq[prompt] = self.prompt_freq[prompt] + freqs[i]
             key_loss = cosine_distance.mean()
 
         return self.values[idx, :].reshape(x.shape[0], -1, self.embedd_dim), key_loss
