@@ -126,14 +126,12 @@ class PromptPool(nn.Module):
                 selected_prompts = selected_prompts.to(self.prompt_freq.device)
                 freqs = freqs.to(self.prompt_freq.device)
                 
-                penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
-                penalty = penalty/penalty.sum()
-                key_loss = cosine_distance * penalty[idx]
-                key_loss = key_loss.sum(dim=-1).mean()
+                # penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
+                # penalty = penalty/penalty.sum()
+                # key_loss = cosine_distance * penalty[idx]
 
                 for i, prompt in enumerate(selected_prompts):
                     self.prompt_freq[prompt] += freqs[i]
-            else:
-                key_loss = cosine_distance.mean()
+            key_loss = cosine_distance.mean()
 
         return self.values[idx, :].reshape(x.shape[0], -1, self.embedd_dim), key_loss
