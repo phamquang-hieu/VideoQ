@@ -105,22 +105,20 @@ class PromptPool(nn.Module):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.keys = nn.Parameter(torch.empty([pool_size, embedd_dim]).uniform_(0, 0.01))
         self.values = nn.Parameter(torch.empty([pool_size, pool_prompt_length, embedd_dim]).uniform_(0, 0.01))
-        self.prompt_freq = torch.ones([pool_size, 1]).requires_grad_(False)
+        self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
         torch.autograd.set_detect_anomaly(True)
     
     def forward(self, x):
         # x.shape = [b*t, 1, d]: shape of the [class token]
         key_loss = None
         self.prompt_freq = self.prompt_freq.to(self.keys.device)
-        self.prompt_freq.requires_grad_(False)
+        # self.prompt_freq.requires_grad_(False)
         
         if self.use_freq:
-            
-            print(self.prompt_freq.reshape(-1, 1)*self.keys)
-            cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
-        else:
             cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
-        
+        else:
+            cosine_distance = 1 - self.prompt_freq*torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
+
         cosine_distance, idx = cosine_distance.topk(self.pool_prompts_per_sample, dim=-1, largest=False) # [x.shape[0], k]
 
         if self.training: # if in train mode
