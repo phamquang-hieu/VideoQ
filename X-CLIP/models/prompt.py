@@ -114,7 +114,7 @@ class PromptPool(nn.Module):
 
         
         if self.use_freq:
-            cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq.reshape(1, -1)*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
+            cosine_distance = 1 - torch.cosine_similarity(x, self.prompt_freq.reshape(-1, 1)*self.keys, dim=-1).reshape(x.shape[0], self.pool_size)
         else:
             cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
         
