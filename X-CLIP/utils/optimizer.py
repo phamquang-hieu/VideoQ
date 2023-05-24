@@ -91,14 +91,16 @@ def build_scheduler(config, optimizer, n_iter_per_epoch):
     num_steps = int(config.TRAIN.EPOCHS * n_iter_per_epoch)
     warmup_steps = int(config.TRAIN.WARMUP_EPOCHS * n_iter_per_epoch)
 
-    lr_scheduler = CosineLRScheduler(
-        optimizer,
-        t_initial=num_steps,
-        lr_min=config.TRAIN.LR,
-        warmup_lr_init=1e-6,
-        warmup_t=warmup_steps,
-        cycle_limit=1,
-        t_in_epochs=False,
-    )
+    # lr_scheduler = CosineLRScheduler(
+    #     optimizer,
+    #     t_initial=num_steps,
+    #     lr_min=config.TRAIN.LR,
+    #     warmup_lr_init=1e-6,
+    #     warmup_t=warmup_steps,
+    #     cycle_limit=1,
+    #     t_in_epochs=False,
+    # )
+    lr_scheduler = optim.lr_scheduler.ConstantLR(optimizer=optimizer, 
+                                                 factor=0.3, total_iters=warmup_steps)
 
     return lr_scheduler
