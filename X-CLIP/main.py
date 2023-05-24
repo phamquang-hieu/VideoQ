@@ -49,7 +49,6 @@ def parse_option():
 
 
 def main(config): 
-    torch.autograd.set_detect_anomaly(True)
     train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
     model = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
                          device="cpu", jit=False, 

@@ -106,7 +106,7 @@ class PromptPool(nn.Module):
         self.keys = nn.Parameter(torch.empty([pool_size, embedd_dim]).uniform_(0, 0.01))
         self.values = nn.Parameter(torch.empty([pool_size, pool_prompt_length, embedd_dim]).uniform_(0, 0.01))
         self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
-        torch.autograd.set_detect_anomaly(True)
+        # torch.autograd.set_detect_anomaly(True)
     
     def forward(self, x):
         # x.shape = [b*t, 1, d]: shape of the [class token]
