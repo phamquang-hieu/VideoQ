@@ -53,6 +53,7 @@ class QuickGELU(nn.Module):
         # print("Tensor:\n", x)
         # print("Norm:", x.norm())
         # torch.GELU()
+        print(x.min(), x.max())
         return nn.GELU()(x)
 
 class ResidualAttentionBlock(nn.Module):
