@@ -53,7 +53,7 @@ class QuickGELU(nn.Module):
         # print("Tensor:\n", x)
         # print("Norm:", x.norm())
         # torch.GELU()
-        return nn.GELU(x)
+        return nn.GELU()(x)
 
 class ResidualAttentionBlock(nn.Module):
     def __init__(self, d_model: int, n_head: int, attn_mask: torch.Tensor = None, ):
