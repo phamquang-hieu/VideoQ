@@ -82,7 +82,7 @@ def build_optimizer(config, model):
     
 
     optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters + text_soft_prompts + visual_soft_prompts,
-                        betas=(0.9, 0.98), eps=1e-8,)
+                        betas=(0.9, 0.98), eps=1e-6,)
    
     return optimizer
 
