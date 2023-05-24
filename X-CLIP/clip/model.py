@@ -50,8 +50,8 @@ class LayerNorm(nn.LayerNorm):
 
 class QuickGELU(nn.Module):
     def forward(self, x: torch.Tensor):
-        print("Tensor:\n", x)
-        print("Norm:", x.norm())
+        # print("Tensor:\n", x)
+        # print("Norm:", x.norm())
         return x * torch.sigmoid(1.702 * x)
 
 class ResidualAttentionBlock(nn.Module):
