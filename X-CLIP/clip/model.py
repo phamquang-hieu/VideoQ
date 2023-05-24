@@ -52,7 +52,7 @@ class QuickGELU(nn.Module):
     def forward(self, x: torch.Tensor):
         # print("Tensor:\n", x)
         # print("Norm:", x.norm())
-        return x.type(torch.float16) * torch.sigmoid(1.702 * x.type(torch.float16))
+        return x * torch.sigmoid(1.702 * x)
 
 class ResidualAttentionBlock(nn.Module):
     def __init__(self, d_model: int, n_head: int, attn_mask: torch.Tensor = None, ):
