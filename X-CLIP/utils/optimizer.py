@@ -95,7 +95,7 @@ def build_scheduler(config, optimizer, n_iter_per_epoch):
         optimizer,
         t_initial=num_steps,
         lr_min=config.TRAIN.LR,
-        warmup_lr_init=0,
+        warmup_lr_init=1e-6,
         warmup_t=warmup_steps,
         cycle_limit=1,
         t_in_epochs=False,
