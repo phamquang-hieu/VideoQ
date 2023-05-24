@@ -176,7 +176,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
         if texts.shape[0] == 1:
             texts = texts.view(1, -1)
-        with torch.cuda.amp.autocast(enabled=True):
+        with torch.cuda.amp.autocast(enabled=False):
             output, prompt_key_loss = model(images, texts)
 
             if prompt_key_loss is not None:
@@ -256,7 +256,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 
                 if config.TRAIN.OPT_LEVEL == 'O2':
                     image_input = image_input.half()
-                with torch.cuda.amp.autocast(enabled=True):
+                with torch.cuda.amp.autocast(enabled=False):
                     output, _ = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
@@ -322,7 +322,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             image_ = image[:, i, :, :, :, :]
             image_input = image_.cuda(non_blocking=True)
 
-            with torch.cuda.amp.autocast(enabled=True):
+            with torch.cuda.amp.autocast(enabled=False):
                 output, _ = model(image_input, text_inputs)
             if not nd_stage:
                 similarity = output.view(b, -1).softmax(dim=-1)
