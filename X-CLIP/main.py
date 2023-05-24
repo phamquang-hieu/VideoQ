@@ -201,13 +201,13 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 scaler.step(optimizer)
                 scaler.update()
                 optimizer.zero_grad()
-                lr_scheduler.step(epoch * num_steps + idx)
+                lr_scheduler.step()
                 # lr_scheduler.step_update(epoch * num_steps + idx)
         else:
             # optimizer.step()
             scaler.step(optimizer)
             scaler.update()
-            lr_scheduler.step(epoch * num_steps + idx)
+            lr_scheduler.step()
             # lr_scheduler.step_update(epoch * num_steps + idx)
 
         torch.cuda.synchronize()
