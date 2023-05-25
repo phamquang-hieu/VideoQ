@@ -281,7 +281,9 @@ def build_model(state_dict: dict,
         pool_prompts_per_sample=pool_prompts_per_sample,
         pool_prompt_length=pool_prompt_length,
         pool_freeze_video=pool_freeze_video,
-        num_classes=num_classes
+        num_classes=num_classes,
+        context_len=context_len,
+        class_len=class_len
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
