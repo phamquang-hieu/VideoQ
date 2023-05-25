@@ -40,7 +40,9 @@ class XCLIP(CLIP):
                  pool_prompts_per_sample=5,
                  pool_prompt_length=5,
                  pool_freeze_video=False,
-                 num_classes = 14
+                 num_classes = 14,
+                 context_len=8,
+                 class_len=8
                  ):
         super().__init__(
             embed_dim,
@@ -53,10 +55,10 @@ class XCLIP(CLIP):
         self.pool_prompt_length = pool_prompt_length
         
         if not use_cache:
-            self.prompt_context_prefix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
-            self.prompt_context_postfix = nn.Parameter(torch.empty(8, transformer_width).normal_(mean=0, std=0.02))
-            self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
-            self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, 8, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_prefix = nn.Parameter(torch.empty(context_len, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_postfix = nn.Parameter(torch.empty(context_len, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, class_len, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, class_len, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
@@ -118,24 +120,26 @@ class XCLIP(CLIP):
             x: a text vector after the embedding layer. x.shape = [num_text, ctx_len=77, embedding_dim]
             text_mask: a binary mask which mask out padding element
         """
-        prompt_len = len(self.prompt_context_prefix)
+        context_prompt_len = len(self.prompt_context_prefix)
+        class_prompt_len = self.prompt_class_prefix.shape[1]
+
         mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
         prompted_text = torch.zeros([x.shape[0], 77, self.transformer_width]).to(x.device)
         prompted_text[:, 0, :] = self.token_embedding(torch.IntTensor([49406]).to(x.device)) # start of sentence embedding
-        prompted_text[:, -1, :] = self.token_embedding(torch.IntTensor([49407]).to(x.device)) # end of sentence embedding
+        eos = self.token_embedding(torch.IntTensor([49407]).to(x.device)) # end of sentence embedding
         
-        prompted_text[:, 1:prompt_len+1, :] = self.prompt_context_prefix 
+        prompted_text[:, 1:context_prompt_len+1, :] = self.prompt_context_prefix 
         for idx, category in enumerate(x):
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
+            prompted_text[idx, context_prompt_len+1:context_prompt_len+class_prompt_len+1, :] = self.prompt_class_prefix[idx] # class prefix
+            # print(category[text_mask[idx]][1:-1].shape)
+            prompted_text[idx, context_prompt_len+class_prompt_len+1: context_prompt_len+class_prompt_len+1 + category_len-1, :] = category[text_mask[idx]][1:-1]
+            prompted_text[idx, context_prompt_len+class_prompt_len+1 + category_len-1:context_prompt_len+class_prompt_len*2+1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
 
-            prompted_text[idx, prompt_len+1:prompt_len*2+1, :] = self.prompt_class_prefix[idx] # class prefix
-            prompted_text[idx, prompt_len*2+1: prompt_len*2 + 1 + category_len-1, :] = category[text_mask[idx]][1:-1]
-            prompted_text[idx, prompt_len*2 + 1 + category_len-1:prompt_len*3 + 1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
-
-            prompted_text[idx, prompt_len*3+category_len+1-1:prompt_len*4+category_len+1-1, : ] = self.prompt_context_postfix
-
-            prompted_text[idx, prompt_len*4 + category_len+1:, :] = mask_token.repeat((77-prompt_len*4-category_len-1, 1))
+            prompted_text[idx, context_prompt_len+class_prompt_len*2+1 + category_len -1:context_prompt_len*2+class_prompt_len*2+1 + category_len-1, : ] = self.prompt_context_postfix
+            prompted_text[idx, context_prompt_len*2+class_prompt_len*2+1 + category_len-1, :] = eos
+            prompted_text[idx, context_prompt_len*2+class_prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-context_prompt_len*2 - class_prompt_len*2-category_len-1, 1))
             
         return prompted_text
 
@@ -236,7 +240,9 @@ def build_model(state_dict: dict,
                 pool_prompts_per_sample=5,
                 pool_prompt_length=5,
                 pool_freeze_video=False,
-                num_classes=14
+                num_classes=14,
+                context_len=8,
+                class_len=8
                 ):
     vit = "visual.proj" in state_dict
 
@@ -295,7 +301,9 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
          pool_prompts_per_sample=5,
          pool_prompt_length=5,
          pool_freeze_video=False,
-         num_classes=14
+         num_classes=14,
+         context_len=8,
+         class_len=8
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -323,7 +331,9 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         pool_prompts_per_sample=pool_prompts_per_sample,
                         pool_prompt_length=pool_prompt_length,
                         pool_freeze_video=pool_freeze_video,
-                        num_classes=num_classes
+                        num_classes=num_classes,
+                        context_len=context_len,
+                        class_len=class_len
                         )
     if str(device) == "cpu":
         model.float()
