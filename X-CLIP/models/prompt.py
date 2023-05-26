@@ -112,7 +112,9 @@ class PromptPool(nn.Module):
         # x.shape = [b*t, 1, d]: shape of the [class token]
         key_loss = None
         self.prompt_freq = self.prompt_freq.to(self.keys.device)
-        
+        self.keys = self.keys/self.keys.norm(dim=-1).unsqueeze(dim=-1)
+        self.values = self.values/self.values.norm(dim=-1).unsqueeze(dim=-1)
+
         if self.use_freq:
             penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
             penalty = penalty/penalty.sum()
