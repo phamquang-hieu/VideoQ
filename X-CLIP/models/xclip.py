@@ -126,6 +126,7 @@ class XCLIP(CLIP):
         """
         context_prompt_len = self.context_prompt_len
         class_prompt_len = self.class_prompt_len
+        eos_position = []
 
         mask_token = self.token_embedding(torch.IntTensor([0]).to(x.device)) # index 0 is the mask token
 
@@ -147,9 +148,12 @@ class XCLIP(CLIP):
                 prompted_text[idx, context_prompt_len+class_prompt_len*2+1 + category_len -1:context_prompt_len*2+class_prompt_len*2+1 + category_len-1, : ] = self.prompt_context_postfix
 
             prompted_text[idx, context_prompt_len*2+class_prompt_len*2+1 + category_len-1, :] = eos
+            
+            eos_position.append(context_prompt_len*2+class_prompt_len*2+1 + category_len-1)
+
             prompted_text[idx, context_prompt_len*2+class_prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-context_prompt_len*2 - class_prompt_len*2-category_len-1, 1))
             
-        return prompted_text
+        return prompted_text, eos_position
 
     def encode_text(self, text):
         x = self.token_embedding(text)
@@ -157,7 +161,7 @@ class XCLIP(CLIP):
         K, N1, C = x.shape
 
         if not self.use_cache:
-            x = self.prompt_text(x, text_mask=text!=0)
+            x, eos_indx = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
         x = x.permute(1, 0, 2)  # NLD -> LND
