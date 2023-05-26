@@ -60,8 +60,6 @@ class XCLIP(CLIP):
             if context_prompt_len > 0:
                 self.prompt_context_prefix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
                 self.prompt_context_postfix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
-                # self.prompt_context_abnormaly_prefix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
-                # self.prompt_context_abnormaly_postfix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
             if class_prompt_len > 0:
                 self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
                 self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
@@ -136,22 +134,18 @@ class XCLIP(CLIP):
         eos = self.token_embedding(torch.IntTensor([49407]).to(x.device)) # end of sentence embedding
         
         if context_prompt_len > 0:
-            prompted_text[:-1, 1:context_prompt_len+1, :] = self.prompt_context_prefix
-            # prompted_text[-1, 1:context_prompt_len+1, :] = self.prompt_context_abnormaly_prefix 
+            prompted_text[:, 1:context_prompt_len+1, :] = self.prompt_context_prefix
 
         for idx, category in enumerate(x):
             category_len = text_mask[idx].sum()-1 # number of text token in a category except for the start token
             if class_prompt_len > 0:
                 prompted_text[idx, context_prompt_len+1:context_prompt_len+class_prompt_len+1, :] = self.prompt_class_prefix[idx] # class prefix
-            # print(category[text_mask[idx]][1:-1].shape)
             prompted_text[idx, context_prompt_len+class_prompt_len+1: context_prompt_len+class_prompt_len+1 + category_len-1, :] = category[text_mask[idx]][1:-1]
             if class_prompt_len > 0:
                 prompted_text[idx, context_prompt_len+class_prompt_len+1 + category_len-1:context_prompt_len+class_prompt_len*2+1 + category_len -1, :] = self.prompt_class_postfix[idx] # class prefix
             if context_prompt_len > 0:
-                # if idx < len(x)-1:
                 prompted_text[idx, context_prompt_len+class_prompt_len*2+1 + category_len -1:context_prompt_len*2+class_prompt_len*2+1 + category_len-1, : ] = self.prompt_context_postfix
-                # elif idx == len(x) - 1:
-                #     prompted_text[idx, context_prompt_len+class_prompt_len*2+1 + category_len -1:context_prompt_len*2+class_prompt_len*2+1 + category_len-1, : ] = self.prompt_context_abnormaly_postfix
+
             prompted_text[idx, context_prompt_len*2+class_prompt_len*2+1 + category_len-1, :] = eos
             prompted_text[idx, context_prompt_len*2+class_prompt_len*2 + category_len+1:, :] = mask_token.repeat((77-context_prompt_len*2 - class_prompt_len*2-category_len-1, 1))
             
