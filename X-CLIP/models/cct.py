@@ -163,4 +163,4 @@ class CrossFrameCommunicationTransformer(nn.Module):
         if self.proj is not None:
             cls_x = cls_x @ self.proj
         
-        return cls_x, x[:,prompt_idx+1:,:], prompt_key_loss
+        return cls_x, x[:,prompt_idx+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generator
