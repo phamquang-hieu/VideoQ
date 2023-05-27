@@ -92,6 +92,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         self.output_dim = output_dim
         self.pool_size = pool_size
         self.pool_prompt_length = pool_prompt_length
+        self.pool_prompt_per_sample = pool_prompts_per_sample
         # to extract tokens out of the original image
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=width, kernel_size=patch_size, stride=patch_size, bias=False)
 
@@ -150,7 +151,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
 
-        prompt_idx = self.pool_size*self.pool_prompt_length 
+        prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
         if prompt_idx == 0: 
             # in this case pool_size == 0 ->
             # the model don't use a prompt pool
