@@ -213,10 +213,10 @@ class VideoDataset(BaseDataset):
 
     def get_oversampling_freq(self):
         label, freq = np.unique(self.labels, return_counts=True)
-        freq_dct = dict(zip(label, freq))
+        freq_dct = dict(zip(label, 1/freq))
         weights = []
         for l in self.labels:
-            weights.append(1/freq_dct[l])
+            weights.append(freq_dct[l])
         return weights
     
     @property
