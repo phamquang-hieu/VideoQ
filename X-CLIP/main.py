@@ -133,7 +133,7 @@ def main(config):
 
     # validate(train_loader, text_labels, text_id, model, config)
     for epoch in range(start_epoch, config.TRAIN.EPOCHS):
-        train_loader.sampler.set_epoch(epoch)
+        # train_loader.sampler.set_epoch(epoch)
         train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_loader, text_labels, config, mixup_fn, scaler)
 
         acc1 = validate(val_loader, text_labels, text_id, model, config)

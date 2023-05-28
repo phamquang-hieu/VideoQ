@@ -203,19 +203,24 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         return self.prepare_train_frames(idx)
 
 class VideoDataset(BaseDataset):
-    def __init__(self, ann_file, pipeline, labels_file, start_index=0, normal_label=13, **kwargs):
+    def __init__(self, ann_file, pipeline, labels_file, start_index=0, **kwargs):
         super().__init__(ann_file, pipeline, start_index=start_index, **kwargs)
         self.labels_file = labels_file
-        self.normal_indices = []
-        self.abnormal_indices = []
-        for i, video in enumerate(self.video_infos):
-            if video['label'] == normal_label:
-                self.normal_indices.append(i)
-            else:
-                self.abnormal_indices.append(i)
+        self.labels = []
+        for _, video in enumerate(self.video_infos):
+            self.labels.append(video['label'])
+
         self.normal_indices = np.array(self.normal_indices)
         self.abnormal_indices = np.array(self.abnormal_indices)
 
+    def get_oversampling_freq(self):
+        label, freq = np.unique(self.labels, return_counts=True)
+        freq_dct = dict(zip(label, freq))
+        weights = []
+        for l in self.labels:
+            weights.append(1/freq_dct[l])
+        return weights
+    
     @property
     def classes(self):
         classes_all = pd.read_csv(self.labels_file)
@@ -279,6 +284,7 @@ class BalanceBatchSampler(torch.utils.data.Sampler):
     def __len__(self):
         """This function returns the number of batch"""
         return int(self.num_normal//(0.5*self.batch_size)) if self.num_normal > self.num_abnormal else int(self.num_abnormal//(self.batch_size*0.5))
+
 class SubsetRandomSampler(torch.utils.data.Sampler):
     r"""Samples elements randomly from a given list of indices, without replacement.
 
@@ -354,11 +360,13 @@ def build_dataloader(logger, config):
     #     pin_memory=True,
     #     collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE)
     # )
-    num_tasks = dist.get_world_size()
-    global_rank = dist.get_rank()
-    sampler_train = torch.utils.data.DistributedSampler(
-        train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
-    )
+    # num_tasks = dist.get_world_size()
+    # global_rank = dist.get_rank()
+    # sampler_train = torch.utils.data.DistributedSampler(
+    #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
+    # )
+    sampler_train = torch.utils.data.WeightedRandomSampler(weights=train_data.get_oversampling_freq(), num_samples=len(train_data), replacement=True)
+    
     train_loader = DataLoader(
         train_data, sampler=sampler_train,
         batch_size=config.TRAIN.BATCH_SIZE,
