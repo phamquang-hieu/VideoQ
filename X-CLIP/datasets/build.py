@@ -210,8 +210,6 @@ class VideoDataset(BaseDataset):
         for _, video in enumerate(self.video_infos):
             self.labels.append(video['label'])
 
-        self.normal_indices = np.array(self.normal_indices)
-        self.abnormal_indices = np.array(self.abnormal_indices)
 
     def get_oversampling_freq(self):
         label, freq = np.unique(self.labels, return_counts=True)
@@ -366,7 +364,7 @@ def build_dataloader(logger, config):
     #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
     # )
     sampler_train = torch.utils.data.WeightedRandomSampler(weights=train_data.get_oversampling_freq(), num_samples=len(train_data), replacement=True)
-    
+
     train_loader = DataLoader(
         train_data, sampler=sampler_train,
         batch_size=config.TRAIN.BATCH_SIZE,
