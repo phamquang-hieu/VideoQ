@@ -193,7 +193,8 @@ class XCLIP(CLIP):
             prompts, prompt_key_loss = self.prompt_pool(cls_features.mean(dim=1).unsqueeze(1))
             prompted_cls = torch.zeros(b, t+self.pool_prompt_length*self.pool_prompts_per_sample, cls_features.shape[-1])
             for vid in range(b):
-                prompted_cls[vid] = torch.cat((cls_features[vid], prompts[vid]), dim=1) 
+                print(cls_features[vid].shape, prompts[vid].shape)
+                prompted_cls[vid] = torch.cat((cls_features[vid], prompts[vid]), dim=0) 
             cls_features = prompted_cls
 
         video_features = self.mit(cls_features)
@@ -211,7 +212,7 @@ class XCLIP(CLIP):
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
-            if 'visual.prompt_pool' in name or "prompt_context_postfix" in name or "prompt_context_prefix" in name or "prompt_class_prefix" in name or "prompt_class_postfix" in name:
+            if 'prompt_pool' in name or "prompt_context_postfix" in name or "prompt_context_prefix" in name or "prompt_class_prefix" in name or "prompt_class_postfix" in name:
                 print("unfreeze", name)
                 param.requires_grad_(True)
                 # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_context_prefix" in name or "prompt_context_postfix" in name
