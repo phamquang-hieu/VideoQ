@@ -67,7 +67,13 @@ class XCLIP(CLIP):
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
         self.use_cache=use_cache
-        self.mit = MultiframeIntegrationTransformer(T=T, embed_dim=embed_dim, layers=mit_layers,)
+        self.mit = MultiframeIntegrationTransformer(T=T, 
+                                                    embed_dim=embed_dim, 
+                                                    layers=mit_layers, 
+                                                    pool_size=pool_size,
+                                                    pool_use_freq=pool_use_freq,
+                                                    pool_prompts_per_sample=pool_prompts_per_sample,
+                                                    pool_prompt_length=pool_prompt_length)
 
         dpr = [x.item() for x in torch.linspace(0, droppath, vision_layers)] if droppath > 0. else None
 

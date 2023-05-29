@@ -44,11 +44,12 @@ class MultiframeIntegrationTransformer(nn.Module):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.pool_prompt_length = pool_prompt_length
         self.pool_size = pool_size
-        self.prompt_pool = PromptPool(pool_size=pool_size,
-                                      embedd_dim=embed_dim,
-                                      use_freq=pool_use_freq, 
-                                      pool_prompts_per_sample=pool_prompts_per_sample, 
-                                      pool_prompt_length=pool_prompt_length)
+        if pool_size > 0:
+            self.prompt_pool = PromptPool(pool_size=pool_size,
+                                        embedd_dim=embed_dim,
+                                        use_freq=pool_use_freq, 
+                                        pool_prompts_per_sample=pool_prompts_per_sample, 
+                                        pool_prompt_length=pool_prompt_length)
 
         self.apply(self._init_weights)
     
