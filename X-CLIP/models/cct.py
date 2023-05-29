@@ -159,13 +159,13 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.permute(1, 0, 2)
 
         prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
-        if prompt_idx == 0: 
-            # in this case pool_size == 0 ->
-            # the model don't use a prompt pool
-            # -> the first token is the [class] token, which is used as the image representation
-            prompt_idx = 1
+        # if prompt_idx == 0: 
+        #     # in this case pool_size == 0 ->
+        #     # the model don't use a prompt pool
+        #     # -> the first token is the [class] token, which is used as the image representation
+        #     prompt_idx = 1
 
-        cls_x = self.ln_post(x[:, 0:prompt_idx, :].mean(dim=1))
+        cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
 
         if self.proj is not None:
             cls_x = cls_x @ self.proj
