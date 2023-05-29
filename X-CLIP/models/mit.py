@@ -73,7 +73,7 @@ class MultiframeIntegrationTransformer(nn.Module):
             prompts, prompt_key_loss = self.prompt_pool(x.mean(dim=1).unsqueeze(dim=1))
 
             for i in range(b):
-                prompted_text[i] = torch.concat(x[i], prompts[i], dim=0)
+                prompted_text[i] = torch.concat((x[i], prompts[i]), dim=0)
             x = prompted_text
 
         x = x.permute(1, 0, 2)
