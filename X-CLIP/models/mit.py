@@ -64,7 +64,7 @@ class MultiframeIntegrationTransformer(nn.Module):
 
     def forward(self, x):
         b, t, d = x.shape
-        ori_x = x
+        # ori_x = x
         x = x + self.positional_embedding
 
         prompt_key_loss = None
@@ -73,12 +73,12 @@ class MultiframeIntegrationTransformer(nn.Module):
             prompts, prompt_key_loss = self.prompt_pool(x.mean(dim=1).unsqueeze(dim=1))
 
             for i in range(b):
-                prompted_text[i] = torch.concat((x[i], prompts[i]), dim=0)
+                prompted_text[i] = torch.concat((prompts[i], x[i]), dim=0)
             x = prompted_text
 
         x = x.permute(1, 0, 2)
         x = self.resblocks(x)
-        x = x.permute(1, 0, 2)  
-        x = x.type(ori_x.dtype) + ori_x
+        x = x.permute(1, 0, 2)
+        # x = x.type(ori_x.dtype) + ori_x
         
         return x.mean(dim=1, keepdim=False), prompt_key_loss
