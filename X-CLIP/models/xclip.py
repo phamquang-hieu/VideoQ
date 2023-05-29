@@ -84,9 +84,10 @@ class XCLIP(CLIP):
             use_checkpoint=use_checkpoint
         )
         
-        self.prompt_pool = PromptPool(pool_size=pool_size, 
+        self.prompt_pool = PromptPool(pool_size=pool_size,
+                                      embedd_dim=vision_width,
                                       use_freq=pool_use_freq, 
-                                      a=pool_prompts_per_sample, 
+                                      pool_prompts_per_sample=pool_prompts_per_sample, 
                                       pool_prompt_length=pool_prompt_length)
 
         self.transformer = Transformer(
