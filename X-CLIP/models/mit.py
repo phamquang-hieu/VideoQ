@@ -3,6 +3,7 @@ from torch import nn
 from collections import OrderedDict
 from timm.models.layers import trunc_normal_
 import sys
+from prompt import PromptPool
 sys.path.append("../")
 from clip.model import QuickGELU
 
@@ -32,13 +33,22 @@ class ResidualAttentionBlock(nn.Module):
 
 
 class MultiframeIntegrationTransformer(nn.Module):
-    def __init__(self, T, embed_dim=512, layers=1,):
+    def __init__(self, T, embed_dim=512, layers=1, pool_size=25, pool_use_freq=False, pool_prompts_per_sample=5, pool_prompt_length=8):
         super().__init__()
         self.T = T
         transformer_heads = embed_dim // 64
         self.positional_embedding = nn.Parameter(torch.empty(1, T, embed_dim))
         trunc_normal_(self.positional_embedding, std=0.02)
         self.resblocks = nn.Sequential(*[ResidualAttentionBlock(d_model=embed_dim, n_head=transformer_heads) for _ in range(layers)])
+
+        self.pool_prompts_per_sample = pool_prompts_per_sample
+        self.pool_prompt_length = pool_prompt_length
+        self.pool_size = pool_size
+        self.prompt_pool = PromptPool(pool_size=pool_size,
+                                      embedd_dim=embed_dim,
+                                      use_freq=pool_use_freq, 
+                                      pool_prompts_per_sample=pool_prompts_per_sample, 
+                                      pool_prompt_length=pool_prompt_length)
 
         self.apply(self._init_weights)
     
@@ -52,11 +62,22 @@ class MultiframeIntegrationTransformer(nn.Module):
             nn.init.ones_(m.weight)
 
     def forward(self, x):
+        b, t, d = x.shape
         ori_x = x
         x = x + self.positional_embedding
+
+        prompt_key_loss = None
+        if self.pool_size > 0:
+            prompted_text = torch.zeros(b, t + self.pool_prompt_length * self.pool_prompts_per_sample, d).to(x.device)
+            prompts, prompt_key_loss = self.prompt_pool(x.mean(dim=1).unsqueeze(dim=1))
+
+            for i in range(b):
+                prompted_text[i] = torch.concat(x[i], prompts[i], dim=0)
+            x = prompted_text
+
         x = x.permute(1, 0, 2)
         x = self.resblocks(x)
         x = x.permute(1, 0, 2)  
         x = x.type(ori_x.dtype) + ori_x
         
-        return x.mean(dim=1, keepdim=False)
+        return x.mean(dim=1, keepdim=False), prompt_key_loss

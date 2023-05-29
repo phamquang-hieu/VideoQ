@@ -84,11 +84,6 @@ class XCLIP(CLIP):
             use_checkpoint=use_checkpoint
         )
         
-        self.prompt_pool = PromptPool(pool_size=pool_size,
-                                      embedd_dim=embed_dim,
-                                      use_freq=pool_use_freq, 
-                                      pool_prompts_per_sample=pool_prompts_per_sample, 
-                                      pool_prompt_length=pool_prompt_length)
 
         self.transformer = Transformer(
             width=transformer_width,
@@ -188,16 +183,15 @@ class XCLIP(CLIP):
         
         img_features = img_features.view(b,t,-1,cls_features.shape[-1])
 
-        prompt_key_loss = None
-        if self.pool_size > 0:
-            prompts, prompt_key_loss = self.prompt_pool(cls_features.mean(dim=1).unsqueeze(1))
-            prompted_cls = torch.zeros(b, t+self.pool_prompt_length*self.pool_prompts_per_sample, cls_features.shape[-1])
-            for vid in range(b):
-                print(cls_features[vid].shape, prompts[vid].shape)
-                prompted_cls[vid] = torch.cat((cls_features[vid], prompts[vid]), dim=0) 
-            cls_features = prompted_cls
+        # prompt_key_loss = None
+        # if self.pool_size > 0:
+        #     prompts, prompt_key_loss = self.prompt_pool(cls_features.mean(dim=1).unsqueeze(1))
+        #     prompted_cls = torch.zeros(b, t+self.pool_prompt_length*self.pool_prompts_per_sample, cls_features.shape[-1])
+        #     for vid in range(b):
+        #         prompted_cls[vid] = torch.cat((cls_features[vid], prompts[vid]), dim=0) 
+        #     cls_features = prompted_cls
 
-        video_features = self.mit(cls_features)
+        video_features, prompt_key_loss = self.mit(cls_features)
 
         return video_features, img_features, prompt_key_loss
 
