@@ -64,7 +64,7 @@ def build_optimizer(config, model):
     )
     mit_parameters = set_weight_decay(model, skip, skip_keywords,
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
-        have=("mit",), not_have=()
+        have=("mit",), not_have=("prompt_pool")
     )
     prompts_parameters = set_weight_decay(model, skip, skip_keywords, 
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
@@ -76,7 +76,7 @@ def build_optimizer(config, model):
         )
     
     visual_soft_prompts = set_weight_decay(model, skip, skip_keywords,
-        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10000,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10,
         have=("prompt_pool",), not_have=()
         ) 
     
