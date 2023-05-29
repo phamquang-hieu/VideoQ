@@ -3,7 +3,7 @@ from torch import nn
 from collections import OrderedDict
 from timm.models.layers import trunc_normal_
 import sys
-from prompt import PromptPool
+from .prompt import PromptPool
 sys.path.append("../")
 from clip.model import QuickGELU
 
