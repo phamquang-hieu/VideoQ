@@ -142,7 +142,13 @@ class CrossFrameCommunicationTransformer(nn.Module):
         #@TODO: use the [class] token as query to query the prompt pool
         prompt_key_loss = None
         if self.prompt_pool is not None:
-            prompt, prompt_key_loss = self.prompt_pool(cls)
+            with torch.no_grad():
+                query = x.permute(1, 0, 2)
+                query = self.transformer(query)
+                query = query.permute(1, 0, 2)
+                query = query[:, 0, :]
+
+            prompt, prompt_key_loss = self.prompt_pool(query)
             x = torch.cat([prompt, x], dim=1)
         
         x = self.ln_pre(x)
@@ -163,4 +169,4 @@ class CrossFrameCommunicationTransformer(nn.Module):
         if self.proj is not None:
             cls_x = cls_x @ self.proj
         
-        return cls_x, x[:,prompt_idx+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generator
+        return cls_x, x[:,self.pool_prompt_per_sample*self.pool_prompt_length+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generator
