@@ -92,8 +92,9 @@ def main(config):
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
 
     num_param = 0
-    for p in model.parameters():
+    for name, p in model.named_parameters():
         num_param += p.numel()
+        print(name)
     logger.info(f"# parameters: {num_param}")
 
     start_epoch, max_accuracy = 0, 0.0
