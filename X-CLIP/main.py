@@ -433,7 +433,7 @@ if __name__ == '__main__':
     Path(config.OUTPUT).mkdir(parents=True, exist_ok=True)
     
     # logger
-    logger = create_logger(output_dir=config.OUTPUT, dist_rank=dist.get_rank(), name=f"{config.MODEL.ARCH}")
+    logger = create_logger(output_dir=config.OUTPUT, name=f"{config.MODEL.ARCH}")
     logger.info(f"working dir: {config.OUTPUT}")
     
     # save config 
