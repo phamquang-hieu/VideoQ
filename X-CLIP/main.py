@@ -91,12 +91,6 @@ def main(config):
 
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
 
-    num_param = 0
-    for name, p in model.named_parameters():
-        num_param += p.numel()
-        if p.requires_grad == False:
-            print(name)
-    logger.info(f"# parameters: {num_param}")
 
     start_epoch, max_accuracy = 0, 0.0
 
@@ -159,6 +153,13 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
     model.train()
     optimizer.zero_grad()
     
+    num_param = 0
+    for name, p in model.named_parameters():
+        num_param += p.numel()
+        if p.requires_grad == False:
+            print(name, p.requires_grad)
+    logger.info(f"# parameters: {num_param}")
+
     num_steps = len(train_loader)
     batch_time = AverageMeter()
     tot_loss_meter = AverageMeter()
