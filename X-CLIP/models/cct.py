@@ -142,14 +142,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         #@TODO: use the [class] token as query to query the prompt pool
         prompt_key_loss = None
         if self.prompt_pool is not None:
-            with torch.no_grad():
-                query = self.ln_pre(x)
-                query = query.permute(1, 0, 2)
-                query = self.transformer(query)
-                query = query.permute(1, 0, 2)
-                query = query[:, 0, :].unsqueeze(1)
-
-            prompt, prompt_key_loss = self.prompt_pool(query)
+            prompt, prompt_key_loss = self.prompt_pool(cls)
             x = torch.cat([prompt, x], dim=1)
         
         x = self.ln_pre(x)
@@ -158,16 +151,57 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
 
-        prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
-        # if prompt_idx == 0: 
-        #     # in this case pool_size == 0 ->
-        #     # the model don't use a prompt pool
-        #     # -> the first token is the [class] token, which is used as the image representation
-        #     prompt_idx = 1
+        prompt_idx = self.pool_size*self.pool_prompt_length 
+        if prompt_idx == 0: 
+            # in this case pool_size == 0 ->
+            # the model don't use a prompt pool
+            # -> the first token is the [class] token, which is used as the image representation
+            prompt_idx = 1
 
-        cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
+        cls_x = self.ln_post(x[:, 0:prompt_idx, :].mean(dim=1))
 
         if self.proj is not None:
             cls_x = cls_x @ self.proj
         
-        return cls_x, x[:,self.pool_prompt_per_sample*self.pool_prompt_length+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generator
+        return cls_x, x[:,prompt_idx:,:], prompt_key_loss
+        # # x.shape = b*t = batchsize * num_frames extracted from a video
+        # x = self.conv1(x)  # shape = [*, width, grid, grid] grid: number of token along 1 spatial dimension
+        # x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = [*, width, grid ** 2] -> flatten to a matrix of tokens
+        # x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
+        # # prepending the class_embedding token to the begining of the sequence
+        # cls = self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device)
+        # x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        # x = x + self.positional_embedding.to(x.dtype)
+       
+        # #@TODO: use the [class] token as query to query the prompt pool
+        # prompt_key_loss = None
+        # if self.prompt_pool is not None:
+        #     with torch.no_grad():
+        #         query = self.ln_pre(x)
+        #         query = query.permute(1, 0, 2)
+        #         query = self.transformer(query)
+        #         query = query.permute(1, 0, 2)
+        #         query = query[:, 0, :].unsqueeze(1)
+
+        #     prompt, prompt_key_loss = self.prompt_pool(query)
+        #     x = torch.cat([prompt, x], dim=1)
+        
+        # x = self.ln_pre(x)
+
+        # x = x.permute(1, 0, 2) # [b*t, grid**2 + 1(class token), width]-> [grid**2 + 1 (class token), (b*t), width] this is needed for multihead self attn when batch_first = false
+        # x = self.transformer(x)
+        # x = x.permute(1, 0, 2)
+
+        # prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
+        # # if prompt_idx == 0: 
+        # #     # in this case pool_size == 0 ->
+        # #     # the model don't use a prompt pool
+        # #     # -> the first token is the [class] token, which is used as the image representation
+        # #     prompt_idx = 1
+
+        # cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
+
+        # if self.proj is not None:
+        #     cls_x = cls_x @ self.proj
+        
+        # return cls_x, x[:,self.pool_prompt_per_sample*self.pool_prompt_length+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generator
