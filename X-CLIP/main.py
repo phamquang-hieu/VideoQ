@@ -89,6 +89,7 @@ def main(config):
 
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
 
+
     start_epoch, max_accuracy = 0, 0.0
 
     if config.TRAIN.AUTO_RESUME:
@@ -181,7 +182,9 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         scaler.scale(total_loss).backward()
-        
+        for name, param in model.named_parameters():
+            if param.grad is None:
+                print('none grad', name)
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
             optimizer.zero_grad()
