@@ -160,9 +160,9 @@ class XCLIP(CLIP):
         eos_indx = text.argmax(dim=-1)
         K, N1, C = x.shape
 
-        if not self.use_cache:
-            print("hello, prompting text")
-            x, eos_indx = self.prompt_text(x, text_mask=text!=0)
+        # if not self.use_cache:
+        #     print("hello, prompting text")
+        #     x, eos_indx = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
         x = x.permute(1, 0, 2)  # NLD -> LND
@@ -174,6 +174,7 @@ class XCLIP(CLIP):
         x = x[torch.arange(x.shape[0]), eos_indx] @ self.text_projection
         x = x.reshape(K, -1)
         return x
+
 
     def encode_video(self, image):
         b,t,c,h,w = image.size()
