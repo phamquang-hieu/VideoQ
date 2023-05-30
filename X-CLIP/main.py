@@ -181,10 +181,10 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
         with torch.cuda.amp.autocast(enabled=True):
             output, prompt_key_loss = model(images, texts)
             
-            # if prompt_key_loss is not None:
-            total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
-            # else:
-            #     total_loss = criterion(output, label_id)
+            if prompt_key_loss is not None:
+                total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
+            else:
+                total_loss = criterion(output, label_id)
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         scaler.scale(total_loss).backward()

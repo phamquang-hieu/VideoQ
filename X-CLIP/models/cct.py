@@ -140,7 +140,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x + self.positional_embedding.to(x.dtype)
        
         #@TODO: use the [class] token as query to query the prompt pool
-        prompt_key_loss = 0
+        prompt_key_loss = None
         if self.prompt_pool is not None:
             with torch.no_grad():
                 query = self.ln_pre(x)
