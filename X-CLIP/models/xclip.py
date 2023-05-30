@@ -119,7 +119,7 @@ class XCLIP(CLIP):
 
     def freeze_module(self, module):
         for param in module.parameters():
-            param.requires_grad(False)  
+            param.requires_grad_(False)  
     
     @torch.jit.ignore
     def no_weight_decay_keywords(self):
