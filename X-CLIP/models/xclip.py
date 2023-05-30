@@ -118,7 +118,7 @@ class XCLIP(CLIP):
             self.positional_embedding.requires_grad_(False)
 
     def freeze_module(self, module):
-        for param in module:
+        for param in module.parameters():
             param.requires_grad(False)  
     
     @torch.jit.ignore
