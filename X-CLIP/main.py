@@ -94,7 +94,8 @@ def main(config):
     num_param = 0
     for name, p in model.named_parameters():
         num_param += p.numel()
-        print(name)
+        if p.requires_grad == False:
+            print(name)
     logger.info(f"# parameters: {num_param}")
 
     start_epoch, max_accuracy = 0, 0.0
