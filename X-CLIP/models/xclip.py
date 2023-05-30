@@ -109,7 +109,17 @@ class XCLIP(CLIP):
         # if training with prompt pool -> can choose whether or not to freeze the video encoder
         if pool_freeze_video:
             self.freeze_no_prompt()
-        
+
+        if self.use_cache:
+            self.freeze_module(self.transformer)
+            self.freeze_module(self.token_embedding)
+            self.freeze_module(self.ln_final)
+            self.text_projection.requires_grad_(False)
+            self.positional_embedding.requires_grad_(False)
+
+    def freeze_module(self, module):
+        for param in module:
+            param.requires_grad(False)  
     
     @torch.jit.ignore
     def no_weight_decay_keywords(self):
@@ -160,9 +170,8 @@ class XCLIP(CLIP):
         eos_indx = text.argmax(dim=-1)
         K, N1, C = x.shape
 
-        # if not self.use_cache:
-        #     print("hello, prompting text")
-        #     x, eos_indx = self.prompt_text(x, text_mask=text!=0)
+        if not self.use_cache:
+            x, eos_indx = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
         x = x.permute(1, 0, 2)  # NLD -> LND
