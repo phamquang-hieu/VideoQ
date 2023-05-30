@@ -115,7 +115,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
         self.transformer = Transformer(width, layers, heads, droppath=droppath, use_checkpoint=use_checkpoint, T=T,)
         self.ln_post = LayerNorm(width)
         self.proj = nn.Parameter(scale * torch.randn(width, output_dim))
-        self.pool = None
 
     def init_weights(self):
         self.apply(self._init_weights)

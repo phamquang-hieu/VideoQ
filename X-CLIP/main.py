@@ -89,7 +89,7 @@ def main(config):
     # if config.TRAIN.OPT_LEVEL != 'O0':
     #     model, optimizer = amp.initialize(models=model, optimizers=optimizer, opt_level=config.TRAIN.OPT_LEVEL)
 
-    model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
+    # model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
 
     num_param = 0
     for p in model.parameters():
@@ -141,7 +141,7 @@ def main(config):
         is_best = acc1 > max_accuracy
         max_accuracy = max(max_accuracy, acc1)
         logger.info(f'Max accuracy: {max_accuracy:.2f}%')
-        if dist.get_rank() == 0 and (epoch % config.SAVE_FREQ == 0 or epoch == (config.TRAIN.EPOCHS - 1)):
+        if (epoch % config.SAVE_FREQ == 0 or epoch == (config.TRAIN.EPOCHS - 1)):
             epoch_saving(config, epoch, model.module, max_accuracy, optimizer, lr_scheduler, logger, config.OUTPUT, is_best)
 
     config.defrost()
@@ -210,7 +210,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             scaler.update()
             lr_scheduler.step_update(epoch * num_steps + idx)
 
-        torch.cuda.synchronize()
+        # torch.cuda.synchronize()
         
         tot_loss_meter.update(total_loss.item(), len(label_id))
         batch_time.update(time.time() - end)
@@ -412,18 +412,18 @@ if __name__ == '__main__':
     args, config = parse_option()
 
     # init_distributed
-    if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
-        rank = int(os.environ["RANK"])
-        world_size = int(os.environ['WORLD_SIZE'])
-        print(f"RANK and WORLD_SIZE in environ: {rank}/{world_size}")
-    else:
-        rank = -1
-        world_size = -1
-    torch.cuda.set_device(args.local_rank)
-    torch.distributed.init_process_group(backend='nccl', init_method='env://', world_size=world_size, rank=rank)
-    torch.distributed.barrier(device_ids=[args.local_rank])
+    # if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
+    #     rank = int(os.environ["RANK"])
+    #     world_size = int(os.environ['WORLD_SIZE'])
+    #     print(f"RANK and WORLD_SIZE in environ: {rank}/{world_size}")
+    # else:
+    #     rank = -1
+    #     world_size = -1
+    # torch.cuda.set_device(args.local_rank)
+    # torch.distributed.init_process_group(backend='nccl', init_method='env://', world_size=world_size, rank=rank)
+    # torch.distributed.barrier(device_ids=[args.local_rank])
 
-    seed = config.SEED + dist.get_rank()
+    seed = config.SEED
     torch.manual_seed(seed)
     np.random.seed(seed)
     random.seed(seed)
@@ -437,8 +437,8 @@ if __name__ == '__main__':
     logger.info(f"working dir: {config.OUTPUT}")
     
     # save config 
-    if dist.get_rank() == 0:
-        logger.info(config)
-        shutil.copy(args.config, config.OUTPUT)
+    # if dist.get_rank() == 0:
+    logger.info(config)
+    shutil.copy(args.config, config.OUTPUT)
 
     main(config)
