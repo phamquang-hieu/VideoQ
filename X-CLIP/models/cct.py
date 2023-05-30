@@ -145,7 +145,9 @@ class CrossFrameCommunicationTransformer(nn.Module):
                 query = query.permute(1, 0, 2)
                 query = self.transformer(query)
                 query = query.permute(1, 0, 2)
+                query = self.ln_post(query)
                 query = query[:, 0, :].unsqueeze(1)
+                
             prompt, prompt_key_loss = self.prompt_pool(query)
             x = torch.cat([prompt, x], dim=1)
         
