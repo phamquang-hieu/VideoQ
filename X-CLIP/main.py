@@ -180,7 +180,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             texts = texts.view(1, -1)
         with torch.cuda.amp.autocast(enabled=True):
             output, prompt_key_loss = model(images, texts)
-
+            if prompt_key_loss is None:
+                print("prompt_key_loss is None")
             if prompt_key_loss is not None:
                 total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
             else:
