@@ -49,8 +49,6 @@ def parse_option():
 
 
 def main(config): 
-    # torch.autograd.set_detect_anomaly(True)
-
     train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
     model = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
                          device="cpu", jit=False, 
@@ -90,7 +88,6 @@ def main(config):
     #     model, optimizer = amp.initialize(models=model, optimizers=optimizer, opt_level=config.TRAIN.OPT_LEVEL)
 
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
-
 
     start_epoch, max_accuracy = 0, 0.0
 
@@ -153,13 +150,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
     model.train()
     optimizer.zero_grad()
     
-    num_param = 0
-    for name, p in model.named_parameters():
-        num_param += p.numel()
-        if p.requires_grad == False:
-            print(name, p.requires_grad)
-    logger.info(f"# parameters: {num_param}")
-
     num_steps = len(train_loader)
     batch_time = AverageMeter()
     tot_loss_meter = AverageMeter()
