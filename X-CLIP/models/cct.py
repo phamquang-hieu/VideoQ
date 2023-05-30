@@ -140,7 +140,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
         #@TODO: use the [class] token as query to query the prompt pool
         prompt_key_loss = None
         if self.prompt_pool is not None:
-            print("surprise mtfk")
             with torch.no_grad():
                 query = self.ln_pre(x)
                 query = query.permute(1, 0, 2)
