@@ -163,4 +163,4 @@ class CrossFrameCommunicationTransformer(nn.Module):
         cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
         if self.proj is not None:
             cls_x = cls_x @ self.proj
-        return cls_x, x[:,self.pool_prompt_per_sample*self.pool_prompt_length+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generato
+        return cls_x, x[:,prompt_idx+1:,:], prompt_key_loss # you have to skip the [cls] token as input to the prompt generato
