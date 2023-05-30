@@ -109,7 +109,7 @@ def main(config):
             logger.info(f'no checkpoint found in {config.OUTPUT}, ignoring auto resume')
 
     if config.MODEL.RESUME:
-        start_epoch, max_accuracy = load_checkpoint(config, model.module, optimizer, lr_scheduler, logger)
+        start_epoch, max_accuracy = load_checkpoint(config, model.modules, optimizer, lr_scheduler, logger)
 
 
     text_labels = generate_text(train_data)
