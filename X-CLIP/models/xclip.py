@@ -161,6 +161,7 @@ class XCLIP(CLIP):
         K, N1, C = x.shape
 
         if not self.use_cache:
+            print("hello, prompting text")
             x, eos_indx = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
