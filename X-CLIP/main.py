@@ -182,13 +182,13 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         scaler.scale(total_loss).backward()
-        cnt = 0
-        for name, param in model.named_parameters():
-            if param.grad is not None:
-                # print('none grad', name, cnt, param.requires_grad)
-            # else:
-                print('not none grad', name, param.grad.norm())
-            cnt +=1
+        # cnt = 0
+        # for name, param in model.named_parameters():
+        #     if param.grad is not None:
+        #         # print('none grad', name, cnt, param.requires_grad)
+        #     # else:
+        #         print('not none grad', name, param.grad.norm())
+        #     cnt +=1
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
             optimizer.zero_grad()
