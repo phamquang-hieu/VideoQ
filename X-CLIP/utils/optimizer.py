@@ -71,12 +71,12 @@ def build_optimizer(config, model):
         have=("prompts",), not_have=()
     )
     text_soft_prompts = set_weight_decay(model, skip, skip_keywords,
-        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*1000,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*100,
         have=("prefix", "postfix",), not_have=()
         )
     
     visual_soft_prompts = set_weight_decay(model, skip, skip_keywords,
-        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10000,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*100,
         have=("prompt_pool",), not_have=()
         ) 
     
