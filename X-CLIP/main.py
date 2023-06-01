@@ -182,7 +182,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         scaler.scale(total_loss).backward()
-        cnt = 0
+        # cnt = 0
         # for name, param in model.named_parameters():
         #     # if param.grad is not None:
         #     if name in ["module.prompt_context_prefix", "module.prompt_context_postfix", "module.visual.prompt_pool.keys", "module.visual.prompt_pool.values"]:
