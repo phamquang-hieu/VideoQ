@@ -189,8 +189,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 # print('none grad', name, cnt, param.requires_grad)
             # else:
                 print('not none grad', name, (optimizer.param_groups[-1]['lr']*param.grad).norm(), param.grad.shape)
+                print(param.grad*optimizer.param_groups[-1]['lr'])
                 print('param norm', param.norm())
-                print(param.grad)
             cnt +=1
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
