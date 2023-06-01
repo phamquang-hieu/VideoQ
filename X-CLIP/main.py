@@ -188,8 +188,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             if name in ["module.prompt_context_prefix", "module.prompt_context_postfix", "module.visual.prompt_pool.keys", "module.visual.prompt_pool.values"]:
                 # print('none grad', name, cnt, param.requires_grad)
             # else:
-                print('not none grad', name, (0.0003*param.grad).norm(), param.grad.shape)
-                print(param.grad*0.0003)
+                print('not none grad', name, (0.00003*param.grad).norm(), param.grad.shape)
+                print(param.grad*0.00003)
                 print('param norm', param.norm())
             cnt +=1
 
