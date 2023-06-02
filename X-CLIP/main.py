@@ -159,9 +159,10 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
     end = time.time()
     
     texts = text_labels.cuda(non_blocking=True)
-    
+    y_true, y_pred = [], []
+    acc1 = 0
+    acc1_meter = AverageMeter()
     for idx, batch_data in enumerate(train_loader):
-
         images = batch_data["imgs"].cuda(non_blocking=True)
         label_id = batch_data["label"].cuda(non_blocking=True)
         label_id = label_id.reshape(-1)
@@ -174,6 +175,14 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             texts = texts.view(1, -1)
         with torch.cuda.amp.autocast(enabled=True):
             output, prompt_key_loss = model(images, texts)
+            similarity = output.view(images.shape[0], -1).softmax(dim=-1)
+            indices_1 = similarity.topk(1, dim=-1)
+
+            for i in range(images.shape[0]):
+                y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu().item())
+                if indices_1[i].cpu().item() == label_id[i].cpu().item():
+                    acc1 += 1
+            acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
 
             if prompt_key_loss is not None:
                 total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
@@ -195,11 +204,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
             optimizer.zero_grad()
-        # if config.TRAIN.OPT_LEVEL != 'O0':
-            # with amp.scale_loss(total_loss, optimizer) as scaled_loss:
-            #     scaled_loss.backward()
-        # else:
-        #     total_loss.backward()
+        
         if config.TRAIN.ACCUMULATION_STEPS > 1:
             if (idx + 1) % config.TRAIN.ACCUMULATION_STEPS == 0:
                 # optimizer.step()
@@ -228,9 +233,11 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 f'eta {datetime.timedelta(seconds=int(etas))} lr {lr:.9f}\t'
                 f'time {batch_time.val:.4f} ({batch_time.avg:.4f})\t'
                 f'tot_loss {tot_loss_meter.val:.4f} ({tot_loss_meter.avg:.4f})\t'
-                f'mem {memory_used:.0f}MB')
+                f'mem {memory_used:.0f}MB\t'
+                f'Acc@1: {acc1_meter.avg:.3f}')
     epoch_time = time.time() - start
     logger.info(f"EPOCH {epoch} training takes {datetime.timedelta(seconds=int(epoch_time))}")
+    logger.info(f'\n{classification_report(y_true=y_true, y_pred=y_pred)}')
 
 
 @torch.no_grad()
