@@ -177,7 +177,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             output, prompt_key_loss = model(images, texts)
             similarity = output.view(images.shape[0], -1).softmax(dim=-1)
             
-            indices_1 = similarity.topk(1, dim=-1)
+            _, indices_1 = similarity.topk(1, dim=-1)
             for i in range(images.shape[0]):
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu().item())
                 if indices_1[i].cpu().item() == label_id[i].cpu().item():
