@@ -93,6 +93,8 @@ class CrossFrameCommunicationTransformer(nn.Module):
         self.pool_size = pool_size
         self.pool_prompt_length = pool_prompt_length
         self.pool_prompt_per_sample = pool_prompts_per_sample
+        self.T = T # num_frames extracted from a video
+        self.vision_embed_dim = width
         # to extract tokens out of the original image
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=width, kernel_size=patch_size, stride=patch_size, bias=False)
 
@@ -141,14 +143,17 @@ class CrossFrameCommunicationTransformer(nn.Module):
         prompt_key_loss = None
         if self.prompt_pool is not None:
             with torch.no_grad():
+                b = int(x.shape[0]/self.T)
                 query = self.ln_pre(x)
                 query = query.permute(1, 0, 2)
                 query = self.transformer(query)
                 query = query.permute(1, 0, 2)
-                query = self.ln_post(query)
-                query = query[:, 0, :].unsqueeze(1)
+                query = self.ln_post(query) # [b*t, grid**2 + 1, width]
+                query = query[:, 0, :].unsqueeze(1) #[b*t, 1, width]
+                query = query.view(b, self.T, -1).mean(dim=1).unsqueeze(dim=1) #[b, 1, width]
                 
-            prompt, prompt_key_loss = self.prompt_pool(query)
+            prompt, prompt_key_loss = self.prompt_pool(query) #[b, topk*len, width]
+            prompt = prompt.unsqueeze(dim=1).repeat((1, self.T, 1, 1)).reshape(b*self.T, -1, self.vision_embed_dim)
             x = torch.cat([prompt, x], dim=1)
         
         x = self.ln_pre(x)
