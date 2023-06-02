@@ -183,6 +183,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(batch_data["label"][i].cpu().item())
                 if indices_1[i].cpu().item() == batch_data["label"][i].cpu().item():
                     acc1 += 1
+            print(acc1, images.shape[0])
+            
             acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
 
             if prompt_key_loss is not None:
