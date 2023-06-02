@@ -160,7 +160,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
     
     texts = text_labels.cuda(non_blocking=True)
     y_true, y_pred = [], []
-    acc1 = 0
     acc1_meter = AverageMeter()
     for idx, batch_data in enumerate(train_loader):
         images = batch_data["imgs"].cuda(non_blocking=True)
@@ -179,11 +178,11 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             
             _, indices_1 = similarity.topk(1, dim=-1)
 
+            acc1 = 0
             for i in range(images.shape[0]):
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(batch_data["label"][i].cpu().item())
                 if indices_1[i].cpu().item() == batch_data["label"][i].cpu().item():
                     acc1 += 1
-            print(acc1, images.shape[0])
             
             acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
 
