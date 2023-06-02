@@ -180,6 +180,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             _, indices_1 = similarity.topk(1, dim=-1)
             print(indices_1)
             print(label_id)
+            print(batch_data["label"])
             for i in range(images.shape[0]):
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu().item())
                 if indices_1[i].cpu().item() == label_id[i].cpu().item():
