@@ -153,7 +153,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
             prompt, prompt_key_loss = self.prompt_pool(query)
             # prompt_key_loss = None
             x = torch.cat([prompt, x], dim=1)
-        
+        print("x.requires_grad", x.requires_grad)
         x = self.ln_pre(x)
         x = x.permute(1, 0, 2) # [b*t, grid**2 + 1(class token), width]-> [grid**2 + 1 (class token), (b*t), width] this is needed for multihead self attn when batch_first = false
         x = self.transformer(x)
