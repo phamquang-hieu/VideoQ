@@ -129,7 +129,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
             nn.init.constant_(m.weight, 1.0)
 
     def forward(self, x: torch.Tensor):
-        # x.shape = b*t = batchsize * num_frames extracted from a video
+        # x.shape = b*t*h*w= batchsize * num_frames extracted from a video
         x = self.conv1(x)  # shape = [*, width, grid, grid] grid: number of token along 1 spatial dimension
         x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = [*, width, grid ** 2] -> flatten to a matrix of tokens
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
@@ -145,11 +145,9 @@ class CrossFrameCommunicationTransformer(nn.Module):
                 query = query.permute(1, 0, 2)
                 query = self.transformer(query)
                 query = query.permute(1, 0, 2)
-                query = self.ln_post(query)
+                query = self.ln_post(query[:, 0, :])
                 query = query[:, 0, :].unsqueeze(1)
             
-            # print("query.requires_grad", query.requires_grad)
-            # query.requires_grad_(True)
             prompt, prompt_key_loss = self.prompt_pool(query)
             # prompt_key_loss = None
             x = torch.cat([prompt, x], dim=1)
@@ -159,11 +157,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
         prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
-        # if prompt_idx == 0: 
-        #     # in this case pool_size == 0 ->
-        #     # the model don't use a prompt pool
-        #     # -> the first token is the [class] token, which is used as the image representation
-        #     prompt_idx = 1
+
         cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
         if self.proj is not None:
             cls_x = cls_x @ self.proj
