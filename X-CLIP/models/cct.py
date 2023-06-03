@@ -141,7 +141,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
         prompt_key_loss = None
         if self.prompt_pool is not None:
             with torch.no_grad():
-                query = self.ln_pre(x.detach().clone())
+                query = self.ln_pre(x.clone().detach())
                 query = query.permute(1, 0, 2)
                 query = self.transformer(query)
                 query = query.permute(1, 0, 2)
