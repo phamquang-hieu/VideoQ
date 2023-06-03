@@ -190,7 +190,6 @@ class XCLIP(CLIP):
         image = image.reshape(-1,c,h,w) #[bach_size*num_frame, c, h, w]
 
         cls_features, img_features, prompt_key_loss = self.encode_image(image)
-        print("cls_features.requires_grad", cls_features.requires_grad)
         img_features = self.prompts_visual_ln(img_features)
         img_features = img_features @ self.prompts_visual_proj
         

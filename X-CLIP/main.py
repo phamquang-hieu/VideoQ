@@ -187,7 +187,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
 
             if prompt_key_loss is not None:
-                print("prompt_keys_loss", prompt_key_loss)
                 total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
             else:
                 total_loss = criterion(output, label_id)
