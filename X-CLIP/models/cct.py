@@ -149,7 +149,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
                 query = self.ln_post(query[:, 0, :])
                 query = query.unsqueeze(1)
 
-            prompt, prompt_key_loss = self.prompt_pool(query.clone().detach())
+            prompt, prompt_key_loss = self.prompt_pool(query)
             # prompt_key_loss = None
             x = torch.cat([prompt, x], dim=1)
         # print("x.requires_grad", x.requires_gra)
