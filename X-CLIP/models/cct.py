@@ -134,8 +134,9 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = [*, width, grid ** 2] -> flatten to a matrix of tokens
         x = x.permute(0, 2, 1)  # shape = [*, grid ** 2, width] -> each token has embedding dim = width
         # prepending the class_embedding token to the begining of the sequence
-        cls = self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device)
-        x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        # cls = self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device)
+        # x = torch.cat([cls, x], dim=1)  # shape = [*, grid ** 2 + 1, width]
+        x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)
         x = x + self.positional_embedding.to(x.dtype)
         #@TODO: use the [class] token as query to query the prompt pool
         prompt_key_loss = None
