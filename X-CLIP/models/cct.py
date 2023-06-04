@@ -148,6 +148,8 @@ class CrossFrameCommunicationTransformer(nn.Module):
                 query = query.permute(1, 0, 2)
                 query = self.ln_post(query[:, 0, :])
                 query = query.unsqueeze(1)
+                for name, param in self.transformer.named_parameters():
+                    print(name, param.requires_grad)
 
             prompt, prompt_key_loss = self.prompt_pool(query)
             # prompt_key_loss = None
@@ -156,8 +158,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = self.ln_pre(x)
         x = x.permute(1, 0, 2) # [b*t, grid**2 + 1(class token), width]-> [grid**2 + 1 (class token), (b*t), width] this is needed for multihead self attn when batch_first = false
         x = self.transformer(x)
-        for name, param in self.transformer.named_parameters():
-            print(name, param.requires_grad)
         x = x.permute(1, 0, 2)
         prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
 
