@@ -148,8 +148,6 @@ class CrossFrameCommunicationTransformer(nn.Module):
                 query = query.permute(1, 0, 2)
                 query = self.ln_post(query[:, 0, :])
                 query = query.unsqueeze(1)
-                for name, param in self.transformer.named_parameters():
-                    print(name, param.requires_grad)
 
             prompt, prompt_key_loss = self.prompt_pool(query)
             # prompt_key_loss = None
