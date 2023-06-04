@@ -151,6 +151,7 @@ class CrossFrameCommunicationTransformer(nn.Module):
             self.train()
             
             prompt, prompt_key_loss = self.prompt_pool(query)
+            prompt = prompt.detach()
             # prompt_key_loss = None
             x = torch.cat([prompt, x], dim=1)
         # print("x.requires_grad", x.requires_gra)
