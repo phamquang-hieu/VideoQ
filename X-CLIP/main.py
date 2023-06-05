@@ -64,7 +64,8 @@ def main(config):
                          pool_freeze_video=config.TRAIN.POOL_FREEZE_VIDEO,
                          num_classes=config.DATA.NUM_CLASSES,
                          context_prompt_len=config.MODEL.CONTEXT_PROMPT_LEN,
-                         class_prompt_len=config.MODEL.CLASS_PROMPT_LEN
+                         class_prompt_len=config.MODEL.CLASS_PROMPT_LEN,
+                         fine_grain_loss=config.TRAIN.FINE_GRAIN_LOSS
                         )
     # model = model.cuda()
     scaler = torch.cuda.amp.GradScaler(enabled=True)
@@ -178,13 +179,15 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             
             _, indices_1 = similarity.topk(1, dim=-1)
 
+            ### eval during training ###
             acc1 = 0
             for i in range(images.shape[0]):
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(batch_data["label"][i].cpu().item())
                 if indices_1[i].cpu().item() == batch_data["label"][i].cpu().item():
                     acc1 += 1
-            # print(indices_1, batch_data["label"])
+
             acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
+            ###############################
 
             if prompt_key_loss is not None:
                 total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss

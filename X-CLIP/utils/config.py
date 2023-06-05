@@ -54,6 +54,7 @@ _C.TRAIN.USE_CHECKPOINT = False
 _C.TRAIN.POOL_LAMBDA = 1.0
 _C.TRAIN.POOL_USE_FREQ = False
 _C.TRAIN.POOL_FREEZE_VIDEO = False
+_C.TRAIN.FINE_GRAIN_LOSS = False
 
 # -----------------------------------------------------------------------------
 # Augmentation settings

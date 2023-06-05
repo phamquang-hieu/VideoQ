@@ -42,7 +42,8 @@ class XCLIP(CLIP):
                  pool_freeze_video=False,
                  num_classes = 14,
                  context_prompt_len=8,
-                 class_prompt_len=8
+                 class_prompt_len=8,
+                 fine_grain_loss=False
                  ):
         super().__init__(
             embed_dim,
@@ -55,6 +56,7 @@ class XCLIP(CLIP):
         self.pool_prompt_length = pool_prompt_length
         self.context_prompt_len = context_prompt_len
         self.class_prompt_len = class_prompt_len
+        self.fine_grain_loss = fine_grain_loss
         
         if not use_cache:
             if context_prompt_len > 0:
@@ -105,10 +107,27 @@ class XCLIP(CLIP):
         self.prompts_visual_ln = LayerNorm(vision_width)
         self.prompts_visual_proj = nn.Parameter(torch.randn(vision_width, embed_dim))
         
+
         self.initialize_parameters()
         # if training with prompt pool -> can choose whether or not to freeze the video encoder
         if pool_freeze_video:
             self.freeze_no_prompt()
+        
+        if self.fine_grain_loss:
+            # for coarse-grained constrast weights
+            self.global_mat_weight = nn.parameter.Parameter(torch.eye(embed_dim), requires_grad=True)
+
+            # for cross-grained constrast weights
+            num_words = 77
+            self.word_logit_weight = nn.parameter.Parameter(torch.eye(num_words), requires_grad=True)
+            self.frame_logit_weight = nn.parameter.Parameter(torch.eye(T), requires_grad=True)        
+
+            # for fine-grained constrast weights
+            self.local_mat_weight = nn.parameter.Parameter(torch.eye(embed_dim), requires_grad=True)
+            self.frame_mat_weight = nn.parameter.Parameter(torch.eye(T), requires_grad=True) # T = num_frames
+            self.word_mat_weight = nn.parameter.Parameter(torch.eye(num_words), requires_grad=True)
+            self.frame_mat_weight2 = nn.parameter.Parameter(torch.eye(T), requires_grad=True)
+            self.word_mat_weight2 = nn.parameter.Parameter(torch.eye(num_words), requires_grad=True)
 
         if self.use_cache:
             self.freeze_module(self.transformer)
@@ -116,6 +135,20 @@ class XCLIP(CLIP):
             self.freeze_module(self.ln_final)
             self.text_projection.requires_grad_(False)
             self.positional_embedding.requires_grad_(False)
+    
+
+    def _attenion_over_fine_grained_sim_matrix(self, word_features, frame_features):
+        bs_video, num_frames, dim_video = frame_features.shape
+        bs_text, num_words, dim_text = word_features.shape
+        fine_grained_sim_scores = torch.matmul(torch.matmul(word_features.view(-1, dim_text), self.local_mat_weight), frame_features.view(-1, dim_video).t()).view(bs_text, num_words, bs_video, num_frames)  # [bs_text, num_words, bs_video, num_frames]
+
+        word_level_logit = torch.sum(torch.matmul(torch.softmax(fine_grained_sim_scores/1e-2, dim=1).permute(0,2,3,1), self.word_mat_weight).permute(0,3,1,2) * fine_grained_sim_scores, dim=1)               # [bs_text, bs_video, num_frames]
+        frame_level_logit = torch.sum(torch.matmul(torch.softmax(fine_grained_sim_scores/1e-2, dim=-1), self.frame_mat_weight) * fine_grained_sim_scores, dim=-1)                                             # [bs_text, num_words, bs_video]
+
+        sent2frame_logits = torch.sum(torch.matmul(torch.softmax(word_level_logit/1e-2, dim=-1),self.frame_mat_weight2) * word_level_logit, dim=-1)                                # [bs_text, bs_video]
+        video2word_logits = torch.sum(torch.matmul(torch.softmax(frame_level_logit/1e-2, dim=1).permute(0,2,1), self.word_mat_weight2).permute(0,2,1) * frame_level_logit, dim=1)  # [bs_text, bs_video]
+
+        return (sent2frame_logits + video2word_logits) / 2
 
     def freeze_module(self, module):
         for param in module.parameters():
@@ -180,10 +213,14 @@ class XCLIP(CLIP):
         x = self.ln_final(x)
         # x.shape = [batch_size, n_ctx, transformer.width]
         # take features from the eot embedding (eot_token is the highest number in each sequence)
+        if self.fine_grain_loss:
+            word_features = x @ self.text_projection
         x = x[torch.arange(x.shape[0]), eos_indx] @ self.text_projection
         x = x.reshape(K, -1)
-        return x
 
+        if self.fine_grain_loss:
+            return x, word_features
+        return x, None
 
     def encode_video(self, image):
         b,t,c,h,w = image.size()
@@ -221,7 +258,8 @@ class XCLIP(CLIP):
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
-            if 'visual.prompt_pool' in name or "prompt_context_postfix" in name or "prompt_context_prefix" in name or "prompt_class_prefix" in name or "prompt_class_postfix" in name:
+            if 'visual.prompt_pool' in name or "prompt_context_postfix" in name or "prompt_context_prefix" in name \
+                or "prompt_class_prefix" in name or "prompt_class_postfix" in name :
                 print("unfreeze", name)
                 param.requires_grad_(True)
                 # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_context_prefix" in name or "prompt_context_postfix" in name
@@ -231,21 +269,42 @@ class XCLIP(CLIP):
 
     def forward(self, image, text):
         b = image.shape[0]
-        video_features, img_features, prompt_key_loss = self.encode_video(image) 
+        frame_features, img_features, prompt_key_loss = self.encode_video(image) 
         img_features = img_features.mean(dim=1, keepdim=False)
 
         if self.use_cache:
-            text_features = self.cache_text(text)
+            text_features, _ = self.cache_text(text)
         else:
-            text_features = self.encode_text(text)
+            text_features, word_features = self.encode_text(text)
+        
         
         text_features = text_features.unsqueeze(0).expand(b, -1, -1)
         text_features = text_features + self.prompts_generator(text_features, img_features)
-           
+        
+        video_features = frame_features.mean(dim=1, keepdim=False)
+
         video_features = video_features / video_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
         logit_scale = self.logit_scale.exp()
-        logits = torch.einsum("bd,bkd->bk", video_features, logit_scale * text_features)
+        if self.fine_grain_loss:
+            # video-sentence score 
+            video_sentence_logits = logit_scale * torch.einsum("bkd, bd->kb", torch.matmul(text_features, self.global_mat_weight), video_features)
+
+            # video-word score
+            video_word_logits = logit_scale * torch.sum(torch.matmul(word_features, video_features.t()) \
+                * torch.matmul(torch.softmax(torch.matmul(word_features, video_features.t()) / 1e-2, dim=1).permute(0,2,1), self.word_logit_weight).permute(0,2,1), dim=1)
+
+            # sentence-frame score 
+            sentence_frame_logits = logit_scale * torch.sum(torch.matmul(text_features, frame_features.permute(0, 2, 1)) \
+                * torch.matmul(torch.softmax(torch.matmul(text_features, frame_features.permute(0, 2, 1)) / 1e-2, dim=-1), self.frame_logit_weight), dim=-1).t()
+
+            # frame-word score
+            frame_word_logits = logit_scale * self._attenion_over_fine_grained_sim_matrix(word_features, frame_features)
+
+            logits = (video_sentence_logits + video_word_logits + sentence_frame_logits + frame_word_logits) / 4
+            logits = logits.permute(1, 0)
+        else: 
+           logits = torch.einsum("bd,bkd->bk", video_features, logit_scale * text_features)
         
         return logits, prompt_key_loss
 
@@ -266,7 +325,8 @@ def build_model(state_dict: dict,
                 pool_freeze_video=False,
                 num_classes=14,
                 context_prompt_len=8,
-                class_prompt_len=8
+                class_prompt_len=8,
+                fine_grain_loss=False
                 ):
     vit = "visual.proj" in state_dict
 
@@ -307,7 +367,8 @@ def build_model(state_dict: dict,
         pool_freeze_video=pool_freeze_video,
         num_classes=num_classes,
         context_prompt_len=context_prompt_len,
-        class_prompt_len=class_prompt_len
+        class_prompt_len=class_prompt_len,
+        fine_grain_loss=fine_grain_loss
     )
 
     for key in ["input_resolution", "context_length", "vocab_size"]:
@@ -329,7 +390,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
          pool_freeze_video=False,
          num_classes=14,
          context_prompt_len=8,
-         class_prompt_len=8
+         class_prompt_len=8,
+         fine_grain_loss = False
 ):
     if model_path is None:
         model_path = clip._download(clip._MODELS[name])
@@ -359,7 +421,8 @@ def load(model_path, name: str, device: Union[str, torch.device] = "cuda" if tor
                         pool_freeze_video=pool_freeze_video,
                         num_classes=num_classes,
                         context_prompt_len=context_prompt_len,
-                        class_prompt_len=class_prompt_len
+                        class_prompt_len=class_prompt_len,
+                        fine_grain_loss=fine_grain_loss
                         )
     if str(device) == "cpu":
         model.float()
