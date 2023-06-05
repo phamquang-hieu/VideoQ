@@ -283,6 +283,8 @@ class XCLIP(CLIP):
         
         video_features = frame_features.mean(dim=1, keepdim=False)
 
+        word_features = word_features / word_features.norm(dim=-1, keepdim=True)
+        frame_features = frame_features / frame_features.norm(dim=-1, keepdim=True)
         video_features = video_features / video_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
         logit_scale = self.logit_scale.exp()
