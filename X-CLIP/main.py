@@ -272,8 +272,8 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 label_id = label_id.cuda(non_blocking=True)
                 image_input = image.cuda(non_blocking=True)
 
-                if config.TRAIN.OPT_LEVEL == 'O2':
-                    image_input = image_input.half()
+                # if config.TRAIN.OPT_LEVEL == 'O2':
+                #     image_input = image_input.half()
                 with torch.cuda.amp.autocast(enabled=True):
                     output, _ = model(image_input, text_inputs)
                 
