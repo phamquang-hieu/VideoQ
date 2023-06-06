@@ -198,8 +198,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 total_loss = criterion(output, label_id)
             
             if config.TRAIN.SYMMETRIC_LOSS:
-                one_hot = torch.zeros(output.shape[1], output.shape[0])
-                print(output.shape)
+                one_hot = torch.zeros((output.shape[1], output.shape[0]))
                 for cnt in range(one_hot.shape[0]):
                     one_hot[batch_data["label"][cnt], cnt] = 1
                 one_hot.to(batch_data["label"].device)
