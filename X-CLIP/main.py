@@ -192,16 +192,14 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             acc1_meter.update(float(acc1) / images.shape[0] * 100, images.shape[0])
             ###############################
 
-            if prompt_key_loss is not None:
-                total_loss = criterion(output, label_id) + config.TRAIN.POOL_LAMBDA * prompt_key_loss
-            else:
-                total_loss = criterion(output, label_id)
-            
             if config.TRAIN.SYMMETRIC_LOSS:
                 one_hot = torch.zeros((output.shape[1], output.shape[0])).to(output.device)
                 for cnt in range(one_hot.shape[1]):
                     one_hot[batch_data["label"][cnt], cnt] = 1
-                total_loss += criterion(output.t().contiguous(), one_hot)
+                total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
+            
+            if prompt_key_loss is not None:
+                total_loss += config.TRAIN.POOL_LAMBDA * prompt_key_loss
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         # cnt = 0
