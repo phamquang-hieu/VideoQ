@@ -133,7 +133,7 @@ def main(config):
 
         acc1 = validate(val_loader, text_labels, text_id, model, config)
         logger.info(f"Accuracy of the network on the {len(val_data)} test videos: {acc1:.1f}%")
-        is_best = max_accuracy > acc1
+        is_best = acc1 > max_accuracy
         max_accuracy = max(max_accuracy, acc1)
         logger.info(f'Max accuracy: {max_accuracy:.2f}%')
         if dist.get_rank() == 0 and (epoch % config.SAVE_FREQ == 0 or epoch == (config.TRAIN.EPOCHS - 1)):
