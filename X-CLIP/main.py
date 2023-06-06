@@ -199,9 +199,10 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             
             if config.TRAIN.SYMMETRIC_LOSS:
                 one_hot = torch.zeros(output.shape[1], output.shape[0])
-                print(batch_data['label'])
-                one_hot.scatter_(1, batch_data['label'], 1.0).to(batch_data['label'].device)
-                total_loss += criterion(output.t(), label_id)
+                for cnt in range(one_hot.shape[0]):
+                    one_hot[batch_data["label"][cnt], cnt] = 1
+                one_hot.to(batch_data["label"].device)
+                total_loss += criterion(output.t(), one_hot)
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         # cnt = 0
