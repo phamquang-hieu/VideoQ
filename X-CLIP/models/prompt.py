@@ -105,7 +105,8 @@ class PromptPool(nn.Module):
         self.pool_prompts_per_sample = pool_prompts_per_sample
         self.keys = nn.Parameter(torch.empty([pool_size, embedd_dim]).uniform_(0, 0.01))
         self.values = nn.Parameter(torch.empty([pool_size, pool_prompt_length, embedd_dim]).uniform_(0, 0.01))
-        self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
+        # self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
+        self.register_buffer("prompt_freq", torch.ones([pool_size]).requires_grad_(False))
         # torch.autograd.set_detect_anomaly(True)
     
     def forward(self, x):
