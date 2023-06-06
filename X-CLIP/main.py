@@ -200,7 +200,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
             if config.TRAIN.SYMMETRIC_LOSS:
                 one_hot = torch.zeros((output.shape[1], output.shape[0])).to(output.device)
                 for cnt in range(one_hot.shape[1]):
-                    one_hot[batch_data["label"][cnt], cnt] = 1
+                    one_hot[batch_data["label"][cnt], cnt] = 1.0
                 total_loss += criterion(output.t().contiguous(), one_hot)
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
