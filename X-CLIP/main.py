@@ -202,7 +202,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 for cnt in range(one_hot.shape[1]):
                     one_hot[batch_data["label"][cnt], cnt] = 1
                 one_hot.to(batch_data["label"].device)
-                total_loss += criterion(output.t(), one_hot)
+                total_loss += criterion(output.t().contiguous(), one_hot)
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
         # cnt = 0
