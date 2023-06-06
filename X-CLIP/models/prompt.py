@@ -118,7 +118,7 @@ class PromptPool(nn.Module):
         #     # self.values.data = self.values.data/self.values.data.norm(dim=-1).unsqueeze(dim=-1)
         #     x.data = x.data/x.data.norm(dim=-1).unsqueeze(dim=-1)
 
-        if self.use_freq:
+        if self.use_freq and self.training:
             penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
             penalty = penalty/penalty.sum()
             
