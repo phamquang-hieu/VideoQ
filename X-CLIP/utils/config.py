@@ -55,6 +55,7 @@ _C.TRAIN.POOL_LAMBDA = 1.0
 _C.TRAIN.POOL_USE_FREQ = False
 _C.TRAIN.POOL_FREEZE_VIDEO = False
 _C.TRAIN.FINE_GRAIN_LOSS = False
+_C.TRAIN.SYMMETRIC_LOSS = False
 
 # -----------------------------------------------------------------------------
 # Augmentation settings
