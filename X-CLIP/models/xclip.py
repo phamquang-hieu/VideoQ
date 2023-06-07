@@ -104,6 +104,7 @@ class XCLIP(CLIP):
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
 
         self.cache_text_features = None
+        self.word_features = None
         self.prompts_visual_ln = LayerNorm(vision_width)
         self.prompts_visual_proj = nn.Parameter(torch.randn(vision_width, embed_dim))
         
@@ -252,9 +253,9 @@ class XCLIP(CLIP):
         self.eval()
         with torch.no_grad():
             if self.cache_text_features is None:
-                self.cache_text_features = self.encode_text(text)
+                self.cache_text_features, self.word_features = self.encode_text(text)
         self.train()
-        return self.cache_text_features
+        return self.cache_text_features, self.word_features
     
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
@@ -273,7 +274,7 @@ class XCLIP(CLIP):
         img_features = img_features.mean(dim=1, keepdim=False)
 
         if self.use_cache:
-            text_features, _ = self.cache_text(text)
+            text_features, word_features = self.cache_text(text)
         else:
             text_features, word_features = self.encode_text(text)
         
