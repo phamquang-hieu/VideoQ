@@ -201,7 +201,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 
                 if config.AUG.LABEL_SMOOTH:
                     one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
-                print(output.t().shape, one_hot.shape)
+                print(criterion(output.t().contiguous(), one_hot).shape)
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
             else:
                 total_loss = criterion(output, label_id)
