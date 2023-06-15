@@ -200,8 +200,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                     one_hot[batch_data["label"][cnt], cnt] = 1
                 
                 if isinstance(criterion, nn.KLDivLoss):
-                    label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES)
-                    print(label_id.dtype, one_hot.dtype)
+                    label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES).to(torch.float32)
                     if config.AUG.LABEL_SMOOTH:
                         label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
                 
