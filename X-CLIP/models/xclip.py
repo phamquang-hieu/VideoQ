@@ -283,12 +283,12 @@ class XCLIP(CLIP):
         
         video_features = frame_features.mean(dim=1, keepdim=False)
 
-        word_features = word_features / word_features.norm(dim=-1, keepdim=True)
-        frame_features = frame_features / frame_features.norm(dim=-1, keepdim=True)
         video_features = video_features / video_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
         logit_scale = self.logit_scale.exp()
         if self.fine_grain_loss:
+            word_features = word_features / word_features.norm(dim=-1, keepdim=True)
+            frame_features = frame_features / frame_features.norm(dim=-1, keepdim=True)
             # video-sentence score 
             video_sentence_logits = logit_scale * torch.einsum("bkd, bd->kb", torch.matmul(text_features, self.global_mat_weight), video_features)
 
