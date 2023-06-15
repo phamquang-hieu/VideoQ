@@ -201,6 +201,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 
                 if isinstance(criterion, nn.KLDivLoss):
                     label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES)
+                    print(label_id, one_hot)
                     if config.AUG.LABEL_SMOOTH:
                         label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
                 
