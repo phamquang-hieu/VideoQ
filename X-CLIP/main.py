@@ -202,6 +202,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 if config.AUG.LABEL_SMOOTH:
                     one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
+            else:
+                total_loss = criterion(output, label_id)
             
             if prompt_key_loss is not None:
                 total_loss += config.TRAIN.POOL_LAMBDA * prompt_key_loss
