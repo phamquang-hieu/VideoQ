@@ -205,11 +205,11 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 if isinstance(criterion, nn.KLDivLoss):
                     label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES).to(torch.float32)
                     if config.AUG.LABEL_SMOOTH:
-                        label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
+                        label_id = label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
                         output = nn.functional.log_softmax(output, dim=-1)
                         label_id = label_id.log()
                         one_hot = one_hot.log()
-                print(label_id)
+                print(label_id, label_id.shape)
                 print(criterion(output, label_id), criterion(output.t().contiguous(), one_hot))
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
             else:
