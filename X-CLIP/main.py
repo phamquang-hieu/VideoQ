@@ -209,8 +209,8 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                         output = nn.functional.log_softmax(output, dim=-1)
                         label_id = label_id.log()
                         one_hot = one_hot.log()
-                print(label_id, label_id.shape)
-                print(criterion(output, label_id), criterion(output.t().contiguous(), one_hot))
+                # print(label_id, label_id.shape)
+                # print(criterion(output, label_id), criterion(output.t().contiguous(), one_hot))
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
             else:
                 total_loss = criterion(output, label_id)
