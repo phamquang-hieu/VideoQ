@@ -21,7 +21,6 @@ from datasets.blending import CutmixMixupBlending
 from utils.config import get_config
 from models import xclip
 from sklearn.metrics import classification_report
-import json
 
 def parse_option():
     parser = argparse.ArgumentParser()
@@ -72,12 +71,15 @@ def main(config):
 
     mixup_fn = None
     if config.AUG.MIXUP > 0:
-        criterion = SoftTargetCrossEntropy()
-        mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
-                                       smoothing=config.AUG.LABEL_SMOOTH, 
-                                       mixup_alpha=config.AUG.MIXUP, 
-                                       cutmix_alpha=config.AUG.CUTMIX, 
-                                       switch_prob=config.AUG.MIXUP_SWITCH_PROB)
+        if config.TRAIN.SYMMETRIC_LOSS:
+            criterion = nn.KLDivLoss(reduction='batchmean')
+        else:
+            criterion = SoftTargetCrossEntropy()
+            mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
+                                        smoothing=config.AUG.LABEL_SMOOTH, 
+                                        mixup_alpha=config.AUG.MIXUP, 
+                                        cutmix_alpha=config.AUG.CUTMIX, 
+                                        switch_prob=config.AUG.MIXUP_SWITCH_PROB)
     elif config.AUG.LABEL_SMOOTH > 0:
         criterion = LabelSmoothingCrossEntropy(smoothing=config.AUG.LABEL_SMOOTH)
     else:
@@ -196,6 +198,9 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 one_hot = torch.zeros((output.shape[1], output.shape[0])).to(output.device)
                 for cnt in range(one_hot.shape[1]):
                     one_hot[batch_data["label"][cnt], cnt] = 1
+                
+                if config.AUG.LABEL_SMOOTH:
+                    one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
             
             if prompt_key_loss is not None:
