@@ -259,7 +259,7 @@ class XCLIP(CLIP):
     def freeze_no_prompt(self): 
         for name, param in self.named_parameters():
             if 'visual.prompt_pool' in name or "prompt_context_postfix" in name or "prompt_context_prefix" in name \
-                or "prompt_class_prefix" in name or "prompt_class_postfix" in name :
+                or "prompt_class_prefix" in name or "prompt_class_postfix" in name or "logit_scale" in name:
                 print("unfreeze", name)
                 param.requires_grad_(True)
                 # or "mit." in name or "visual.class_embedding" in name or "prompts_generator" in name or "prompt_context_prefix" in name or "prompt_context_postfix" in name
