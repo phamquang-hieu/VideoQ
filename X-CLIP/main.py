@@ -72,7 +72,7 @@ def main(config):
     mixup_fn = None
     if config.AUG.MIXUP > 0:
         if config.TRAIN.SYMMETRIC_LOSS:
-            criterion = nn.KLDivLoss(reduction='batchmean')
+            criterion = nn.KLDivLoss(reduction='batchmean', log_target=True)
         else:
             criterion = SoftTargetCrossEntropy()
             mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
@@ -207,7 +207,7 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 if config.AUG.LABEL_SMOOTH:
                     one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
 
-                total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
+                total_loss = 0.5*(criterion(output.log(), label_id.log()) + criterion(output.t().contiguous().log(), one_hot.log()))
             else:
                 total_loss = criterion(output, label_id)
             
