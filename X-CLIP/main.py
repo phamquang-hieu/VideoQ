@@ -199,9 +199,14 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 for cnt in range(one_hot.shape[1]):
                     one_hot[batch_data["label"][cnt], cnt] = 1
                 
+                if isinstance(criterion, nn.KLDivLoss):
+                    label_id = nn.functional.one_hot(label_id)
+                    if config.AUG.LABEL_SMOOTH:
+                        label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
+                
                 if config.AUG.LABEL_SMOOTH:
                     one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
-                print(label_id.shape)
+
                 total_loss = 0.5*(criterion(output, label_id) + criterion(output.t().contiguous(), one_hot))
             else:
                 total_loss = criterion(output, label_id)
