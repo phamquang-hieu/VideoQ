@@ -74,7 +74,8 @@ def main(config):
         if config.TRAIN.SYMMETRIC_LOSS:
             criterion = nn.KLDivLoss(reduction='batchmean', log_target=True)
         else:
-            criterion = SoftTargetCrossEntropy()
+            # criterion = SoftTargetCrossEntropy()
+            criterion = nn.KLDivLoss(reduction='batchmean', log_target=True)
         mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
                                     smoothing=config.AUG.LABEL_SMOOTH, 
                                     mixup_alpha=config.AUG.MIXUP, 
