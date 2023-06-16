@@ -75,11 +75,11 @@ def main(config):
             criterion = nn.KLDivLoss(reduction='batchmean', log_target=True)
         else:
             criterion = SoftTargetCrossEntropy()
-            mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
-                                        smoothing=config.AUG.LABEL_SMOOTH, 
-                                        mixup_alpha=config.AUG.MIXUP, 
-                                        cutmix_alpha=config.AUG.CUTMIX, 
-                                        switch_prob=config.AUG.MIXUP_SWITCH_PROB)
+        mixup_fn = CutmixMixupBlending(num_classes=config.DATA.NUM_CLASSES, 
+                                    smoothing=config.AUG.LABEL_SMOOTH, 
+                                    mixup_alpha=config.AUG.MIXUP, 
+                                    cutmix_alpha=config.AUG.CUTMIX, 
+                                    switch_prob=config.AUG.MIXUP_SWITCH_PROB)
     elif config.AUG.LABEL_SMOOTH > 0:
         criterion = LabelSmoothingCrossEntropy(smoothing=config.AUG.LABEL_SMOOTH)
     else:
@@ -203,9 +203,9 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                     one_hot = one_hot*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/one_hot.shape[-1] 
 
                 if isinstance(criterion, nn.KLDivLoss):
-                    label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES).to(torch.float32)
+                    # label_id = nn.functional.one_hot(label_id, num_classes=config.DATA.NUM_CLASSES).to(torch.float32)
                     if config.AUG.LABEL_SMOOTH:
-                        label_id = label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
+                        # label_id = label_id*(1-config.AUG.LABEL_SMOOTH) + config.AUG.LABEL_SMOOTH/label_id.shape[-1]
                         output = nn.functional.log_softmax(output, dim=-1)
                         label_id = label_id.log()
                         one_hot = one_hot.log()
