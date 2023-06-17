@@ -273,7 +273,7 @@ class XCLIP(CLIP):
         img_features = img_features.mean(dim=1, keepdim=False)
 
         if self.use_cache:
-            text_features, _ = self.cache_text(text)
+            text_features, word_features = self.cache_text(text)
         else:
             text_features, word_features = self.encode_text(text)
         
