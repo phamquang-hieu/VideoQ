@@ -166,13 +166,13 @@ class CutmixMixupBlending(BaseMiniBatchBlending):
         # uniform
         cx = torch.randint(w, (1, ))[0]
         cy = torch.randint(h, (1, ))[0]
-        print(cut_w)
-        print(cut_w // 2)
+        # print(cut_w)
+        # print(cut_w // 2)
 
-        bbx1 = torch.clamp(cx - torch.div(cut_w, 2), 0, w)
-        bby1 = torch.clamp(cy - torch.div(cut_h, 2), 0, h)
-        bbx2 = torch.clamp(cx + torch.div(cut_w, 2), 0, w)
-        bby2 = torch.clamp(cy + torch.div(cut_h, 2), 0, h)
+        bbx1 = torch.clamp(cx - torch.div(cut_w, 2, rounding_mode='trunc'), 0, w)
+        bby1 = torch.clamp(cy - torch.div(cut_h, 2, rounding_mode='trunc'), 0, h)
+        bbx2 = torch.clamp(cx + torch.div(cut_w, 2, rounding_mode='trunc'), 0, w)
+        bby2 = torch.clamp(cy + torch.div(cut_h, 2, rounding_mode='trunc'), 0, h)
 
         return bbx1, bby1, bbx2, bby2
 
