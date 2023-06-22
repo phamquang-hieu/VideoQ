@@ -51,15 +51,15 @@ def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, l
                   'epoch': epoch,
                   'config': config}
     
-    save_path = os.path.join(working_dir, f'ckpt_epoch_{epoch}.pth')
-    logger.info(f"{save_path} saving......")
-    torch.save(save_state, save_path)
-    logger.info(f"{save_path} saved !!!")
     if is_best:
         best_path = os.path.join(working_dir, f'best.pth')
         torch.save(save_state, best_path)
         logger.info(f"{best_path} saved !!!")
-
+    else:
+        save_path = os.path.join(working_dir, f'ckpt_epoch_{epoch}.pth')
+        logger.info(f"{save_path} saving......")
+        torch.save(save_state, save_path)
+        logger.info(f"{save_path} saved !!!")
 
 def load_checkpoint(config, model, optimizer=None, lr_scheduler=None, logger=None):
     if os.path.isfile(config.MODEL.RESUME): 
