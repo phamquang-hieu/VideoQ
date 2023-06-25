@@ -157,7 +157,10 @@ class CrossFrameCommunicationTransformer(nn.Module):
         x = x.permute(1, 0, 2) # [b*t, grid**2 + 1(class token), width]-> [grid**2 + 1 (class token), (b*t), width] this is needed for multihead self attn when batch_first = false
         x = self.transformer(x)
         x = x.permute(1, 0, 2)
-        prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length 
+        if self.pool_size > 0:
+            prompt_idx = self.pool_prompt_per_sample*self.pool_prompt_length
+        else:
+            prompt_idx = 0 
 
         cls_x = self.ln_post(x[:, 0:prompt_idx+1, :].mean(dim=1))
         if self.proj is not None:
