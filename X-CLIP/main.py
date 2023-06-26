@@ -311,7 +311,7 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                     output, _ = model(image_input, text_inputs)
                 
                 similarity = output.view(b, -1).softmax(dim=-1)
-                similarity = sum_by_index(similarity, text_id)
+                similarity = sum_by_index(similarity, text_id, n_classes=config.DATA.NUM_CLASSES)
                 tot_similarity += similarity # accumulating simmilarity from views
             # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)s
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
@@ -372,7 +372,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             else:
                 similarity = output.view(1, -1).softmax(dim=-1)
             # print("tot_similarity shape", tot_similarity.shape)
-            similarity = sum_by_index(similarity, text_id)
+            similarity = sum_by_index(similarity, text_id, config.DATA.NUM_CLASSES)
             tot_similarity += similarity # accumulating simmilarity from views
         return tot_similarity
     
