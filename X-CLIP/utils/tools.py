@@ -40,7 +40,7 @@ class AverageMeter:
         self.val = reduce_tensor(val, world_size).item()
         self.sum = reduce_tensor(sum_v, 1).item()
         self.count = reduce_tensor(count, 1).item()
-        self.avg = self.sum / self.count
+        self.avg = self.sum / self.count if self.count != 0 else -1
 
 
 def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, logger, working_dir, is_best):
