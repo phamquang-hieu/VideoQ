@@ -1,4 +1,5 @@
 id,name
+0,"daily video: This video include both indoor (such as a shopping mall) or outdoor scenes as well as day and night-time scenes."
 1,"abuse: This video shows bad, cruel or violent behavior against children, old people, animals, women."
 1,"arrest: This video shows police arresting individuals."
 1,"assault: This video shows a sudden or violent physical attack on someone."
@@ -6,4 +7,3 @@ id,name
 1,"fighting: This video displays two or more people attacking one another."
 1,"robbery: This video shows thieves taking money unlawfully by force or threat of force."
 1,"shooting: This video shows act of shooting someone with a gun."
-0,"daily video: This video include both indoor (such as a shopping mall) or outdoor scenes as well as day and night-time scenes."
