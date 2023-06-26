@@ -315,18 +315,22 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
                 tot_similarity += similarity # accumulating simmilarity from views
             # tot_similarity = sum_by_index(tot_similarity, indices=text_id, n_classes=14)s
             values_1, indices_1 = tot_similarity.topk(1, dim=-1)
-            values_5, indices_5 = tot_similarity.topk(5, dim=-1)
+            if config.DATA.NUM_CLASSES > 5:
+                values_5, indices_5 = tot_similarity.topk(5, dim=-1)
             acc1, acc5 = 0, 0
             for i in range(b):
                 y_pred.append(indices_1[i].cpu().item()), y_true.append(label_id[i].cpu().item())
 
                 if indices_1[i].cpu().item() == label_id[i].cpu().item():
                     acc1 += 1
-                if label_id[i].cpu().item() in indices_5[i].cpu():
-                    acc5 += 1
+                
+                if config.DATA.NUM_CLASSES > 5:
+                    if label_id[i].cpu().item() in indices_5[i].cpu():
+                        acc5 += 1
            
             acc1_meter.update(float(acc1) / b * 100, b)
-            acc5_meter.update(float(acc5) / b * 100, b)
+            if config.DATA.NUM_CLASSES > 5:
+                acc5_meter.update(float(acc5) / b * 100, b)
             if idx % config.PRINT_FREQ == 0:
                 logger.info(
                     f'Test: [{idx}/{len(val_loader)}]\t'
@@ -341,11 +345,9 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 
 def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
     result = torch.zeros([similarity.shape[0], n_classes], device=similarity.device)
-    print(indices)
+    # print(indices)
     for b_id, b in enumerate(similarity):
         for i, item in enumerate(b):
-            print("item", item)
-            print("i", i) 
             result[b_id, indices[i]] += item
     return result
     
