@@ -343,7 +343,7 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
     result = torch.zeros([similarity.shape[0], n_classes], device=similarity.device)
     for b_id, b in enumerate(similarity):
         for i, item in enumerate(b):
-            # print("item", item) 
+            print("item", item) 
             result[b_id, indices[i]] += item
     return result
     
