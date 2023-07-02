@@ -1,0 +1,4 @@
+id,name
+0,"daily video: This video include both indoor (such as a shopping mall) or outdoor scenes as well as day and night-time scenes."
+1,"Violent action video: This video depicts various intense and aggressive actions involving physical force and aggression. It includes scenes that portray acts of violence, such as fights, combat, or confrontations, either indoors or outdoors, during both day and night-time settings."
+2,"Weapons detection video: This video focuses on identifying and detecting instances of handheld objects that could be potentially used to harm humans or properties, encompassing a wide range of objects beyond traditional guns and knives. The dataset is designed to recognize any object that could be regarded as a weapon, whether it is used in violent actions or not. The scenes can be filmed indoors or outdoors, during different times of the day."
