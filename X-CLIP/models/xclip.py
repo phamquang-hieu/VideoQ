@@ -281,7 +281,9 @@ class XCLIP(CLIP):
         text_features = text_features.unsqueeze(0).expand(b, -1, -1)
         text_features = text_features + self.prompts_generator(text_features, img_features)
         
+        print("before", video_features.shape)
         video_features = frame_features.mean(dim=1, keepdim=False)
+        print("after", video_features.shape)
 
         video_features = video_features / video_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
