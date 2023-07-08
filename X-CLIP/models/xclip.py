@@ -271,9 +271,7 @@ class XCLIP(CLIP):
         b = image.shape[0]
         frame_features, img_features, prompt_key_loss = self.encode_video(image) 
         
-        print("img_features", img_features.shape)
         img_features = img_features.mean(dim=1, keepdim=False)
-        print("img_features after", img_features.shape)
 
         if self.use_cache:
             text_features, word_features = self.cache_text(text)
