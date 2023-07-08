@@ -270,7 +270,10 @@ class XCLIP(CLIP):
     def forward(self, image, text):
         b = image.shape[0]
         frame_features, img_features, prompt_key_loss = self.encode_video(image) 
+        
+        print("img_features", img_features.shape)
         img_features = img_features.mean(dim=1, keepdim=False)
+        print("img_features after", img_features.shape)
 
         if self.use_cache:
             text_features, word_features = self.cache_text(text)
@@ -281,13 +284,12 @@ class XCLIP(CLIP):
         text_features = text_features.unsqueeze(0).expand(b, -1, -1)
         text_features = text_features + self.prompts_generator(text_features, img_features)
         
-        print("before", frame_features.shape)
         video_features = frame_features.mean(dim=1, keepdim=False)
-        print("after", video_features.shape)
 
         video_features = video_features / video_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
         logit_scale = self.logit_scale.exp()
+        
         if self.fine_grain_loss:
             word_features = word_features / word_features.norm(dim=-1, keepdim=True)
             frame_features = frame_features / frame_features.norm(dim=-1, keepdim=True)
