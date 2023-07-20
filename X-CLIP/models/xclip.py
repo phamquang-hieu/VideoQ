@@ -58,13 +58,13 @@ class XCLIP(CLIP):
         self.class_prompt_len = class_prompt_len
         self.fine_grain_loss = fine_grain_loss
         
-        if not use_cache:
-            if context_prompt_len > 0:
-                self.prompt_context_prefix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
-                self.prompt_context_postfix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
-            if class_prompt_len > 0:
-                self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
-                self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
+        # if not use_cache:
+        if context_prompt_len > 0:
+            self.prompt_context_prefix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_context_postfix = nn.Parameter(torch.empty(context_prompt_len, transformer_width).normal_(mean=0, std=0.02))
+        if class_prompt_len > 0:
+            self.prompt_class_prefix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
+            self.prompt_class_postfix = nn.Parameter(torch.empty(num_classes, class_prompt_len, transformer_width).normal_(mean=0, std=0.02))
         self.transformer_width = transformer_width # = text embedding dim
 
         self.prompts_generator = VideoSpecificPrompt(layers=prompts_layers, embed_dim=embed_dim, alpha=prompts_alpha,)
@@ -203,7 +203,7 @@ class XCLIP(CLIP):
         eos_indx = text.argmax(dim=-1)
         K, N1, C = x.shape
 
-        if not self.use_cache:
+        if self.context_prompt_len > 0 or self.class_prompt_len > 0:
             x, eos_indx = self.prompt_text(x, text_mask=text!=0)
 
         x = x + self.positional_embedding
