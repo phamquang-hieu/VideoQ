@@ -1,0 +1,32 @@
+DATA:
+    ROOT: '/kaggle/input/ucf-crime-full'
+    TRAIN_FILE: '/kaggle/working/VideoQ/X-CLIP/annotations/train_split.json'
+    VAL_FILE: '/kaggle/working/VideoQ/X-CLIP/annotations/test_split.json'
+    DATASET: ucf-crime
+    NUM_FRAMES: 16
+    NUM_CLASSES: 14
+    LABEL_LIST: 'labels/ucf-crime-def.csv'
+MODEL:
+    ARCH: ViT-B/16
+    RESUME: '/kaggle/working/VideoQ/X-CLIP/k400_16_16.pth'
+    FIX_TEXT: False
+    POOL_SIZE: 60 # number of prompt tokens in the pool
+    POOL_PROMPTS_PER_SAMPLE: 6 # each sample is associated with top-<> prompts 
+    POOL_PROMPT_LENGTH: 8 # each prompt has <> tokens
+    CLASS_PROMPT_LEN: 0
+    CONTEXT_PROMPT_LEN: 4 # since we prompt the input text on both side, setting this param to 4 means 8 context prompts are added (4 on each side)
+TRAIN:
+    POOL_LAMBDA: 0.5
+    BATCH_SIZE: 6
+    ACCUMULATION_STEPS: 43
+    EPOCHS: 20
+    LR: 2.e-6
+    POOL_USE_FREQ: True
+    POOL_FREEZE_VIDEO: True
+    WARMUP_EPOCHS: 1
+    FINE_GRAIN_LOSS: True
+TEST:
+    BATCH_SIZE: 6
+    NUM_CLIP: 1
+SAVE_FREQ: 5
+PRINT_FREQ: 50
