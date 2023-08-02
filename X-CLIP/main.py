@@ -226,18 +226,6 @@ def train_one_epoch(epoch, model, criterion, optimizer, lr_scheduler, train_load
                 total_loss += config.TRAIN.POOL_LAMBDA * prompt_key_loss
 
             total_loss = total_loss / config.TRAIN.ACCUMULATION_STEPS
-        # cnt = 0
-        # for name, param in model.named_parameters():
-        #     if param.grad is None:
-        #     # if name in ["module.prompt_context_prefix", "module.prompt_context_postfix", "module.visual.prompt_pool.keys", "module.visual.prompt_pool.values"]:
-        #         print('none grad', name, cnt, param.requires_grad)
-        #     # # else:
-        #     #     print('not none grad', name, (0.00003*param.grad).norm(), param.grad.shape)
-        #     #     print(param.grad*0.00003)
-        #     #     print('param norm', param.norm())
-        #     if param.requires_grad == False:
-        #         print("not requires_grad", name, param.requires_grad)
-        #     cnt +=1
 
         if config.TRAIN.ACCUMULATION_STEPS == 1:
             optimizer.zero_grad()
@@ -345,7 +333,6 @@ def validate(val_loader, text_labels, text_id:np.ndarray, model, config):
 
 def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
     result = torch.zeros([similarity.shape[0], n_classes], device=similarity.device)
-    # print(indices)
     for b_id, b in enumerate(similarity):
         for i, item in enumerate(b):
             result[b_id, indices[i]] += item
@@ -400,10 +387,7 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
            
             tot_similarity = views_inference(text_inputs=text_inputs_1, text_id=text_id_1, b=b, nd_stage=False)
 
-            # tot_similarity = sum_by_index(tot_similarity, text_id_1, n_classes=14)
-            # values_1, indices_1 = tot_similarity.topk(1, dim=-1)
             values_5, indices_5 = tot_similarity.topk(5, dim=-1)
-            # print("top 5", indices_5)
             acc1, acc5 = 0, 0
             
             for i in range(b):
@@ -416,22 +400,15 @@ def validate_2stage(val_loader, text_labels_1, text_labels_2, text_id_1:np.ndarr
             indices_5 = indices_5.cpu()
             # print("indices_5 before", indices_5)
             indices_5 = [np.unique(index) for index in indices_5]
-            # print("indices_5 after", indices_5)
 
-            # print("text_inputs_1 == text_inputs_2?", (text_inputs_1 == text_inputs_2).sum(), text_inputs_1.shape)
-            # print("hey", text_inputs_2.shape, text_inputs_2[indices_5[i], :].shape, text_inputs_1.shape)
             for i in range(b):
                 mask = [index in indices_5[i] for index in text_id_2]
                 text = text_inputs_2[mask]
-                # print("text_id_2", np.unique(text_id_2[mask]))
                 tot_similarity_2nd = views_inference(text_inputs=text, text_id=text_id_2[mask], b=i, nd_stage=True)
-                # print("top 5", tot_similarity_2nd.topk(5, dim=-1))
                 values_1, indices_1 = tot_similarity_2nd.topk(1, dim=-1)
-                # print(indices_1)
                 gt_label = label_id[i].cpu().item()
-                # predicted = text_id_2[mask][indices_1[0].cpu()]
                 predicted = indices_1[0].cpu()
-                # print("predicted", int(predicted.numpy()))
+
                 y_true.append(gt_label), y_pred.append(int(predicted.numpy()))
 
                 if gt_label == predicted:
