@@ -1,0 +1,4812 @@
+[
+	{
+		"filename": "violence video cleaned/V109.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.1
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V92.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V83.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V99.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.333333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V72.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.433333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V110.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.2
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V2.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.88
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V14.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V6.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.833333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V102.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V10.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.533333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V32.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.433333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V4.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V21.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V24.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V11.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V95.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.166666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V7.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.433333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V44.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.833333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V89.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V94.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V49.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V105.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.666666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V40.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V69.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V45.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.866666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V103.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.566666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V39.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V88.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.833333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V70.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.266666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V18.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.033333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V46.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.6
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V101.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.466666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V82.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V90.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V68.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V25.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.366666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V13.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V97.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.766666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V20.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.5
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V63.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V108.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V26.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V107.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V81.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V30.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V77.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V34.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.6
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V42.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V50.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.266666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V19.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V1.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.760000000000001
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V8.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V98.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.066666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V43.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V57.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V51.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.033333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V22.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V17.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V74.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V61.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.5
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V86.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.566666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V41.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V76.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V100.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V87.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.666666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V16.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.766666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V65.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.533333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V53.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.166666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V79.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.833333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V47.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.766666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V54.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V28.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.333333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V12.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.133333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V80.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.833333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V71.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V52.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V38.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V59.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.866666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V112.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V75.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V58.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V67.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.233333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V104.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.866666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V85.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V35.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.7
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V66.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.566666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V37.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.866666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V93.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.833333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V3.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V91.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.766666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V96.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V31.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.066666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V56.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V27.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 11.0
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V15.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.666666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V60.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V84.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.533333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V78.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V9.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V29.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.966666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V64.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.866666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V55.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.833333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V36.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V106.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.733333333333333
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V33.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.266666666666667
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V73.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V62.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.933333333333334
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V23.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.066666666666666
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V48.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.8
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "violence video cleaned/V111.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "0"
+	},
+	{
+		"filename": "Non-Violence Videos/nv170.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.196066666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv141.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.8593222222222225
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv156.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.3165625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv241.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.81796875
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv121.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.169711111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv108.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.339044444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv99.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.003844444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv16.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.467996140238019
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv232.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.085
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv165.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.666640624999999
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv209.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.380625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv77.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.678922222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv188.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.110555555555555
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv97.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.5055
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv1.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.118533333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv136.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.383644444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv191.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.05
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv36.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.324911111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv184.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.03361111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv153.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.522054036458333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv129.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.411377777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv167.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.791933333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv93.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.088416666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv230.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.428333333333334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv100.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.3212777777777776
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv14.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.392730781601801
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv116.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.961877777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv115.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.509277777777777
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv109.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.9283
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv101.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.370255555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv137.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.783266666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv107.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.529333333333334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv43.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.574455555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv31.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.762877777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv17.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.030878095850756
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv218.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.701666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv39.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.071733333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv41.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.3925
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv126.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.2095666666666665
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv193.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.575
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv151.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.161946614583333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv149.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.611979166666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv75.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.256688888888888
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv9.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.628819556127373
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv223.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.431666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv64.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.271933333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv18.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.66902541009971
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv70.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.442766666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv161.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.479609375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv23.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.16
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv187.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.971666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv205.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.496666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv49.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.333333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv176.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.75361111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv130.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.470744444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv245.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.837656249999999
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv213.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.654375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv243.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.446015625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv89.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.455044444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv4.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.984622222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv163.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.946015625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv145.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.204264322916666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv12.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.759729816661306
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv217.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.453333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv26.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.414022222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv244.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.173671875
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv119.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.411844444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv168.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.552066666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv122.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.3044
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv239.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.931666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv59.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.2234
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv42.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.731366666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv51.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.233333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv10.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.3473785783210035
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv210.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.522656250000001
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv135.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.6066
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv7.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.548407848182696
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv198.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.861666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv50.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.8
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv224.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.281666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv40.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.8183444444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv127.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.528877777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv203.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.7749999999999995
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv102.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.392566666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv134.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.675533333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv192.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.9938111111111105
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv150.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.49267578125
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv45.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.966666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv91.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.68
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv132.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.6066
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv22.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.335644444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv195.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.923333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv160.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.356328125
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv211.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.282343750000001
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv148.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.40234375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv32.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.708333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv118.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.104288888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv34.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.468066666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv212.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.459375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv225.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.525
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv183.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.813877777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv202.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.251666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv63.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.334477777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv24.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.051055555555555
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv236.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.626666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv28.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.959588888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv201.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.711666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv56.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.438288888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv174.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.945555555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv120.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.358533333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv227.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.205
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv207.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.719375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv200.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.038333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv92.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.88
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv3.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.673755555555555
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv2.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.100811111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv206.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.78203125
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv154.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.716959635416667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv88.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.9078888888888885
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv166.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.666733333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv96.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.007
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv38.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.438766666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv114.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.0892
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv68.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.608600000000001
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv106.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.516900000000001
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv196.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.235
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv171.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.616388888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv44.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.614466666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv11.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.709231264072049
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv61.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.6306666666666665
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv80.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.5088
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv48.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.533333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv162.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.926406249999999
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv147.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.8037109375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv233.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.963333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv190.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.18640625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv82.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.386811111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv220.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.6850000000000005
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv71.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.913222222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv222.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.13
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv65.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.5688555555555554
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv112.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.9
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv113.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.670988888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv235.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.571666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv237.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 2.305
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv146.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.282063802083334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv138.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.839322222222223
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv219.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.571666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv189.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.348333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv21.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.864908330652943
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv194.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.135
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv179.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.649988888888888
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv182.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.493322222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv155.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.058349609375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv197.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.608333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv103.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.205111111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv181.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.916666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv131.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.772433333333334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv144.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.656982421875
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv229.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.075
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv81.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.626844444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv73.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.615466666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv37.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.132588888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv78.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.796733333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv58.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.186155555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv46.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.866666666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv238.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.891666666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv242.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.701328125
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv72.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.380766666666666
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv164.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.794140625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv66.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.138466666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv95.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.048708333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv208.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.495
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv185.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.104155555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv86.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.5739777777777775
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv125.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.9296999999999995
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv47.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.6
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv104.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.478844444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv94.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.756749999999999
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv214.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.219609375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv98.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.005
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv158.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.336875
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv175.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.626111111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv15.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.312319073657124
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv105.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.0632222222222225
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv33.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.047844444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv178.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.869711111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv13.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.5937600514634935
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv231.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.618333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv55.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.635055555555555
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv157.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.01359375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv60.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.022488888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv79.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.661555555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv143.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.195393880208332
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv117.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.8095888888888885
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv19.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.955612737214539
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv152.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.057698567708333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv180.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.283322222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv215.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.366328125
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv234.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.058333333333334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv54.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.554
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv226.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.765
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv29.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.203255555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv246.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.284609375
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv35.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.054411111111111
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv124.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.792
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv87.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.539266666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv123.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.458622222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv57.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.478855555555555
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv76.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.0015
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv90.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.407811111111112
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv53.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.533333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv240.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.475
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv199.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.2250000000000005
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv5.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.222466666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv177.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.417777777777777
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv159.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.317265625
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv69.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.575233333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv74.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.914977777777778
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv25.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.657466666666667
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv169.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.3864
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv6.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.0056
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv30.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.583555555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv139.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.928344444444444
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv204.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.158333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv85.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.181633333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv62.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.840455555555556
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv186.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.769433333333334
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv8.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.196847861048568
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv221.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.38
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv142.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.897322222222222
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv128.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.2606222222222225
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv111.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.95
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv110.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.455188888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv84.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.241644444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv52.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.9
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv173.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.6802777777777775
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv83.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.642244444444445
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv172.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.8475
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv228.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.3533333333333335
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv216.MOV",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.008333333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv140.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.478777777777777
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv133.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.863033333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv20.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.834995175297523
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv27.mov",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.949188888888889
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Non-Violence Videos/nv67.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.074733333333333
+			}
+		],
+		"label": "1"
+	},
+	{
+		"filename": "Weapon Violence/WV21.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.1
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV49.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.933333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV102.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.9
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV100.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.566666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV89.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV7.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.2
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV123.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.733333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV88.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.8
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV67.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV8.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.366666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV70.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV30.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV69.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV19.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.166666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV29.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.2
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV90.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.966666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV62.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV47.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV108.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV86.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.1
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV99.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.833333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV79.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV40.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV33.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.833333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV60.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.7
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV111.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV32.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV38.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.366666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV6.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.7
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV71.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.6
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV76.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.633333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV114.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 11.033333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV13.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.433333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV98.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.233333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV92.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.633333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV17.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.233333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV109.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.1
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV34.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.566666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV59.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.366666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV15.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.666666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV42.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV44.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV5.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.933333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV58.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.3
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV65.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV20.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.266666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV12.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV43.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV105.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.733333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV107.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV85.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.966666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV119.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV83.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.533333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV10.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.566666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV106.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV23.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV35.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.866666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV14.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV50.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.833333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV31.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV64.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.966666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV16.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.8
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV27.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.633333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV24.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.166666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV93.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.866666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV95.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.266666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV82.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.4
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV87.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.8
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV84.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.9
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV80.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.633333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV103.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.733333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV57.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.933333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV25.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.2
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV55.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV75.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV73.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV101.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.866666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV122.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.7
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV116.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.3
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV54.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.666666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV28.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.433333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV96.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.366666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV120.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 12.9
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV66.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV36.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV22.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.833333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV63.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.366666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV1.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.133333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV18.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.133333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV115.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 11.266666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV77.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.933333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV104.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.2
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV37.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV91.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 8.533333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV124.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.7
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV121.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 4.233333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV9.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV97.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.233333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV48.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV117.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV112.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.2
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV113.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.6
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV78.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.733333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV118.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 9.766666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV41.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.466666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV81.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV26.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.233333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV74.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.433333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV46.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.333333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV52.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.333333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV72.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV4.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.633333333333334
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV61.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.266666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV45.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.0
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV53.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.266666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV94.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.566666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV110.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 10.166666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV51.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.033333333333333
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV68.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 3.6
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV11.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.1
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV56.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 6.5
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV3.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.566666666666666
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV2.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 5.166666666666667
+			}
+		],
+		"label": "2"
+	},
+	{
+		"filename": "Weapon Violence/WV39.mp4",
+		"annotations": [
+			{
+				"start": 0,
+				"end": 7.8
+			}
+		],
+		"label": "2"
+	}
+]

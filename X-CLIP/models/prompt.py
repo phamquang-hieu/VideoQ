@@ -95,3 +95,51 @@ class VideoSpecificPrompt(nn.Module):
             text = layer(text, visual)
         
         return self.alpha * text
+
+class PromptPool(nn.Module):
+    def __init__(self, pool_size, embedd_dim, use_freq=False, pool_prompts_per_sample=5, pool_prompt_length=5) -> None:
+        super().__init__()
+        self.pool_size = pool_size
+        self.embedd_dim = embedd_dim
+        self.use_freq = use_freq
+        self.pool_prompts_per_sample = pool_prompts_per_sample
+        self.keys = nn.Parameter(torch.empty([pool_size, embedd_dim]).uniform_(0, 0.01))
+        self.values = nn.Parameter(torch.empty([pool_size, pool_prompt_length, embedd_dim]).uniform_(0, 0.01))
+        # self.prompt_freq = torch.ones([pool_size]).requires_grad_(False)
+        self.register_buffer("prompt_freq", torch.ones([pool_size]).requires_grad_(False))
+        # torch.autograd.set_detect_anomaly(True)
+    
+    def forward(self, x):
+        # x.shape = [b*t, 1, d]: shape of the [class token]
+        key_loss = None
+        self.prompt_freq = self.prompt_freq.to(self.keys.device)
+        # with torch.no_grad():
+        #     self.keys.data = self.keys.data/self.keys.data.norm(dim=-1).unsqueeze(dim=-1)
+        #     # self.values.data = self.values.data/self.values.data.norm(dim=-1).unsqueeze(dim=-1)
+        #     x.data = x.data/x.data.norm(dim=-1).unsqueeze(dim=-1)
+
+        if self.use_freq and self.training:
+            penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
+            penalty = penalty/penalty.sum()
+            
+            cosine_distance = 1 - penalty.clone()*torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
+        else:
+            cosine_distance = 1 - torch.cosine_similarity(x, self.keys, dim=-1).reshape(x.shape[0], self.pool_size)        
+
+        cosine_distance, idx = cosine_distance.topk(self.pool_prompts_per_sample, dim=-1, largest=False) # [x.shape[0], k]
+
+        if self.training: # if in train mode
+            if self.use_freq:
+                selected_prompts, freqs = torch.unique(idx, return_counts=True)
+                selected_prompts = selected_prompts.to(self.prompt_freq.device)
+                freqs = freqs.to(self.prompt_freq.device)
+                
+                # penalty = 1 - self.prompt_freq/self.prompt_freq.sum() #[1, pool_size]
+                # penalty = penalty/penalty.sum()
+                # key_loss = cosine_distance * penalty[idx]
+
+                for i, prompt in enumerate(selected_prompts):
+                    self.prompt_freq[prompt] += freqs[i]
+            key_loss = cosine_distance.mean()
+
+        return self.values[idx, :].reshape(x.shape[0], -1, self.embedd_dim), key_loss

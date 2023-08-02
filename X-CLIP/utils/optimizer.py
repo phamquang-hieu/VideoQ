@@ -43,9 +43,9 @@ def fix_text(model):
 def build_optimizer(config, model):
     model = model.module if hasattr(model, 'module') else model
     
-    # fix text
-    if config.MODEL.FIX_TEXT:
-        fix_text(model)
+    # # fix text
+    # if config.MODEL.FIX_TEXT:
+    #     fix_text(model)
     
     # set decay and lr
     skip = {}
@@ -55,8 +55,8 @@ def build_optimizer(config, model):
     if hasattr(model, 'no_weight_decay_keywords'):
         skip_keywords = model.no_weight_decay_keywords()
     clip_parameters = set_weight_decay(model, skip, skip_keywords, 
-        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR, 
-        have=(), not_have=("prompts", "mit", "message_")
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR, # config.TRAIN.LR is of order e-6
+        have=(), not_have=("prompts", "mit", "message_", "prefix", "postfix", "prompt_pool")
     )
     msg_parameters = set_weight_decay(model, skip, skip_keywords,
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
@@ -70,8 +70,18 @@ def build_optimizer(config, model):
         weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10, 
         have=("prompts",), not_have=()
     )
+    text_soft_prompts = set_weight_decay(model, skip, skip_keywords,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*100,
+        have=("prefix", "postfix",), not_have=()
+        )
+    
+    visual_soft_prompts = set_weight_decay(model, skip, skip_keywords,
+        weight_decay=config.TRAIN.WEIGHT_DECAY, lr=config.TRAIN.LR*10000,
+        have=("prompt_pool",), not_have=()
+        ) 
+    
 
-    optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters,
+    optimizer = optim.AdamW(clip_parameters + mit_parameters + prompts_parameters + msg_parameters + text_soft_prompts + visual_soft_prompts,
                         betas=(0.9, 0.98), eps=1e-8,)
    
     return optimizer
@@ -84,8 +94,8 @@ def build_scheduler(config, optimizer, n_iter_per_epoch):
     lr_scheduler = CosineLRScheduler(
         optimizer,
         t_initial=num_steps,
-        lr_min=config.TRAIN.LR / 100,
-        warmup_lr_init=0,
+        lr_min=config.TRAIN.LR,
+        warmup_lr_init=1e-6,
         warmup_t=warmup_steps,
         cycle_limit=1,
         t_in_epochs=False,

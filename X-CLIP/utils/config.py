@@ -19,6 +19,7 @@ _C.DATA.INPUT_SIZE = 224
 _C.DATA.NUM_FRAMES = 8
 _C.DATA.NUM_CLASSES = 400
 _C.DATA.LABEL_LIST = 'labels/kinetics_400_labels.csv'
+_C.DATA.LABEL_2 = None
 
 # -----------------------------------------------------------------------------
 # Model settings
@@ -29,6 +30,11 @@ _C.MODEL.DROP_PATH_RATE = 0.
 _C.MODEL.PRETRAINED = None
 _C.MODEL.RESUME = None
 _C.MODEL.FIX_TEXT = True
+_C.MODEL.POOL_SIZE = 25
+_C.MODEL.POOL_PROMPTS_PER_SAMPLE = 5
+_C.MODEL.POOL_PROMPT_LENGTH = 5
+_C.MODEL.CLASS_PROMPT_LEN = 8
+_C.MODEL.CONTEXT_PROMPT_LEN = 8
 
 # -----------------------------------------------------------------------------
 # Training settings
@@ -45,6 +51,11 @@ _C.TRAIN.OPTIMIZER = 'adamw'
 _C.TRAIN.OPT_LEVEL = 'O1'
 _C.TRAIN.AUTO_RESUME = False
 _C.TRAIN.USE_CHECKPOINT = False
+_C.TRAIN.POOL_LAMBDA = 1.0
+_C.TRAIN.POOL_USE_FREQ = False
+_C.TRAIN.POOL_FREEZE_VIDEO = False
+_C.TRAIN.FINE_GRAIN_LOSS = False
+_C.TRAIN.SYMMETRIC_LOSS = False
 
 # -----------------------------------------------------------------------------
 # Augmentation settings
@@ -64,6 +75,7 @@ _C.TEST = CN()
 _C.TEST.NUM_CLIP = 1
 _C.TEST.NUM_CROP = 1
 _C.TEST.ONLY_TEST = False
+_C.TEST.BATCH_SIZE = 4
 
 # -----------------------------------------------------------------------------
 # Misc

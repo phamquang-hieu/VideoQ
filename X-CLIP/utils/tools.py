@@ -3,7 +3,7 @@ import torch.distributed as dist
 import torch
 import clip
 import os
-
+import gc
 
 def reduce_tensor(tensor, n=None):
     if n is None:
@@ -29,7 +29,7 @@ class AverageMeter:
         self.val = val
         self.sum += val * n
         self.count += n
-        self.avg = self.sum / self.count
+        self.avg = self.sum / self.count if self.count != 0 else -1
     
     def sync(self):
         rank = dist.get_rank()
@@ -40,7 +40,7 @@ class AverageMeter:
         self.val = reduce_tensor(val, world_size).item()
         self.sum = reduce_tensor(sum_v, 1).item()
         self.count = reduce_tensor(count, 1).item()
-        self.avg = self.sum / self.count
+        self.avg = self.sum / self.count if self.count != 0 else -1
 
 
 def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, logger, working_dir, is_best):
@@ -51,40 +51,46 @@ def epoch_saving(config, epoch, model,  max_accuracy, optimizer, lr_scheduler, l
                   'epoch': epoch,
                   'config': config}
     
-    save_path = os.path.join(working_dir, f'ckpt_epoch_{epoch}.pth')
-    logger.info(f"{save_path} saving......")
-    torch.save(save_state, save_path)
-    logger.info(f"{save_path} saved !!!")
     if is_best:
         best_path = os.path.join(working_dir, f'best.pth')
         torch.save(save_state, best_path)
         logger.info(f"{best_path} saved !!!")
+    else:
+        save_path = os.path.join(working_dir, f'ckpt_epoch_{epoch}.pth')
+        logger.info(f"{save_path} saving......")
+        torch.save(save_state, save_path)
+        logger.info(f"{save_path} saved !!!")
 
-
-def load_checkpoint(config, model, optimizer, lr_scheduler, logger):
+def load_checkpoint(config, model, optimizer=None, lr_scheduler=None, logger=None):
     if os.path.isfile(config.MODEL.RESUME): 
         logger.info(f"==============> Resuming form {config.MODEL.RESUME}....................")
-        checkpoint = torch.load(config.MODEL.RESUME, map_location='cpu')
+        checkpoint = torch.load(config.MODEL.RESUME, map_location='cuda:0')
         load_state_dict = checkpoint['model']
 
         msg = model.load_state_dict(load_state_dict, strict=False)
         logger.info(f"resume model: {msg}")
 
         try:
-            optimizer.load_state_dict(checkpoint['optimizer'])
-            lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
-
+            if optimizer and lr_scheduler is not None:
+                optimizer.load_state_dict(checkpoint['optimizer'])
+                lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
+                # pass
+            checkpoint['optimizer'] = None
+            del checkpoint['optimizer']
+            gc.collect()
             start_epoch = checkpoint['epoch'] + 1
             max_accuracy = checkpoint['max_accuracy']
 
             logger.info(f"=> loaded successfully '{config.MODEL.RESUME}' (epoch {checkpoint['epoch']})")
             
             del checkpoint
+            gc.collect()
             torch.cuda.empty_cache()
 
             return start_epoch, max_accuracy
         except:
             del checkpoint
+            gc.collect()
             torch.cuda.empty_cache()
             return 0, 0.
 

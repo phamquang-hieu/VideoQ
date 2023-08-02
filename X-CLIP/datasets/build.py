@@ -54,9 +54,10 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         data_prefix = data_prefix.replace(".tar", "")
         self.ann_file = ann_file
         self.repeat = repeat
-        self.data_prefix = osp.realpath(
-            data_prefix) if data_prefix is not None and osp.isdir(
-                data_prefix) else data_prefix
+        self.data_prefix = data_prefix
+        # self.data_prefix = osp.realpath(
+        #     data_prefix) if data_prefix is not None and osp.isdir(
+        #         data_prefix) else data_prefix
         self.test_mode = test_mode
         self.multi_class = multi_class
         self.num_classes = num_classes
@@ -70,6 +71,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
         self.pipeline = Compose(pipeline)
         self.video_infos = self.load_annotations()
+        # video_infos: a dict of keys as video id and values under the form of dictionary containing info about individual video 
+        # or a list of dict containing info about individual videos
         if self.sample_by_class:
             self.video_infos_by_class = self.parse_by_class()
 
@@ -105,6 +108,32 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                 assert len(video_infos[i]['label']) == 1
                 video_infos[i]['label'] = video_infos[i]['label'][0]
         return video_infos
+    
+    def load_json_annotations_2(self):
+        """load json annotations from extended ucf crime"""
+        video_infos = mmcv.load(self.ann_file)
+        # video_infos = {"<class_name>/filename>":[{"start": val_1, "end": val_1'}, {...}, ...]}
+        results = []
+        for vid, values in video_infos.items():
+            results.append(dict(filename=os.path.join(self.data_prefix, vid) if self.data_prefix is not None else vid,
+                                label=int(values['label']),
+                                annotations=values["annotations"],
+                                tar=self.use_tar_format))
+        return results
+    
+    def load_json_annotations_3(self):
+        video_infos = mmcv.load(self.ann_file)
+        results = []
+        for vid in video_infos:
+            vid_name = vid['filename']
+            results.append(dict(filename=os.path.join(self.data_prefix, vid_name) if self.data_prefix is not None else vid_name,
+                                label=int(vid['label']),
+                                annotations=vid['annotations'],
+                                tar=self.use_tar_format
+                                )
+                        )
+        return results
+
 
     def parse_by_class(self):
         video_infos_by_class = defaultdict(list)
@@ -177,7 +206,19 @@ class VideoDataset(BaseDataset):
     def __init__(self, ann_file, pipeline, labels_file, start_index=0, **kwargs):
         super().__init__(ann_file, pipeline, start_index=start_index, **kwargs)
         self.labels_file = labels_file
+        self.labels = []
+        for _, video in enumerate(self.video_infos):
+            self.labels.append(video['label'])
 
+
+    def get_oversampling_freq(self):
+        label, freq = np.unique(self.labels, return_counts=True)
+        freq_dct = dict(zip(label, 1/freq))
+        weights = []
+        for l in self.labels:
+            weights.append(freq_dct[l])
+        return weights
+    
     @property
     def classes(self):
         classes_all = pd.read_csv(self.labels_file)
@@ -186,24 +227,61 @@ class VideoDataset(BaseDataset):
     def load_annotations(self):
         """Load annotation file to get video information."""
         if self.ann_file.endswith('.json'):
-            return self.load_json_annotations()
+            return self.load_json_annotations_3()
+            # return self.load_json_annotations_2()
 
         video_infos = []
         with open(self.ann_file, 'r') as fin:
             for line in fin:
                 line_split = line.strip().split()
-                if self.multi_class:
+                if self.multi_class: # if a video belongs to multiple classes
                     assert self.num_classes is not None
                     filename, label = line_split[0], line_split[1:]
                     label = list(map(int, label))
                 else:
-                    filename, label = line_split
+                    filename, label = line_split 
                     label = int(label)
                 if self.data_prefix is not None:
                     filename = osp.join(self.data_prefix, filename)
                 video_infos.append(dict(filename=filename, label=label, tar=self.use_tar_format))
         return video_infos
 
+class BalanceBatchSampler(torch.utils.data.Sampler):
+    """Balancing the number of positive and negative samples within a batch"""
+
+    def __init__(self, normal_indices, abnormal_indices, batch_size=6) -> None:
+        self.normal_indices = normal_indices #[#data points]
+        self.abnormal_indices = abnormal_indices #[#data points]
+        self.batch_size = batch_size
+        self.num_normal = len(normal_indices)
+        self.num_abnormal = len(abnormal_indices)
+    
+    def random_sample_extend(self, array:np.ndarray, desired_len):
+        return np.concatenate((array, np.random.choice(array, size=desired_len-len(array), replace=False)), axis=-1)
+    
+    def truncate_indices(self, array, half):
+        end = len(array)%half
+        if end == 0: return array.reshape(-1, half)
+        return array[:-end].reshape(-1, half) 
+
+    def __iter__(self):
+        half = self.batch_size//2
+        normal_indices = np.random.permutation(self.normal_indices)
+        abnormal_indices = np.random.permutation(self.abnormal_indices)        
+        if self.num_normal < self.num_abnormal:
+            normal_indices = self.random_sample_extend(normal_indices, self.num_abnormal)
+        elif self.num_normal > self.num_abnormal:
+            abnormal_indices = self.random_sample_extend(abnormal_indices, self.num_normal)
+        
+        normal_indices = self.truncate_indices(normal_indices, half=half)
+        abnormal_indices = self.truncate_indices(abnormal_indices, half=half)
+
+        batch = np.concatenate((abnormal_indices, normal_indices), axis=-1)
+        return (batch[i] for i in range(len(batch)))
+    
+    def __len__(self):
+        """This function returns the number of batch"""
+        return int(self.num_normal//(0.5*self.batch_size)) if self.num_normal > self.num_abnormal else int(self.num_abnormal//(self.batch_size*0.5))
 
 class SubsetRandomSampler(torch.utils.data.Sampler):
     r"""Samples elements randomly from a given list of indices, without replacement.
@@ -246,9 +324,9 @@ def build_dataloader(logger, config):
 
     train_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES),
         dict(type='DecordDecode'),
-        dict(type='Resize', scale=(-1, scale_resize)),
+        dict(type='Resize', scale=(-1, scale_resize)), # assign np.inf to long edge for rescaling short edge later.
         dict(
             type='MultiScaleCrop',
             input_size=config.DATA.INPUT_SIZE,
@@ -268,15 +346,29 @@ def build_dataloader(logger, config):
     
     train_data = VideoDataset(ann_file=config.DATA.TRAIN_FILE, data_prefix=config.DATA.ROOT,
                               labels_file=config.DATA.LABEL_LIST, pipeline=train_pipeline)
-    num_tasks = dist.get_world_size()
-    global_rank = dist.get_rank()
-    sampler_train = torch.utils.data.DistributedSampler(
-        train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
-    )
+    # num_tasks = dist.get_world_size()
+    # global_rank = dist.get_rank()
+    # sampler_train = torch.utils.data.DistributedSampler(
+    #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
+    # )
+    # sampler_train = BalanceBatchSampler(normal_indices=train_data.normal_indices, abnormal_indices=train_data.abnormal_indices, batch_size=config.TRAIN.BATCH_SIZE) #@TODO: finish this line
+    # train_loader = DataLoader(
+    #     train_data, batch_sampler=sampler_train,
+    #     num_workers=1,
+    #     pin_memory=True,
+    #     collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE)
+    # )
+    # num_tasks = dist.get_world_size()
+    # global_rank = dist.get_rank()
+    # sampler_train = torch.utils.data.DistributedSampler(
+    #     train_data, num_replicas=num_tasks, rank=global_rank, shuffle=True
+    # )
+    sampler_train = torch.utils.data.WeightedRandomSampler(weights=train_data.get_oversampling_freq(), num_samples=len(train_data), replacement=True)
+
     train_loader = DataLoader(
         train_data, sampler=sampler_train,
         batch_size=config.TRAIN.BATCH_SIZE,
-        num_workers=16,
+        num_workers=1,
         pin_memory=True,
         drop_last=True,
         collate_fn=partial(mmcv_collate, samples_per_gpu=config.TRAIN.BATCH_SIZE),
@@ -284,7 +376,7 @@ def build_dataloader(logger, config):
     
     val_pipeline = [
         dict(type='DecordInit'),
-        dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
+        dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
         dict(type='DecordDecode'),
         dict(type='Resize', scale=(-1, scale_resize)),
         dict(type='CenterCrop', crop_size=config.DATA.INPUT_SIZE),
@@ -297,18 +389,20 @@ def build_dataloader(logger, config):
         val_pipeline[3] = dict(type='Resize', scale=(-1, config.DATA.INPUT_SIZE))
         val_pipeline[4] = dict(type='ThreeCrop', crop_size=config.DATA.INPUT_SIZE)
     if config.TEST.NUM_CLIP > 1:
-        val_pipeline[1] = dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, multiview=config.TEST.NUM_CLIP)
+        # config.TEST.NUM_CLIP -> number of clips sampled out of a video
+        val_pipeline[1] = dict(type='SampleAnnotatedFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, multiview=config.TEST.NUM_CLIP)
     
     val_data = VideoDataset(ann_file=config.DATA.VAL_FILE, data_prefix=config.DATA.ROOT, labels_file=config.DATA.LABEL_LIST, pipeline=val_pipeline)
-    indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size())
+    indices = np.arange(dist.get_rank(), len(val_data), dist.get_world_size()) # assume having 4 processes -> process #0 handles indices 0, 4, 8, 12,... process #2 handles indices 1, 5, 9, 13,...
     sampler_val = SubsetRandomSampler(indices)
+    
     val_loader = DataLoader(
         val_data, sampler=sampler_val,
-        batch_size=2,
-        num_workers=16,
+        batch_size=config.TEST.BATCH_SIZE,
+        num_workers=1,
         pin_memory=True,
-        drop_last=True,
-        collate_fn=partial(mmcv_collate, samples_per_gpu=2),
+        drop_last=False,
+        collate_fn=partial(mmcv_collate, samples_per_gpu=config.TEST.BATCH_SIZE),
     )
 
     return train_data, val_data, train_loader, val_loader
