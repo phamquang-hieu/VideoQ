@@ -112,6 +112,7 @@ def main(config):
     
     result = copy.deepcopy(video_info)
 
+    print(pipeline(result), type(pipeline(result)))
     video = pipeline(result).cuda()
     video = video.unsqueeze(0)
 
