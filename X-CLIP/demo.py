@@ -65,8 +65,6 @@ def main(config):
     # train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
     img_norm_cfg = dict(
         mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
-    PIPELINES = Registry('pipeline')
-    pipeline = Compose(pipeline)
 
     model = xclip.load(config.MODEL.PRETRAINED, config.MODEL.ARCH, 
                          device="cpu", jit=False, 
@@ -87,6 +85,7 @@ def main(config):
                         )
     
     scale_resize = int(256 / 224 * config.DATA.INPUT_SIZE)
+    PIPELINES = Registry('pipeline')
     val_pipeline = [
         dict(type='DecordInit'),
         dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
