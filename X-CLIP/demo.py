@@ -170,5 +170,5 @@ if __name__ == '__main__':
     if dist.get_rank() == 0:
         logger.info(config)
         shutil.copy(args.config, config.OUTPUT)
-
+    logger.disabled = True
     main(config)
