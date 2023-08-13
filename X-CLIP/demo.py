@@ -102,7 +102,9 @@ def main(config):
 
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK], broadcast_buffers=False, find_unused_parameters=False)
     labels = pd.read_csv(config.DATA.LABEL_LIST).values.tolist()
-    
+    if config.MODEL.RESUME:
+        start_epoch, max_accuracy = load_checkpoint(config, model.module, None, None, logger)
+
     text_id = np.array([p[0] for p in labels])
     text_inputs = generate_text(labels).cuda()
     
