@@ -123,7 +123,6 @@ def main(config):
     tot_similarity = torch.zeros((b, config.DATA.NUM_CLASSES)).cuda()
     for i in range(n): # for view in views
         image = _image[:, i, :, :, :, :] # [b,t,c,h,w]
-        label_id = label_id.cuda(non_blocking=True)
         image_input = image.cuda(non_blocking=True)
 
         # if config.TRAIN.OPT_LEVEL == 'O2':
