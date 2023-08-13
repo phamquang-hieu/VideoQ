@@ -1,0 +1,71 @@
+id,name
+0, maltreatment
+0, mistreatment
+0, harassment
+0, cruelty
+0, violence
+1, detain
+1, apprehend
+1, seize
+1, capture
+1, take into custody
+2, pyromania
+2, fire-raising
+2, incendiarism
+2, torch job
+2, burn-down
+3, attack
+3, aggression
+3, battery
+3, violence
+3, onslaught
+4, car crash
+4, automobile collision
+4, vehicle wreck
+4, road mishap
+4, car accident
+5, burglary
+5, break-in
+5, theft
+5, housebreaking
+5, intruding
+6, blast
+6, detonation
+6, burst
+6, eruption
+6, blowup
+7, brawl
+7, altercation
+7, scuffle
+7, fracas
+7, tussle
+8, theft
+8, robbery
+8, heist
+8, larceny
+8, hold-up
+9, shooting incident
+9, gunfire
+9, shoot-out
+9, sniping
+9, barrage
+10, theft
+10, stealing
+10, thievery
+10, pilfering
+10, embezzlement
+11, shop theft
+11, shop stealing
+11, retail theft
+11, pocketing
+11, shrinkage
+12, vandalism
+12, destruction
+12, damage
+12, desecration
+12, defacement
+13, routine
+13, habit
+13, custom
+13, practice
+13, everyday activity
