@@ -164,7 +164,7 @@ if __name__ == '__main__':
     
     # logger
     logger = create_logger(output_dir=config.OUTPUT, dist_rank=dist.get_rank(), name=f"{config.MODEL.ARCH}")
-    # logger.disabled = True
+    logger.disabled = True
     logger.info(f"working dir: {config.OUTPUT}")
     
     # save config 
