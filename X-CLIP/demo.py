@@ -61,6 +61,7 @@ def sum_by_index(similarity: torch.Tensor, indices: np.ndarray, n_classes=14):
             result[b_id, indices[i]] += item
     return result
 
+PIPELINES = Registry('pipeline')
 def main(config): 
     # train_data, val_data, train_loader, val_loader = build_dataloader(logger, config)
     img_norm_cfg = dict(
@@ -85,7 +86,6 @@ def main(config):
                         )
     
     scale_resize = int(256 / 224 * config.DATA.INPUT_SIZE)
-    PIPELINES = Registry('pipeline')
     val_pipeline = [
         dict(type='DecordInit'),
         dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=config.DATA.NUM_FRAMES, test_mode=True),
@@ -108,7 +108,7 @@ def main(config):
     
     modality = 'RGB'
     start_index = 0
-    video_info = [dict(filename=config.DATA.SINGLE_FILE, label=-1, tar=False, modality=modality, start_index=start_index)]
+    video_info = dict(filename=config.DATA.SINGLE_FILE, label=-1, tar=False, modality=modality, start_index=start_index)
     
     result = copy.deepcopy(video_info)
 
