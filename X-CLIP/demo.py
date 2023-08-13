@@ -109,7 +109,7 @@ def main(config):
     
     modality = 'RGB'
     start_index = 0
-    video_info = [dict(filename=config.DATA.SINGLE_FILE, label=-1, tar=False)]
+    video_info = [dict(filename=config.DATA.SINGLE_FILE, label=-1, tar=False, modality=modality, start_index=start_index)]
     
     result = copy.deepcopy(video_info)
 
